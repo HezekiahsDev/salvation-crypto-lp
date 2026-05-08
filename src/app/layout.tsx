@@ -5,13 +5,16 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Salvation Crypto Academy — Master the Financial Markets",
   description:
-    "Join the premier Forex & Financial Markets Trading Academy. Learn from funded traders, master risk management, and transform your trading career with battle-tested strategies.",
+    "Join the premier crypto learning and trading community. Master the markets through quality education, daily signals, and professional mentorship.",
   keywords: [
     "forex trading",
     "trading academy",
     "financial markets",
     "crypto trading",
-    "funded trader",
+    "crypto trading",
+    "trading academy",
+    "bitcoin signals",
+    "master trader",
     "trading mentorship",
     "trading psychology",
     "risk management",

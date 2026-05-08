@@ -96,8 +96,9 @@ export function FounderSection() {
               <p>
                 But I didn&apos;t quit. I studied obsessively, found real mentors,
                 and developed a systematic approach to the markets. By 2019, I
-                was consistently profitable. By 2020, I was managing funded
-                accounts.
+                was consistently profitable. By 2020, I was trading at a 
+                professional level, managing significant capital with absolute 
+                discipline.
               </p>
               <p className="text-slate-300 font-medium">
                 Salvation Crypto Academy exists because I remember what it felt
@@ -117,7 +118,7 @@ export function FounderSection() {
                 {
                   icon: Award,
                   title: "Proven Track Record",
-                  desc: "Multiple funded accounts. Verified trading history.",
+                  desc: "Years of consistent profitability. Verified trading history.",
                 },
                 {
                   icon: Heart,

@@ -18,7 +18,7 @@ const features = [
     icon: MonitorPlay,
     title: "Live Trading Sessions",
     description:
-      "Watch our funded traders execute live trades in real-time. See the setups, entries, and management — not just the results.",
+      "Watch our professional traders execute live trades in real-time. See the setups, entries, and management — not just the results.",
     highlight: "3x Weekly",
   },
   {

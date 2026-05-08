@@ -13,7 +13,7 @@ const faqs = [
   {
     question: "Do you trade live, or is this just pre-recorded content?",
     answer:
-      "Both. We have 200+ hours of structured recorded content that you can study at your own pace, AND we host live trading sessions 3 times per week where our funded mentors trade in real-time, explain their thought process, and answer your questions. This combination of theory and live application is what makes our approach so effective.",
+      "Both. We have 200+ hours of structured recorded content that you can study at your own pace, AND we host live trading sessions 3 times per week where our professional mentors trade in real-time, explain their thought process, and answer your questions. This combination of theory and live application is what makes our approach so effective.",
   },
   {
     question: "What markets do you cover?",
@@ -38,7 +38,7 @@ const faqs = [
   {
     question: "Can I upgrade or downgrade my plan later?",
     answer:
-      "Yes. You can upgrade or downgrade your plan at any time. If you upgrade, you'll get immediate access to the additional features. If you downgrade, the change will take effect at the start of your next billing cycle. Many students start with Professional and upgrade to Elite when they're ready for funded challenge preparation.",
+      "Yes. You can upgrade or downgrade your plan at any time. If you upgrade, you'll get immediate access to the additional features. If you downgrade, the change will take effect at the start of your next billing cycle. Many students start with Genesis or Alpha and upgrade to Elite Alpha Circle or Inner Caucus as they grow.",
   },
 ];
 

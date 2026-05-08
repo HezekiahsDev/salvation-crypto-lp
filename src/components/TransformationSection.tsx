@@ -36,11 +36,11 @@ const stages = [
   },
   {
     phase: "04",
-    title: "The Funded Trader",
+    title: "The Master Trader",
     subtitle: "The breakthrough",
     description:
-      "You pass your funded account challenge. You trade with discipline. Your P&L is consistently green. Trading becomes a skill, not a gamble.",
-    traits: ["Funded account", "Consistent profits", "Professional mindset"],
+      "You've mastered the strategy. You trade with absolute discipline. Your P&L is consistently green. Trading is now a high-income skill, not a gamble.",
+    traits: ["Market Mastery", "Consistent profits", "Professional mindset"],
     color: "from-green-500 to-blue-500",
     bgGlow: "bg-green-500/5",
   },
@@ -72,7 +72,7 @@ export function TransformationSection() {
           </span>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance">
             From Beginner to{" "}
-            <span className="gradient-text">Funded Trader</span>
+            <span className="gradient-text">Market Master</span>
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed">
             Every successful trader follows this path. Our academy compresses

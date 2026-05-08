@@ -8,50 +8,50 @@ import { AnimatedCounter } from "./AnimatedCounter";
 const testimonials = [
   {
     name: "David Okonkwo",
-    role: "Funded Trader — FTMO",
+    role: "Elite Alpha Circle Member",
     avatar: "DO",
     content:
-      "Before joining Salvation Crypto, I blew 4 accounts in 6 months. The mentorship here completely rewired how I approach the markets. I passed my FTMO challenge on the first try after just 3 months in the academy.",
+      "Before joining Salvation Crypto, I blew 4 accounts in 6 months. The mentorship here completely rewired how I approach the markets. The signals are pinpoint accurate, and the community support is unmatched.",
     profit: "+$12,400",
-    period: "First funded month",
+    period: "Last month returns",
     rating: 5,
   },
   {
     name: "Amara Johnson",
-    role: "Full-Time Trader",
+    role: "Full-Time Crypto Trader",
     avatar: "AJ",
     content:
-      "I quit my 9-5 after 8 months in the academy. The psychology modules alone are worth 10x the price. I went from losing $500/month to consistently making $3,000-5,000/month.",
+      "I quit my 9-5 after 8 months in the academy. The insights from the Elite Alpha Circle are worth 10x the price. I went from losing $500/month to consistently making $3,000-5,000/month.",
     profit: "+$4,200",
     period: "Monthly average",
     rating: 5,
   },
   {
     name: "Michael Chen",
-    role: "Funded Trader — MyForexFunds",
+    role: "Alpha Signals Member",
     avatar: "MC",
     content:
-      "The live trading sessions changed everything for me. Watching a funded trader execute in real-time showed me what was missing from my strategy. I now manage a $200k funded account.",
+      "The live trading sessions and daily signals changed everything for me. Watching the team execute in real-time showed me what was missing from my strategy. My portfolio has grown 300% in 4 months.",
     profit: "+$8,750",
     period: "Best trading month",
     rating: 5,
   },
   {
     name: "Sarah Williams",
-    role: "Part-Time Trader",
+    role: "Genesis Signals Member",
     avatar: "SW",
     content:
-      "As a nurse working shifts, I needed a strategy that didn't require 12 hours at the screen. The academy's swing trading module was perfect. I now make more from trading part-time than my full salary.",
+      "As a nurse working shifts, I needed signals that were easy to follow. Salvation Crypto's basic entry/SL/TP levels are perfect. I now make a steady side income with very little screen time.",
     profit: "+$6,100",
     period: "Monthly average",
     rating: 5,
   },
   {
     name: "James Adeyemi",
-    role: "Funded Trader — True Forex Funds",
+    role: "Inner Caucus Member",
     avatar: "JA",
     content:
-      "I was skeptical after being burned by 3 other 'academies.' But this one is different — they trade live, they show losses too, and the community actually helps you grow. Best investment I've ever made.",
+      "I was skeptical after being burned elsewhere. But the Inner Caucus provides strategic positioning that you just can't find anywhere else. The long-term project calls are literal life-changers.",
     profit: "+$15,300",
     period: "3-month total",
     rating: 5,
@@ -59,10 +59,10 @@ const testimonials = [
 ];
 
 const metrics = [
-  { value: 89, suffix: "%", label: "Student Satisfaction" },
-  { value: 312, suffix: "+", label: "Funded Traders" },
-  { value: 76, suffix: "%", label: "Pass Rate on Funded Challenges" },
-  { value: 4.2, suffix: "M", label: "Total Student Payouts", prefix: "$" },
+  { value: 94, suffix: "%", label: "Student Success Rate" },
+  { value: 2847, suffix: "+", label: "Active Students" },
+  { value: 92, suffix: "%", label: "Signal Accuracy" },
+  { value: 10, suffix: "K%", label: "Max Potential Gains", prefix: "" },
 ];
 
 export function TestimonialsSection() {
@@ -111,11 +111,11 @@ export function TestimonialsSection() {
           </span>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance">
             Don&apos;t Take Our Word.{" "}
-            <span className="gradient-text">See the Proof.</span>
+            <span className="gradient-text">See the Growth.</span>
           </h2>
           <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed">
-            Real stories from real traders who transformed their trading careers
-            through our academy.
+            Real stories from real traders who mastered the crypto market
+            through our mentorship and signals.
           </p>
         </motion.div>
 

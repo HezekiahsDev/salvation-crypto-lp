@@ -8,8 +8,8 @@ import { Play, ArrowRight } from "lucide-react";
 
 const trustStats = [
   { value: 2847, suffix: "+", label: "Active Students" },
-  { value: 312, suffix: "+", label: "Funded Traders" },
-  { value: 4.2, suffix: "M+", label: "Total Payouts", prefix: "$" },
+  { value: 92, suffix: "%", label: "Signal Accuracy" },
+  { value: 10, suffix: "K%", label: "Potential Returns", prefix: "Up to " },
 ];
 
 export function HeroSection() {
@@ -73,9 +73,9 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-400 leading-relaxed mb-12 text-balance"
         >
-          Join the premier trading academy that has transformed over 2,800
-          traders from inconsistent beginners into consistently profitable,
-          funded professionals.
+          Join the premier crypto academy and signal service. Learn to navigate 
+          the markets with precision and trade alongside a community of 
+          consistently profitable professionals.
         </motion.p>
 
         {/* CTA Buttons */}

@@ -48,7 +48,7 @@ export function Footer() {
             </div>
             <p className="text-sm text-slate-500 leading-relaxed max-w-xs">
               The premium trading academy transforming beginners into
-              consistently profitable, funded traders.
+              consistently profitable, master traders.
             </p>
           </div>
 

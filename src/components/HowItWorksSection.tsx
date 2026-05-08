@@ -24,10 +24,10 @@ const steps = [
   {
     icon: Rocket,
     step: "03",
-    title: "Get Funded & Profit",
+    title: "Master & Profit",
     description:
-      "Apply your skills to funded account challenges with confidence. Join 312+ academy members who are now trading with capital they didn't risk.",
-    detail: "Real results, real payouts",
+      "Apply your skills to the live markets with confidence. Join 312+ elite circle members who are now navigating the crypto space with a professional edge.",
+    detail: "Real results, real growth",
   },
 ];
 

@@ -14,7 +14,7 @@ const painPoints = [
     icon: TrendingDown,
     title: "Blowing Accounts",
     description:
-      "You've funded account after account, only to watch your balance hit zero. The cycle of depositing and losing feels endless and crushing.",
+      "You've funded trading account after account, only to watch your balance hit zero. The cycle of depositing and losing feels endless and crushing.",
     stat: "87%",
     statLabel: "of retail traders lose money",
     color: "from-red-500/20 to-red-600/5",
