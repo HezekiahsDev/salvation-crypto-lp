@@ -25,6 +25,7 @@ export function FinalCTASection() {
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6 }}
           className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-white/5 mb-8"
+          data-aos="zoom-in"
         >
           <Sparkles size={28} className="text-blue-400" />
         </motion.div>
@@ -35,6 +36,8 @@ export function FinalCTASection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-8 text-balance"
+          data-aos="fade-up"
+          data-aos-delay="200"
         >
           Your Future in the Markets{" "}
           <span className="gradient-text">Starts Today</span>

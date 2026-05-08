@@ -25,6 +25,7 @@ export function FounderSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="relative"
+            data-aos="fade-right"
           >
             <div className="relative aspect-[4/5] max-w-md mx-auto">
               {/* Photo placeholder - gradient silhouette */}
@@ -78,6 +79,7 @@ export function FounderSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            data-aos="fade-left"
           >
             <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4">
               Meet the Founder

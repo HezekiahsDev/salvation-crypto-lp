@@ -11,6 +11,8 @@
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@studio-freight/lenis": "^1.0.42",
+    "@types/aos": "^3.0.7",
+    "aos": "^2.3.4",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
     "gsap": "^3.15.0",

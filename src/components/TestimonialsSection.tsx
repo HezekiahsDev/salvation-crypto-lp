@@ -105,15 +105,16 @@ export function TestimonialsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
+          data-aos="fade-down"
         >
-          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4">
+          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4" data-aos="fade-right">
             Real Results
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance" data-aos="zoom-in">
             Don&apos;t Take Our Word.{" "}
             <span className="gradient-text">See the Growth.</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed" data-aos="fade-up">
             Real stories from real traders who mastered the crypto market
             through our mentorship and signals.
           </p>
@@ -125,6 +126,7 @@ export function TestimonialsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20"
+          data-aos="fade-up"
         >
           {metrics.map((metric, i) => (
             <div

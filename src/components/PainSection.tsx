@@ -76,15 +76,16 @@ export function PainSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
+          data-aos="fade-down"
         >
-          <span className="inline-block text-sm font-semibold text-red-400/80 tracking-widest uppercase mb-4">
+          <span className="inline-block text-sm font-semibold text-red-400/80 tracking-widest uppercase mb-4" data-aos="fade-right" data-aos-delay="200">
             The Reality
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance" data-aos="zoom-in" data-aos-delay="400">
             Why Most Traders{" "}
             <span className="text-red-400/90">Never Make It</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed" data-aos="fade-up" data-aos-delay="600">
             Before you can win, you need to understand why you&apos;re losing.
             These are the silent killers of trading careers.
           </p>
@@ -102,6 +103,8 @@ export function PainSection() {
                 delay: 0.2 + i * 0.15,
                 ease: [0.22, 1, 0.36, 1],
               }}
+              data-aos={i % 2 === 0 ? "fade-right" : "fade-left"}
+              data-aos-delay={i * 100}
               className={`group relative p-8 rounded-2xl border border-white/5 bg-gradient-to-b ${pain.color} backdrop-blur-sm transition-all duration-500 ${pain.borderColor} hover:bg-white/[0.02] cursor-default`}
             >
               {/* Icon */}

@@ -50,15 +50,16 @@ export function HowItWorksSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
+          data-aos="fade-down"
         >
-          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4">
+          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4" data-aos="fade-right" data-aos-delay="200">
             Simple Process
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance" data-aos="zoom-in" data-aos-delay="400">
             Three Steps to{" "}
             <span className="gradient-text">Your New Career</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed" data-aos="fade-up" data-aos-delay="600">
             Getting started is straightforward. We&apos;ve removed every barrier so
             you can focus on what matters — becoming profitable.
           </p>
@@ -87,6 +88,8 @@ export function HowItWorksSection() {
                   delay: 0.3 + i * 0.2,
                   ease: [0.22, 1, 0.36, 1],
                 }}
+                data-aos="fade-up"
+                data-aos-delay={i * 200}
                 className="relative text-center group"
               >
                 {/* Step number circle */}

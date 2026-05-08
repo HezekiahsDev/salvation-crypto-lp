@@ -37,7 +37,7 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1">
+          <div className="col-span-2 md:col-span-1" data-aos="fade-right">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
                 <span className="text-white font-bold text-sm">SC</span>
@@ -52,9 +52,8 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Link columns */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
+          {Object.entries(footerLinks).map(([category, links], i) => (
+            <div key={category} data-aos="fade-up" data-aos-delay={i * 100}>
               <h4 className="text-sm font-semibold text-white mb-4 tracking-wide">
                 {category}
               </h4>
@@ -98,7 +97,7 @@ export function Footer() {
         </div>
 
         {/* Risk disclaimer */}
-        <div className="mt-10 p-5 rounded-xl bg-white/[0.02] border border-white/5">
+        <div className="mt-10 p-5 rounded-xl bg-white/[0.02] border border-white/5" data-aos="fade-up">
           <p className="text-[11px] text-slate-600 leading-relaxed text-center">
             <span className="text-slate-500 font-semibold">
               Risk Disclaimer:

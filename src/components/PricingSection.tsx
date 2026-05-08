@@ -119,14 +119,15 @@ export function PricingSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
+          data-aos="fade-down"
         >
-          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4">
+          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4" data-aos="fade-right">
             Membership Plans
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance" data-aos="zoom-in">
             Choose Your <span className="gradient-text">Success Path</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed" data-aos="fade-up">
             Whether you want professional signals or complete market mastery, we have a dedicated track for your growth.
           </p>
         </motion.div>
@@ -145,6 +146,8 @@ export function PricingSection() {
               }}
               onMouseEnter={() => setHoveredPlan(i)}
               onMouseLeave={() => setHoveredPlan(null)}
+              data-aos="fade-up"
+              data-aos-delay={i * 100}
               className={`relative rounded-2xl p-6 transition-all duration-500 flex flex-col h-full ${
                 plan.popular
                   ? "bg-white/[0.04] border-2 border-transparent pricing-highlight scale-105 z-10"

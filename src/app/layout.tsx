@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
+import { AnimationProvider } from "@/components/AnimationProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -41,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="antialiased" suppressHydrationWarning>
       <body className="min-h-screen bg-[#030014] text-white overflow-x-hidden font-sans">
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <AnimationProvider>{children}</AnimationProvider>
       </body>
     </html>
   );

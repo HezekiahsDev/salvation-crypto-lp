@@ -127,13 +127,13 @@ export function FAQSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
+          data-aos="fade-down"
         >
-          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4">
-            Questions
+          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4" data-aos="fade-left">
+            Common Questions
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-6 text-balance">
-            Frequently Asked{" "}
-            <span className="gradient-text">Questions</span>
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-6" data-aos="zoom-in">
+            Objections <span className="gradient-text">Resolved</span>
           </h2>
           <p className="max-w-xl mx-auto text-lg text-slate-400 leading-relaxed">
             Everything you need to know before joining. Can&apos;t find your
