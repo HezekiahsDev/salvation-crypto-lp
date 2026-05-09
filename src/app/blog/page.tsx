@@ -10,86 +10,8 @@ import { BlogCard } from "@/components/blog/BlogCard";
 import { BlogFilters } from "@/components/blog/BlogFilters";
 import { motion } from "framer-motion";
 
-const BLOG_POSTS = [
-  {
-    id: "1",
-    title: "Mastering the Art of Order Flow: A Guide for Advanced Traders",
-    excerpt: "Understand how institutional money moves the markets and how you can position yourself alongside the giants of the industry.",
-    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80\u0026w=2832\u0026auto=format\u0026fit=crop",
-    category: "Trading Strategy",
-    date: "Oct 24, 2023",
-    readTime: "12 min read",
-    author: {
-      name: "Alex Rivera",
-      avatar: ""
-    }
-  },
-  {
-    id: "2",
-    title: "Bitcoin Market Cycle Analysis: Where Are We Now?",
-    excerpt: "An in-depth look at on-chain data and historical cycles to determine if we've reached the peak or if the moon mission is just beginning.",
-    image: "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80\u0026w=2938\u0026auto=format\u0026fit=crop",
-    category: "Market Analysis",
-    date: "Oct 22, 2023",
-    readTime: "8 min read",
-    author: {
-      name: "Sarah Chen",
-      avatar: ""
-    }
-  },
-  {
-    id: "3",
-    title: "The Psychology of a Winning Trader: Overcoming FOMO",
-    excerpt: "Trading is 90% mental. Learn the psychological frameworks used by elite traders to stay calm during extreme market volatility.",
-    image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80\u0026w=2940\u0026auto=format\u0026fit=crop",
-    category: "Psychology",
-    date: "Oct 20, 2023",
-    readTime: "15 min read",
-    author: {
-      name: "Marcus Thorne",
-      avatar: ""
-    }
-  },
-  {
-    id: "4",
-    title: "Understanding DeFi Liquidity Pools and Yield Farming",
-    excerpt: "A beginner's guide to the complex world of Decentralized Finance and how to earn passive income while managing your risk.",
-    image: "https://images.unsplash.com/photo-1633156189757-4f4938391c83?q=80\u0026w=2940\u0026auto=format\u0026fit=crop",
-    category: "Crypto Education",
-    date: "Oct 18, 2023",
-    readTime: "10 min read",
-    author: {
-      name: "Elena Vance",
-      avatar: ""
-    }
-  },
-  {
-    id: "5",
-    title: "Technical Analysis vs. Fundamental Analysis in Crypto",
-    excerpt: "Do charts really matter in a news-driven market? We explore the synergy between technical levels and core project fundamentals.",
-    image: "https://images.unsplash.com/photo-1611974717483-5828fb774024?q=80\u0026w=2942\u0026auto=format\u0026fit=crop",
-    category: "Trading Strategy",
-    date: "Oct 15, 2023",
-    readTime: "14 min read",
-    author: {
-      name: "Alex Rivera",
-      avatar: ""
-    }
-  },
-  {
-    id: "6",
-    title: "Introducing Salvation Elite: Our Newest Mentorship Tier",
-    excerpt: "We're expanding the academy! Discover what's included in our most comprehensive trading program yet.",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80\u0026w=2940\u0026auto=format\u0026fit=crop",
-    category: "Academy Updates",
-    date: "Oct 12, 2023",
-    readTime: "5 min read",
-    author: {
-      name: "Management",
-      avatar: ""
-    }
-  }
-];
+import { BLOG_POSTS } from "@/data/blog-posts";
+
 
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("All Articles");

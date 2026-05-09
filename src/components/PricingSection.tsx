@@ -2,13 +2,21 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Check, ArrowRight, Sparkles, Zap, Shield, Crown, GraduationCap } from "lucide-react";
+import {
+  Check,
+  ArrowRight,
+  Sparkles,
+  Zap,
+  Shield,
+  Crown,
+  GraduationCap,
+} from "lucide-react";
 
 const plans = [
   {
     name: "Genesis Signals",
     duration: "1 Month",
-    price: "49", // Placeholder price, user didn't specify
+    price: "10", // Placeholder price, user didn't specify
     period: "/month",
     description: "Your gateway into the crypto market, perfect for beginners.",
     features: [
@@ -24,9 +32,10 @@ const plans = [
   {
     name: "Alpha Signals",
     duration: "6 Months",
-    price: "199", // Placeholder price
+    price: "50", // Placeholder price
     period: "/6 months",
-    description: "Built for traders ready to level up and for serious traders looking for consistency.",
+    description:
+      "Built for traders ready to level up and for serious traders looking for consistency.",
     features: [
       "Access to daily trading signals",
       "Basic entry, SL & TP levels",
@@ -42,9 +51,10 @@ const plans = [
   {
     name: "Elite Alpha Circle",
     duration: "1 Year",
-    price: "399", // Placeholder price
+    price: "100", // Placeholder price
     period: "/year",
-    description: "The highest level of signal access for committed traders who want maximum edge.",
+    description:
+      "The highest level of signal access for committed traders who want maximum edge.",
     features: [
       "Access to daily trading signals",
       "Basic entry, SL & TP levels",
@@ -62,9 +72,10 @@ const plans = [
   {
     name: "Inner Caucus",
     duration: "Exclusive",
-    price: "Custom",
+    price: "500",
     period: "",
-    description: "Exclusive access for the most committed members. Private high-level platform.",
+    description:
+      "Exclusive access for the most committed members. Private high-level platform.",
     features: [
       "Private high-level early access platform",
       "Strategic market positioning",
@@ -81,9 +92,10 @@ const plans = [
   {
     name: "Crypto Academy",
     duration: "Unlimited",
-    price: "299", // Placeholder price
+    price: "50", // Placeholder price
     period: "one-time",
-    description: "Master the crypto market through quality education and community.",
+    description:
+      "Master the crypto market through quality education and community.",
     features: [
       "Complete learning curriculum",
       "Beginner to Advanced modules",
@@ -105,11 +117,7 @@ export function PricingSection() {
   const [hoveredPlan, setHoveredPlan] = useState<number | null>(null);
 
   return (
-    <section
-      id="pricing"
-      ref={ref}
-      className="relative py-32 overflow-hidden"
-    >
+    <section id="pricing" ref={ref} className="relative py-32 overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full bg-blue-500/3 blur-[150px]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -121,14 +129,24 @@ export function PricingSection() {
           className="text-center mb-20"
           data-aos="fade-down"
         >
-          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4" data-aos="fade-right">
+          <span
+            className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4"
+            data-aos="fade-right"
+          >
             Membership Plans
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance" data-aos="zoom-in">
+          <h2
+            className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance"
+            data-aos="zoom-in"
+          >
             Choose Your <span className="gradient-text">Success Path</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed" data-aos="fade-up">
-            Whether you want professional signals or complete market mastery, we have a dedicated track for your growth.
+          <p
+            className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed"
+            data-aos="fade-up"
+          >
+            Whether you want professional signals or complete market mastery, we
+            have a dedicated track for your growth.
           </p>
         </motion.div>
 
@@ -169,14 +187,20 @@ export function PricingSection() {
                 <h3 className="text-base font-bold text-white mb-1 uppercase tracking-tight">
                   {plan.name}
                 </h3>
-                <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest">{plan.duration}</span>
-                <p className="text-xs text-slate-500 mt-3 mb-4 h-8 line-clamp-2">{plan.description}</p>
+                <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest">
+                  {plan.duration}
+                </span>
+                <p className="text-xs text-slate-500 mt-3 mb-4 h-8 line-clamp-2">
+                  {plan.description}
+                </p>
                 <div className="flex items-baseline gap-1">
                   <span className="text-xs text-slate-500">$</span>
                   <span className="text-3xl font-bold text-white tracking-tight">
                     {plan.price}
                   </span>
-                  <span className="text-slate-500 text-[10px]">{plan.period}</span>
+                  <span className="text-slate-500 text-[10px]">
+                    {plan.period}
+                  </span>
                 </div>
               </div>
 
@@ -190,7 +214,9 @@ export function PricingSection() {
                         plan.popular ? "text-blue-400" : "text-slate-500"
                       }`}
                     />
-                    <span className="text-[11px] text-slate-400 leading-tight">{feature}</span>
+                    <span className="text-[11px] text-slate-400 leading-tight">
+                      {feature}
+                    </span>
                   </li>
                 ))}
               </ul>

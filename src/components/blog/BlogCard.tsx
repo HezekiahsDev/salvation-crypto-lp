@@ -1,11 +1,11 @@
-"use client";
-
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ChevronRight, ArrowUpRight } from "lucide-react";
 
 interface BlogCardProps {
   post: {
     id: string;
+    slug: string;
     title: string;
     excerpt: string;
     image: string;
@@ -33,7 +33,7 @@ export function BlogCard({ post, index }: BlogCardProps) {
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
       {/* Image Container */}
-      <div className="relative h-56 overflow-hidden">
+      <Link href={`/blog/${post.slug}`} className="relative h-56 overflow-hidden block">
         <img
           src={post.image}
           alt={post.title}
@@ -42,12 +42,12 @@ export function BlogCard({ post, index }: BlogCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-[#020010] via-transparent to-transparent opacity-60" />
         
         {/* Category Badge */}
-        <div className="absolute top-4 left-4">
+        <div className="absolute top-4 left-4 z-20">
           <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-white bg-blue-600 rounded-full shadow-lg shadow-blue-900/50">
             {post.category}
           </span>
         </div>
-      </div>
+      </Link>
 
       {/* Content */}
       <div className="flex flex-col flex-grow p-6 relative z-10">
@@ -64,9 +64,11 @@ export function BlogCard({ post, index }: BlogCardProps) {
         </div>
 
         {/* Title */}
-        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors line-clamp-2 leading-tight">
-          {post.title}
-        </h3>
+        <Link href={`/blog/${post.slug}`}>
+          <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors line-clamp-2 leading-tight">
+            {post.title}
+          </h3>
+        </Link>
 
         {/* Excerpt */}
         <p className="text-sm text-slate-400 line-clamp-3 mb-6 flex-grow leading-relaxed">
@@ -88,12 +90,16 @@ export function BlogCard({ post, index }: BlogCardProps) {
             </span>
           </div>
           
-          <button className="flex items-center gap-1 text-xs font-bold text-blue-400 group-hover:text-blue-300 transition-colors uppercase tracking-widest">
+          <Link 
+            href={`/blog/${post.slug}`}
+            className="flex items-center gap-1 text-xs font-bold text-blue-400 group-hover:text-blue-300 transition-colors uppercase tracking-widest"
+          >
             Read More
             <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </button>
+          </Link>
         </div>
       </div>
     </motion.div>
   );
 }
+
