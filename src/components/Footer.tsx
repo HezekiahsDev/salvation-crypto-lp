@@ -1,23 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 const footerLinks = {
   Academy: [
-    { label: "Curriculum", href: "#features" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "Testimonials", href: "#testimonials" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Curriculum", href: "/#features" },
+    { label: "Pricing", href: "/#pricing" },
+    { label: "Testimonials", href: "/#testimonials" },
+    { label: "FAQ", href: "/#faq" },
   ],
   Resources: [
-    { label: "Trading Blog", href: "#" },
+    { label: "Trading Blog", href: "/blog" },
     { label: "Free Webinars", href: "#" },
     { label: "Market Analysis", href: "#" },
     { label: "Trading Tools", href: "#" },
   ],
   Company: [
-    { label: "About Us", href: "#founder" },
+    { label: "About Us", href: "/#founder" },
     { label: "Contact", href: "#" },
     { label: "Privacy Policy", href: "#" },
     { label: "Terms of Service", href: "#" },
@@ -64,12 +65,12 @@ export function Footer() {
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link.label}>
-                    <a
+                    <Link
                       href={link.href}
                       className="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
