@@ -23,11 +23,11 @@ export default function Home() {
         <HeroSection />
         <PainSection />
         <JourneySection />
+        <HowItWorksSection />
+        <PricingSection />
         <FeaturesSection />
         <TestimonialsSection />
         <FounderSection />
-        <HowItWorksSection />
-        <PricingSection />
         <FAQSection />
         <FinalCTASection />
       </main>
