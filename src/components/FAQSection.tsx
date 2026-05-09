@@ -26,9 +26,9 @@ const faqs = [
       "Free content gives you information. We give you transformation. The difference is: structured progression, live mentorship, trade reviews, accountability, a community of serious traders, and a proven system that connects all the pieces. Anyone can learn what a support level is — we teach you how to build a consistently profitable trading business.",
   },
   {
-    question: "What if I want to cancel or get a refund?",
+    question: "Can I cancel my subscription?",
     answer:
-      "We offer a 7-day money-back guarantee on all plans. If you join, engage with the material, and genuinely feel it's not for you, we'll refund your payment — no questions asked. After the initial 7 days, you can cancel your subscription at any time with no penalties or long-term obligations.",
+      "Yes, you can cancel your subscription at any time. Please note that we do not offer refunds once access has been granted, but you will continue to have access to all features until the end of your current billing period.",
   },
   {
     question: "How quickly can I become profitable?",
