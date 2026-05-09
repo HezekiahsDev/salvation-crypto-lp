@@ -68,4 +68,4 @@ certbot --nginx -d "m.$DOMAIN" -d "academy.$DOMAIN" --redirect
 
 # 9️⃣ Final check
 echo "✅ Setup complete!"
-echo "🌐 Your API should now be live at: https://m.$DOMAIN and https://academy.$DOMAIN"
+echo "🌐 Your App should now be live at: https://m.$DOMAIN and https://academy.$DOMAIN"
