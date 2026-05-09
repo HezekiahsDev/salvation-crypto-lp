@@ -39,8 +39,12 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1" data-aos="fade-right">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">SC</span>
+              <div className="w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-blue-500/20">
+                <img 
+                  src="/img/logo/icon.png" 
+                  alt="Salvation Crypto"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <span className="text-lg font-semibold text-white tracking-tight">
                 Salvation<span className="text-blue-400">Crypto</span>

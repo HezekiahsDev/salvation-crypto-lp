@@ -38,10 +38,12 @@ export function Navigation() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center overflow-hidden">
-              <span className="text-white font-bold text-sm tracking-tight">
-                SC
-              </span>
+            <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-blue-500/20">
+              <img 
+                src="/img/logo/icon.png" 
+                alt="Salvation Crypto"
+                className="w-full h-full object-cover"
+              />
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
             <span className="text-lg font-semibold tracking-tight text-white hidden sm:block">
