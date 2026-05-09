@@ -12,105 +12,8 @@ import {
   GraduationCap,
 } from "lucide-react";
 
-const plans = [
-  {
-    name: "Genesis Signals",
-    duration: "1 Month",
-    price: "10", // Placeholder price, user didn't specify
-    period: "/month",
-    description: "Your gateway into the crypto market, perfect for beginners.",
-    features: [
-      "Access to daily trading signals",
-      "Basic entry, SL & TP levels",
-      "Community access",
-      "Standard support",
-    ],
-    cta: "Get Genesis Access",
-    popular: false,
-    icon: null,
-  },
-  {
-    name: "Alpha Signals",
-    duration: "6 Months",
-    price: "50", // Placeholder price
-    period: "/6 months",
-    description:
-      "Built for traders ready to level up and for serious traders looking for consistency.",
-    features: [
-      "Access to daily trading signals",
-      "Basic entry, SL & TP levels",
-      "Daily market insights",
-      "Massive follow-up from the team",
-      "Priority support",
-    ],
-    cta: "Join Alpha Circle",
-    popular: false,
-    icon: Sparkles,
-    badge: "Maximum Edge",
-  },
-  {
-    name: "Elite Alpha Circle",
-    duration: "1 Year",
-    price: "100", // Placeholder price
-    period: "/year",
-    description:
-      "The highest level of signal access for committed traders who want maximum edge.",
-    features: [
-      "Access to daily trading signals",
-      "Basic entry, SL & TP levels",
-      "Daily market insights",
-      "Spot trading signals",
-      "Poly market insider info signal",
-      "Long-term projects (10,000% potential)",
-      "Special pick meme pump calls",
-      "Massive follow-up from the team",
-    ],
-    cta: "Go Elite Alpha",
-    popular: true,
-    icon: Crown,
-    badge: "Best Value",
-  },
-  {
-    name: "Inner Caucus",
-    duration: "Exclusive",
-    price: "500",
-    period: "",
-    description:
-      "Exclusive access for the most committed members. Private high-level platform.",
-    features: [
-      "Private high-level early access platform",
-      "Strategic market positioning",
-      "Advanced alpha plays",
-      "Networking with top traders",
-      "Direct access to exclusive updates",
-      "Personalized mentorship",
-    ],
-    cta: "Apply for Inner Caucus",
-    popular: false,
-    icon: Shield,
-    badge: "VVIP Access",
-  },
-  {
-    name: "Crypto Academy",
-    duration: "Unlimited",
-    price: "50", // Placeholder price
-    period: "one-time",
-    description:
-      "Master the crypto market through quality education and community.",
-    features: [
-      "Complete learning curriculum",
-      "Beginner to Advanced modules",
-      "Trading community access",
-      "Recorded masterclasses",
-      "Practical workshops",
-      "Lifetime updates",
-    ],
-    cta: "Enroll in Academy",
-    popular: false,
-    icon: GraduationCap,
-    badge: "Learn to Trade",
-  },
-];
+import { plans } from "@/data/plans";
+import Link from "next/link";
 
 export function PricingSection() {
   const ref = useRef(null);
@@ -155,7 +58,7 @@ export function PricingSection() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 items-start">
           {plans.map((plan, i) => (
             <motion.div
-              key={plan.name}
+              key={plan.id}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{
@@ -167,12 +70,13 @@ export function PricingSection() {
               onMouseLeave={() => setHoveredPlan(null)}
               data-aos="fade-up"
               data-aos-delay={i * 100}
-              className={`relative rounded-2xl p-6 transition-all duration-500 flex flex-col h-full ${
+              className={`relative rounded-2xl p-6 transition-all duration-500 flex flex-col h-full group/card cursor-pointer ${
                 plan.popular
                   ? "bg-white/[0.04] border-2 border-transparent pricing-highlight scale-105 z-10"
                   : "bg-white/[0.02] border border-white/5 hover:border-white/10"
               } ${hoveredPlan === i && !plan.popular ? "transform scale-[1.02]" : ""}`}
             >
+              <Link href={`/plans/${plan.id}`} className="absolute inset-0 z-20" />
               {/* Badge */}
               {plan.badge && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
@@ -184,7 +88,7 @@ export function PricingSection() {
               )}
 
               {/* Plan header */}
-              <div className="mb-6">
+              <div className="mb-6 relative z-10">
                 <h3 className="text-base font-bold text-white mb-1 uppercase tracking-tight">
                   {plan.name}
                 </h3>
@@ -206,7 +110,7 @@ export function PricingSection() {
               </div>
 
               {/* Features */}
-              <ul className="space-y-2.5 mb-8 flex-grow">
+              <ul className="space-y-2.5 mb-8 flex-grow relative z-10">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-2">
                     <Check
@@ -223,11 +127,11 @@ export function PricingSection() {
               </ul>
 
               {/* CTA */}
-              <button
-                className={`w-full py-3 rounded-xl font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 group mt-auto ${
+              <div
+                className={`w-full py-3 rounded-xl font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 group mt-auto relative z-10 ${
                   plan.popular
                     ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:shadow-lg hover:shadow-blue-500/25"
-                    : "bg-white/5 text-white border border-white/10 hover:bg-white/10"
+                    : "bg-white/5 text-white border border-white/10 group-hover/card:bg-white/10"
                 }`}
               >
                 {plan.cta}
@@ -235,7 +139,7 @@ export function PricingSection() {
                   size={14}
                   className="group-hover:translate-x-1 transition-transform"
                 />
-              </button>
+              </div>
             </motion.div>
           ))}
         </div>
