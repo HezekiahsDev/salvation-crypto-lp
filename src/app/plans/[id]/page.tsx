@@ -4,14 +4,14 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
-import { 
-  Check, 
-  ArrowLeft, 
-  Wallet, 
-  ShieldCheck, 
-  Zap, 
-  Clock, 
-  CreditCard 
+import {
+  Check,
+  ArrowLeft,
+  Wallet,
+  ShieldCheck,
+  Zap,
+  Clock,
+  CreditCard,
 } from "lucide-react";
 import { CopyButton } from "@/components/CopyButton";
 import Link from "next/link";
@@ -23,7 +23,9 @@ interface PageProps {
   }>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { id } = await params;
   const plan = plans.find((p) => p.id === id);
   if (!plan) return { title: "Plan Not Found" };
@@ -45,15 +47,18 @@ export default async function PlanDetailsPage({ params }: PageProps) {
   return (
     <>
       <Navigation />
-      
+
       <main className="relative pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Back Button */}
-          <Link 
-            href="/#pricing" 
+          <Link
+            href="/#pricing"
             className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-8 group"
           >
-            <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeft
+              size={18}
+              className="group-hover:-translate-x-1 transition-transform"
+            />
             Back to Pricing
           </Link>
 
@@ -65,18 +70,26 @@ export default async function PlanDetailsPage({ params }: PageProps) {
                   {plan.icon ? <plan.icon size={40} /> : <Zap size={40} />}
                 </div>
                 <div>
-                  <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">{plan.name}</h1>
-                  <p className="text-blue-400 font-bold uppercase tracking-widest text-sm">{plan.duration} Access</p>
+                  <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
+                    {plan.name}
+                  </h1>
+                  <p className="text-blue-400 font-bold uppercase tracking-widest text-sm">
+                    {plan.duration} Access
+                  </p>
                 </div>
               </div>
               <div className="flex items-baseline gap-2 p-6 rounded-2xl bg-white/5 border border-white/5">
                 {plan.price ? (
                   <>
-                    <span className="text-5xl font-bold text-white">${plan.price}</span>
+                    <span className="text-5xl font-bold text-white">
+                      ${plan.price}
+                    </span>
                     <span className="text-slate-500">{plan.period}</span>
                   </>
                 ) : (
-                  <span className="text-2xl font-bold text-white">Custom Pricing</span>
+                  <span className="text-2xl font-bold text-white">
+                    Custom Pricing
+                  </span>
                 )}
               </div>
             </div>
@@ -93,13 +106,18 @@ export default async function PlanDetailsPage({ params }: PageProps) {
                   <TestimonialCarousel proofImages={plan.proofImages} />
                 </div>
               </div>
-              
+
               {/* Trust Badge */}
               <div className="flex items-center gap-4 p-6 rounded-2xl bg-blue-500/5 border border-blue-500/10">
                 <ShieldCheck className="text-blue-400 shrink-0" size={32} />
                 <div>
-                  <h4 className="text-white font-bold text-sm">Join a Winning Community</h4>
-                  <p className="text-xs text-slate-500">Real results from real members. Join the elite circle of profitable traders.</p>
+                  <h4 className="text-white font-bold text-sm">
+                    Join a Winning Community
+                  </h4>
+                  <p className="text-xs text-slate-500">
+                    Real results from real members. Join the elite circle of
+                    profitable traders.
+                  </p>
                 </div>
               </div>
             </div>
@@ -116,37 +134,53 @@ export default async function PlanDetailsPage({ params }: PageProps) {
                   {plan.isExclusive ? (
                     <>
                       <p className="text-slate-400 text-sm leading-relaxed">
-                        The <span className="text-white font-bold">{plan.name}</span> requires direct onboarding.
+                        The{" "}
+                        <span className="text-white font-bold">
+                          {plan.name}
+                        </span>{" "}
+                        requires direct onboarding.
                       </p>
                       <div className="p-6 rounded-2xl bg-blue-500/5 border border-blue-500/20 space-y-4">
                         <p className="text-sm text-slate-300">
-                          {plan.id === 'inner-caucus' 
-                            ? "To apply for the Inner Caucus, please fill out our private application form. Our team will review your application and contact you if you're a good fit." 
-                            : plan.id === 'one-on-one'
-                            ? "To apply for One-on-One mentorship, please message the Secretary directly. They will discuss your goals and provide the next steps."
-                            : "To apply for membership, please contact our senior support team. They will guide you through the vetting process and provide secure payment instructions."}
+                          {plan.id === "inner-caucus"
+                            ? "To apply for the Inner Caucus, please fill out our private application form. Our team will review your application and contact you if you're a good fit."
+                            : plan.id === "one-on-one"
+                              ? "To apply for One-on-One mentorship, please message the Secretary directly. They will discuss your goals and provide the next steps."
+                              : "To apply for membership, please contact our senior support team. They will guide you through the vetting process and provide secure payment instructions."}
                         </p>
-                        <a 
-                          href={plan.supportLink || "https://t.me/salvationcrypto_support"} 
-                          target="_blank" 
+                        <a
+                          href={
+                            plan.supportLink ||
+                            "https://t.me/salvationcrypto_support"
+                          }
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold transition-all shadow-lg shadow-blue-600/20"
                         >
-                          {plan.id === 'inner-caucus' ? 'Fill Application Form' : 
-                           plan.id === 'one-on-one' ? 'Message Secretary to Apply' : 
-                           'Contact Support to Apply'}
+                          {plan.id === "inner-caucus"
+                            ? "Fill Application Form"
+                            : plan.id === "one-on-one"
+                              ? "Fill the Application Form"
+                              : "Contact Support to Apply"}
                         </a>
                       </div>
                     </>
                   ) : (
                     <>
                       <p className="text-slate-400 text-sm">
-                        Please send the exact amount of <span className="text-white font-bold">${plan.price}</span> to any address below:
+                        Please send the exact amount of{" "}
+                        <span className="text-white font-bold">
+                          ${plan.price}
+                        </span>{" "}
+                        to any address below:
                       </p>
 
                       <div className="space-y-4">
                         {plan.paymentInstructions.crypto.map((crypto, i) => (
-                          <div key={i} className="p-4 rounded-xl bg-black/40 border border-white/5 space-y-3">
+                          <div
+                            key={i}
+                            className="p-4 rounded-xl bg-black/40 border border-white/5 space-y-3"
+                          >
                             <div className="flex justify-between items-center">
                               <div className="flex items-center gap-2">
                                 <Wallet size={16} className="text-blue-400" />
@@ -177,7 +211,7 @@ export default async function PlanDetailsPage({ params }: PageProps) {
                         </ol>
                       </div>
 
-                      <a 
+                      <a
                         href={`${plan.supportContact}?text=${encodeURIComponent(`Hello, I've just made payment for the ${plan.name} (${plan.duration}) plan. Here is my proof of payment:`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -200,7 +234,10 @@ export default async function PlanDetailsPage({ params }: PageProps) {
             </h3>
             <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
               {plan.features.map((feature, i) => (
-                <li key={i} className="flex items-start gap-3 text-slate-400 bg-white/5 p-4 rounded-xl border border-white/5">
+                <li
+                  key={i}
+                  className="flex items-start gap-3 text-slate-400 bg-white/5 p-4 rounded-xl border border-white/5"
+                >
                   <div className="mt-1 w-2 h-2 rounded-full bg-blue-500 shrink-0 shadow-lg shadow-blue-500/50" />
                   <span className="text-sm font-medium">{feature}</span>
                 </li>

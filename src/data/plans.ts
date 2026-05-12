@@ -215,7 +215,7 @@ export const plans: Plan[] = [
     icon: Shield,
     badge: "VVIP Access",
     isExclusive: true,
-    supportLink: "https://forms.gle/Jp4hwLukdNvPo9ni8",
+    supportLink: "",
     supportContact: DEFAULT_SUPPORT_CONTACT,
     proofImages: [
       "/img/proofs/inner-caucus.jpg",
