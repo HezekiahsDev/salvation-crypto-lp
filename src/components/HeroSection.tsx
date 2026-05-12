@@ -30,8 +30,8 @@ export function HeroSection() {
       <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-purple-500/5 blur-[100px] animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
 
       {/* Trading chart background */}
-      <div className="absolute inset-0 flex items-end opacity-20 pointer-events-none">
-        <TradingChart className="translate-y-10" />
+      <div className="absolute inset-0 flex items-end opacity-35 pointer-events-none">
+        <TradingChart />
       </div>
 
       {/* Floating orbs */}

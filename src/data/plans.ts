@@ -166,7 +166,7 @@ export const plans: Plan[] = [
   {
     id: "crypto-academy",
     name: "Crypto Academy",
-    duration: "Unlimited",
+    duration: "",
     price: "50",
     period: "one-time",
     description:
