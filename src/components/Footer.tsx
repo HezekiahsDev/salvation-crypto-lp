@@ -19,7 +19,7 @@ const footerLinks = {
   ],
   Company: [
     { label: "About Us", href: "/#founder" },
-    { label: "Contact", href: "#" },
+    { label: "Contact", href: "https://wa.me/2347026821951" },
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
   ],

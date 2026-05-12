@@ -4,6 +4,7 @@ import { PainSection } from "@/components/PainSection";
 import { JourneySection } from "@/components/JourneySection";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
+import { ProofMarquee } from "@/components/ProofMarquee";
 import { FounderSection } from "@/components/FounderSection";
 import { HowItWorksSection } from "@/components/HowItWorksSection";
 import { PricingSection } from "@/components/PricingSection";
@@ -27,6 +28,7 @@ export default function Home() {
         <PricingSection />
         <FeaturesSection />
         <TestimonialsSection />
+        <ProofMarquee />
         <FounderSection />
         <FAQSection />
         <FinalCTASection />

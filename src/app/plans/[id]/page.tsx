@@ -73,8 +73,14 @@ export default async function PlanDetailsPage({ params }: PageProps) {
                 </div>
               </div>
               <div className="flex items-baseline gap-2 p-6 rounded-2xl bg-white/5 border border-white/5">
-                <span className="text-5xl font-bold text-white">${plan.price}</span>
-                <span className="text-slate-500">{plan.period}</span>
+                {plan.price ? (
+                  <>
+                    <span className="text-5xl font-bold text-white">${plan.price}</span>
+                    <span className="text-slate-500">{plan.period}</span>
+                  </>
+                ) : (
+                  <span className="text-2xl font-bold text-white">Custom Pricing</span>
+                )}
               </div>
             </div>
             <p className="text-xl text-slate-400 mt-8 leading-relaxed max-w-3xl">
@@ -117,7 +123,11 @@ export default async function PlanDetailsPage({ params }: PageProps) {
                       </p>
                       <div className="p-6 rounded-2xl bg-blue-500/5 border border-blue-500/20 space-y-4">
                         <p className="text-sm text-slate-300">
-                          To apply for membership, please contact our senior support team. They will guide you through the vetting process and provide secure payment instructions.
+                          {plan.id === 'inner-caucus' 
+                            ? "To apply for the Inner Caucus, please fill out our private application form. Our team will review your application and contact you if you're a good fit." 
+                            : plan.id === 'one-on-one'
+                            ? "To apply for One-on-One mentorship, please message the Secretary directly. They will discuss your goals and provide the next steps."
+                            : "To apply for membership, please contact our senior support team. They will guide you through the vetting process and provide secure payment instructions."}
                         </p>
                         <a 
                           href={plan.supportLink || "https://t.me/salvationcrypto_support"} 
@@ -125,7 +135,9 @@ export default async function PlanDetailsPage({ params }: PageProps) {
                           rel="noopener noreferrer"
                           className="flex items-center justify-center gap-2 w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold transition-all shadow-lg shadow-blue-600/20"
                         >
-                          Contact Support to Apply
+                          {plan.id === 'inner-caucus' ? 'Fill Application Form' : 
+                           plan.id === 'one-on-one' ? 'Message Secretary to Apply' : 
+                           'Contact Support to Apply'}
                         </a>
                       </div>
                     </>
@@ -168,9 +180,14 @@ export default async function PlanDetailsPage({ params }: PageProps) {
                         </ol>
                       </div>
 
-                      <button className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold transition-all shadow-lg shadow-blue-600/20">
+                      <a 
+                        href={`${plan.supportContact}?text=${encodeURIComponent(`Hello, I've just made payment for the ${plan.name} (${plan.duration}) plan. Here is my proof of payment:`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold transition-all shadow-lg shadow-blue-600/20 text-center block"
+                      >
                         I've Made Payment
-                      </button>
+                      </a>
                     </>
                   )}
                 </div>

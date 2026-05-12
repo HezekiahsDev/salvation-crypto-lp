@@ -31,6 +31,7 @@ export function CinematicBackground() {
       const xPos = (clientX / window.innerWidth - 0.5) * 40;
       const yPos = (clientY / window.innerHeight - 0.5) * 40;
 
+      if (!containerRef.current) return;
       gsap.to(containerRef.current, {
         x: xPos,
         y: yPos,

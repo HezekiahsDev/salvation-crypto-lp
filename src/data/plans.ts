@@ -1,4 +1,10 @@
-import { Sparkles, Crown, Shield, GraduationCap, LucideIcon } from "lucide-react";
+import {
+  Sparkles,
+  Crown,
+  Shield,
+  GraduationCap,
+  LucideIcon,
+} from "lucide-react";
 
 export interface Plan {
   id: string;
@@ -14,6 +20,7 @@ export interface Plan {
   badge?: string;
   isExclusive?: boolean;
   supportLink?: string;
+  supportContact?: string;
   paymentInstructions: {
     crypto: {
       network: string;
@@ -27,6 +34,34 @@ export interface Plan {
     };
   };
 }
+
+const DEFAULT_SUPPORT_CONTACT = "https://wa.me/2347026821951";
+
+const DEFAULT_PAYMENT_INSTRUCTIONS: Plan["paymentInstructions"] = {
+  crypto: [
+    {
+      symbol: "USDT",
+      network: "BEP20",
+      address: "0xcca3702515db3df2cce978cdaf516436ae4229aa",
+    },
+    {
+      symbol: "USDT",
+      network: "TRC20",
+      address: "TUdEe4v2c8TLv8z8B2S7xVgqabPA7M4Rct",
+    },
+    {
+      symbol: "USDT",
+      network: "Aptos",
+      address:
+        "0xc965330e7faad6d2c02e753c338b8c4a7519f6fba4567dba136307d174034fcb",
+    },
+    {
+      symbol: "USDT",
+      network: "Solana",
+      address: "9YxqjmWhnB8kpXGBtJK28ac3YjmUDySokpHn4FU7DBkd",
+    },
+  ],
+};
 
 export const plans: Plan[] = [
   {
@@ -45,12 +80,9 @@ export const plans: Plan[] = [
     cta: "Get Genesis Access",
     popular: false,
     icon: null,
-    paymentInstructions: {
-      crypto: [
-        { symbol: "USDT", network: "TRC20", address: "TXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" },
-        { symbol: "SOL", network: "Solana", address: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" }
-      ]
-    }
+    supportLink: "https://wa.me/2347026821951",
+    supportContact: DEFAULT_SUPPORT_CONTACT,
+    paymentInstructions: DEFAULT_PAYMENT_INSTRUCTIONS,
   },
   {
     id: "alpha-signals",
@@ -58,7 +90,8 @@ export const plans: Plan[] = [
     duration: "6 Months",
     price: "50",
     period: "/6 months",
-    description: "Built for traders ready to level up and for serious traders looking for consistency.",
+    description:
+      "Built for traders ready to level up and for serious traders looking for consistency.",
     features: [
       "Access to daily trading signals",
       "Basic entry, SL & TP levels",
@@ -70,12 +103,9 @@ export const plans: Plan[] = [
     popular: false,
     icon: Sparkles,
     badge: "Maximum Edge",
-    paymentInstructions: {
-      crypto: [
-        { symbol: "USDT", network: "TRC20", address: "TXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" },
-        { symbol: "SOL", network: "Solana", address: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" }
-      ]
-    }
+    supportLink: "https://wa.me/2347026821951",
+    supportContact: DEFAULT_SUPPORT_CONTACT,
+    paymentInstructions: DEFAULT_PAYMENT_INSTRUCTIONS,
   },
   {
     id: "elite-alpha",
@@ -83,7 +113,8 @@ export const plans: Plan[] = [
     duration: "1 Year",
     price: "100",
     period: "/year",
-    description: "The highest level of signal access for committed traders who want maximum edge.",
+    description:
+      "The highest level of signal access for committed traders who want maximum edge.",
     features: [
       "Access to daily trading signals",
       "Basic entry, SL & TP levels",
@@ -98,40 +129,9 @@ export const plans: Plan[] = [
     popular: true,
     icon: Crown,
     badge: "Best Value",
-    paymentInstructions: {
-      crypto: [
-        { symbol: "USDT", network: "TRC20", address: "TXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" },
-        { symbol: "SOL", network: "Solana", address: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" }
-      ]
-    }
-  },
-  {
-    id: "inner-caucus",
-    name: "Inner Caucus",
-    duration: "Exclusive",
-    price: "500",
-    period: "",
-    description: "Exclusive access for the most committed members. Private high-level platform.",
-    features: [
-      "Private high-level early access platform",
-      "Strategic market positioning",
-      "Advanced alpha plays",
-      "Networking with top traders",
-      "Direct access to exclusive updates",
-      "Personalized mentorship",
-    ],
-    cta: "Apply for Inner Caucus",
-    popular: false,
-    icon: Shield,
-    badge: "VVIP Access",
-    isExclusive: true,
-    supportLink: "https://t.me/salvationcrypto_support",
-    paymentInstructions: {
-      crypto: [
-        { symbol: "USDT", network: "TRC20", address: "TXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" },
-        { symbol: "SOL", network: "Solana", address: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" }
-      ]
-    }
+    supportLink: "https://wa.me/2347026821951",
+    supportContact: DEFAULT_SUPPORT_CONTACT,
+    paymentInstructions: DEFAULT_PAYMENT_INSTRUCTIONS,
   },
   {
     id: "crypto-academy",
@@ -139,24 +139,76 @@ export const plans: Plan[] = [
     duration: "Unlimited",
     price: "50",
     period: "one-time",
-    description: "Master the crypto market through quality education and community.",
+    description:
+      "Master the crypto market through quality education and community.",
     features: [
       "Complete learning curriculum",
       "Beginner to Advanced modules",
       "Trading community access",
       "Recorded masterclasses",
       "Practical workshops",
-      "Lifetime updates",
     ],
     cta: "Enroll in Academy",
     popular: false,
     icon: GraduationCap,
     badge: "Learn to Trade",
+    supportLink: "https://wa.me/2347026821951",
+    supportContact: DEFAULT_SUPPORT_CONTACT,
+    paymentInstructions: DEFAULT_PAYMENT_INSTRUCTIONS,
+  },
+  {
+    id: "inner-caucus",
+    name: "Inner Caucus",
+    duration: "Exclusive",
+    price: "2000",
+    period: "",
+    description:
+      "Exclusive access for the most committed members. Private high-level platform.",
+    features: [
+      "Private high-level early access platform",
+      "Access to insider information (Crypto/Polymarket)",
+      "Strategic market positioning",
+      "Advanced alpha plays",
+      "Networking with top traders",
+      "Direct access to exclusive updates",
+    ],
+    cta: "Apply for Inner Caucus",
+    popular: false,
+    icon: Shield,
+    badge: "VVIP Access",
+    isExclusive: true,
+    supportLink: "https://forms.gle/Jp4hwLukdNvPo9ni8",
+    supportContact: DEFAULT_SUPPORT_CONTACT,
     paymentInstructions: {
-      crypto: [
-        { symbol: "USDT", network: "TRC20", address: "TXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" },
-        { symbol: "SOL", network: "Solana", address: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" }
-      ]
-    }
+      crypto: [],
+    },
+  },
+  {
+    id: "one-on-one",
+    name: "One on One",
+    duration: "Custom",
+    price: "",
+    period: "",
+    description:
+      "Private one-on-one mentorship. Fill the form to request this plan.",
+    features: [
+      "Private 1:1 Mentorship",
+      "Live Trading Sessions",
+      "Full Portfolio Review & Guidance",
+      "Trading Psychology Mastery",
+      "Risk Management Training",
+      "24/7 Priority Support",
+      "Exclusive Trading Tools & Resources",
+    ],
+    cta: "Apply for 1:1",
+    popular: false,
+    icon: null,
+    isExclusive: true,
+    supportLink:
+      "https://wa.me/2347026821951?text=Hi%2C%20I%20would%20like%20to%20apply%20for%20One%20On%20One%2C%20my%20name%20is%20",
+    supportContact: DEFAULT_SUPPORT_CONTACT,
+    paymentInstructions: {
+      crypto: [],
+    },
   },
 ];

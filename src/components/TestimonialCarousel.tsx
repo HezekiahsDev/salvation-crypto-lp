@@ -87,6 +87,7 @@ export function TestimonialCarousel() {
                 src={testimonials[currentIndex].image}
                 alt={`Testimonial ${currentIndex + 1}`}
                 fill
+                sizes="(max-width: 768px) 100vw, 448px"
                 className="object-contain"
               />
             </div>
