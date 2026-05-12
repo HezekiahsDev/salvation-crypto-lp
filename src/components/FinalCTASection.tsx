@@ -63,7 +63,7 @@ export function FinalCTASection() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
         >
           <a
-            href="#pricing"
+            href="/#pricing"
             className="btn-primary text-lg !py-4 !px-10 flex items-center gap-3 group"
           >
             Start Your Transformation

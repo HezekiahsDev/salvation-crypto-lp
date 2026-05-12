@@ -33,6 +33,9 @@ export const metadata: Metadata = {
   },
 };
 
+import { CinematicBackground } from "@/components/CinematicBackground";
+import { MouseFollowGlow } from "@/components/MouseFollowGlow";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,6 +44,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="antialiased" suppressHydrationWarning>
       <body className="min-h-screen bg-[#030014] text-white overflow-x-hidden font-sans">
+        <CinematicBackground />
+        <MouseFollowGlow />
         <AnimationProvider>{children}</AnimationProvider>
       </body>
     </html>

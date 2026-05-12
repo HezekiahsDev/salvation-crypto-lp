@@ -11,14 +11,10 @@ import { PricingSection } from "@/components/PricingSection";
 import { FAQSection } from "@/components/FAQSection";
 import { FinalCTASection } from "@/components/FinalCTASection";
 import { Footer } from "@/components/Footer";
-import { MouseFollowGlow } from "@/components/MouseFollowGlow";
-import { CinematicBackground } from "@/components/CinematicBackground";
 
 export default function Home() {
   return (
     <>
-      <CinematicBackground />
-      <MouseFollowGlow />
       <Navigation />
       <main>
         <HeroSection />

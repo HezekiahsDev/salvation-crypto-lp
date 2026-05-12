@@ -86,7 +86,7 @@ export function HeroSection() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
         >
           <a
-            href="#pricing"
+            href="/#pricing"
             className="btn-primary text-base flex items-center gap-2 group"
           >
             Join the Academy
@@ -96,7 +96,7 @@ export function HeroSection() {
             />
           </a>
           <a
-            href="#testimonials"
+            href="/#testimonials"
             className="btn-secondary text-base flex items-center gap-2 group"
           >
             <Play

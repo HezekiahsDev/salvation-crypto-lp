@@ -2,8 +2,7 @@ import { plans } from "@/data/plans";
 import { notFound } from "next/navigation";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { CinematicBackground } from "@/components/CinematicBackground";
-import { MouseFollowGlow } from "@/components/MouseFollowGlow";
+
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
 import { 
   Check, 
@@ -45,8 +44,6 @@ export default async function PlanDetailsPage({ params }: PageProps) {
 
   return (
     <>
-      <CinematicBackground />
-      <MouseFollowGlow />
       <Navigation />
       
       <main className="relative pt-32 pb-20 px-6">

@@ -79,7 +79,7 @@ export function TestimonialCarousel({ proofImages }: TestimonialCarouselProps) {
                 fill
                 sizes="(max-width: 768px) 100vw, 384px"
                 className="object-contain"
-                unoptimized
+                priority={currentIndex === 0}
               />
             </div>
           </motion.div>

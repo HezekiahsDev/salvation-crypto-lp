@@ -252,8 +252,7 @@ export const plans: Plan[] = [
     popular: false,
     icon: null,
     isExclusive: true,
-    supportLink:
-      "https://wa.me/2347026821951?text=Hi%2C%20I%20would%20like%20to%20apply%20for%20One%20On%20One%2C%20my%20name%20is%20",
+    supportLink: "https://forms.gle/Jp4hwLukdNvPo9ni8",
     supportContact: DEFAULT_SUPPORT_CONTACT,
     proofImages: [
       "/img/proofs/one1.jpg",

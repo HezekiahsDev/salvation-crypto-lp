@@ -69,7 +69,7 @@ export function Navigation() {
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
             <a
-              href="#pricing"
+              href="/#pricing"
               className="btn-primary text-sm !py-2.5 !px-6 inline-flex items-center gap-2"
             >
               Join Academy
@@ -123,7 +123,7 @@ export function Navigation() {
               ))}
               <div className="pt-4 border-t border-white/5">
                 <a
-                  href="#pricing"
+                  href="/#pricing"
                   onClick={() => setIsMobileOpen(false)}
                   className="btn-primary block text-center !py-3"
                 >

@@ -77,7 +77,21 @@ export function TradingChart({ className = "" }: { className?: string }) {
     });
   }, []);
 
+  const [isVisible, setIsVisible] = useState(true);
+  const containerRef = useRef<SVGSVGElement>(null);
+
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
     const schedulePush = () => {
       tickRef.current = setTimeout(() => {
         pushCandle();
@@ -96,7 +110,7 @@ export function TradingChart({ className = "" }: { className?: string }) {
       if (tickRef.current) clearTimeout(tickRef.current);
       if (priceTickRef.current) clearTimeout(priceTickRef.current);
     };
-  }, [pushCandle, tickPrice]);
+  }, [pushCandle, tickPrice, isVisible]);
 
   // ── derived layout ───────────────────────────────────────────────────────
   const prices = candles.flatMap((c) => [c.high, c.low]);
@@ -119,6 +133,7 @@ export function TradingChart({ className = "" }: { className?: string }) {
 
   return (
     <svg
+      ref={containerRef}
       viewBox={`0 0 ${W} ${H}`}
       className={`w-full h-full ${className}`}
       preserveAspectRatio="none"
