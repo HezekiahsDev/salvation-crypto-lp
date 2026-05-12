@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-DOMAIN="salvationquest.com"
+DOMAIN="salvationacademy.com"
 APP_PORT=9004
 NGINX_AVAILABLE="/etc/nginx/sites-available/$DOMAIN"
 NGINX_ENABLED="/etc/nginx/sites-enabled/$DOMAIN"
@@ -32,7 +32,7 @@ echo "📝 Creating new Nginx config"
 cat > "$NGINX_AVAILABLE" <<EOF
 server {
     listen 80;
-    server_name m.$DOMAIN academy.$DOMAIN;
+    server_name $DOMAIN www.$DOMAIN;
 
     location / {
         proxy_pass http://127.0.0.1:$APP_PORT;
@@ -64,8 +64,8 @@ systemctl reload nginx
 
 # 8️⃣ Run Certbot
 echo "🔐 Requesting SSL certificate via Certbot"
-certbot --nginx -d "m.$DOMAIN" -d "academy.$DOMAIN" --redirect
+certbot --nginx -d "$DOMAIN" -d "www.$DOMAIN" --redirect
 
 # 9️⃣ Final check
 echo "✅ Setup complete!"
-echo "🌐 Your App should now be live at: https://m.$DOMAIN and https://academy.$DOMAIN"
+echo "🌐 Your App should now be live at: https://$DOMAIN and https://www.$DOMAIN"
