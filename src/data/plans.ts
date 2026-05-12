@@ -21,6 +21,7 @@ export interface Plan {
   isExclusive?: boolean;
   supportLink?: string;
   supportContact?: string;
+  proofImages: string[];
   paymentInstructions: {
     crypto: {
       network: string;
@@ -82,6 +83,14 @@ export const plans: Plan[] = [
     icon: null,
     supportLink: "https://wa.me/2347026821951",
     supportContact: DEFAULT_SUPPORT_CONTACT,
+    proofImages: [
+      "/img/proofs/genesis.jpg",
+      "/img/proofs/trading1.jpg",
+      "/img/proofs/trading-2.jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-22-13(2).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-59(4).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-56.jpg",
+    ],
     paymentInstructions: DEFAULT_PAYMENT_INSTRUCTIONS,
   },
   {
@@ -105,6 +114,15 @@ export const plans: Plan[] = [
     badge: "Maximum Edge",
     supportLink: "https://wa.me/2347026821951",
     supportContact: DEFAULT_SUPPORT_CONTACT,
+    proofImages: [
+      "/img/proofs/alpha.jpg",
+      "/img/proofs/alpha1.jpg",
+      "/img/proofs/trading-3.jpg",
+      "/img/proofs/trading-4.jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-54.jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-58(1).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-46-00(1).jpg",
+    ],
     paymentInstructions: DEFAULT_PAYMENT_INSTRUCTIONS,
   },
   {
@@ -131,6 +149,18 @@ export const plans: Plan[] = [
     badge: "Best Value",
     supportLink: "https://wa.me/2347026821951",
     supportContact: DEFAULT_SUPPORT_CONTACT,
+    proofImages: [
+      "/img/proofs/elite.jpg",
+      "/img/proofs/insider-info-job.jpg",
+      "/img/proofs/insider-indo-job2.jpg",
+      "/img/proofs/trading 4.jpg",
+      "/img/proofs/trading -5.jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-54(1).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-55(4).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-59(1).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-46-00(4).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-46-00(5).jpg",
+    ],
     paymentInstructions: DEFAULT_PAYMENT_INSTRUCTIONS,
   },
   {
@@ -154,6 +184,14 @@ export const plans: Plan[] = [
     badge: "Learn to Trade",
     supportLink: "https://wa.me/2347026821951",
     supportContact: DEFAULT_SUPPORT_CONTACT,
+    proofImages: [
+      "/img/proofs/academy.jpg",
+      "/img/proofs/academy1.jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-56(2).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-57(1).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-59(2).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-22-13(5).jpg",
+    ],
     paymentInstructions: DEFAULT_PAYMENT_INSTRUCTIONS,
   },
   {
@@ -179,6 +217,16 @@ export const plans: Plan[] = [
     isExclusive: true,
     supportLink: "https://forms.gle/Jp4hwLukdNvPo9ni8",
     supportContact: DEFAULT_SUPPORT_CONTACT,
+    proofImages: [
+      "/img/proofs/inner-caucus.jpg",
+      "/img/proofs/inner-caucus1.jpg",
+      "/img/proofs/inner-cacus2.jpg",
+      "/img/proofs/inner.jpg",
+      "/img/proofs/inner1.jpg",
+      "/img/proofs/inside.jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-46-00(5).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-22-13(5).jpg",
+    ],
     paymentInstructions: {
       crypto: [],
     },
@@ -207,6 +255,13 @@ export const plans: Plan[] = [
     supportLink:
       "https://wa.me/2347026821951?text=Hi%2C%20I%20would%20like%20to%20apply%20for%20One%20On%20One%2C%20my%20name%20is%20",
     supportContact: DEFAULT_SUPPORT_CONTACT,
+    proofImages: [
+      "/img/proofs/one1.jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-57.jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-58(2).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-59(3).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-46-01.jpg",
+    ],
     paymentInstructions: {
       crypto: [],
     },

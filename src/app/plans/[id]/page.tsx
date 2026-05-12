@@ -93,7 +93,7 @@ export default async function PlanDetailsPage({ params }: PageProps) {
             <div className="space-y-8 h-full">
               <div className="p-1 rounded-3xl bg-gradient-to-br from-blue-500/20 to-purple-500/20">
                 <div className="rounded-[calc(1.5rem-1px)] bg-[#030014] overflow-hidden">
-                  <TestimonialCarousel />
+                  <TestimonialCarousel proofImages={plan.proofImages} />
                 </div>
               </div>
               
