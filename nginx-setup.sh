@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-DOMAIN="salvationacademy.com"
+DOMAIN="salvationacademy.net"
 APP_PORT=9004
 NGINX_AVAILABLE="/etc/nginx/sites-available/$DOMAIN"
 NGINX_ENABLED="/etc/nginx/sites-enabled/$DOMAIN"
