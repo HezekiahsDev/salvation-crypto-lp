@@ -15,7 +15,7 @@ pnpm run build
 
 
 # Restart the PM2 process
-pm2 stop salvation-quest || true
-pm2 delete salvation-quest || true
-pm2 start pnpm --name "salvation-quest" -- start
+pm2 stop salvation-academy-lp || true
+pm2 delete salvation-academy-lp || true
+pm2 start pnpm --name "salvation-academy-lp" -- start
 pm2 save
