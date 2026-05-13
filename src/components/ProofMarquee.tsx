@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const proofImages = Array.from({ length: 46 }, (_, i) => `/img/testimonies/Salvation/${i + 1}.jpg`);
+const proofImages = Array.from({ length: 20 }, (_, i) => `/img/testimonies/Salvation/${i + 1}.jpg`);
 
 export function ProofMarquee() {
   return (
@@ -20,7 +20,7 @@ export function ProofMarquee() {
             x: ["0%", "-50%"],
           }}
           transition={{
-            duration: 40,
+            duration: 30, // Slightly faster for fewer images
             ease: "linear",
             repeat: Infinity,
           }}
@@ -34,8 +34,9 @@ export function ProofMarquee() {
                 src={src}
                 alt={`Proof ${i}`}
                 fill
-                sizes="(max-width: 768px) 250px, 250px"
+                sizes="250px"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
+                priority={i < 4} // Preload first few images
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
