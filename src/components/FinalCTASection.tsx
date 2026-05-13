@@ -84,7 +84,7 @@ export function FinalCTASection() {
         >
           <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
           <span className="text-sm text-slate-400">
-            <span className="text-orange-300 font-semibold">Limited Slots</span>{" "}
+            <span className="text-orange-300 font-semibold">Limited Spots</span>{" "}
             Available
           </span>
         </motion.div>
