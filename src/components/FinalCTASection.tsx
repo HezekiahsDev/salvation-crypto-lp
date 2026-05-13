@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 export function FinalCTASection() {
   const ref = useRef(null);
@@ -51,8 +52,8 @@ export function FinalCTASection() {
           className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-400 leading-relaxed mb-12 text-balance"
         >
           Every day you wait is another day of uncertainty, another blown
-          account, another missed opportunity. Join 2,847+ traders who decided to
-          take control of their financial future.
+          account, another missed opportunity. Join 2,847+ traders who decided
+          to take control of their financial future.
         </motion.p>
 
         {/* CTA */}
@@ -62,7 +63,7 @@ export function FinalCTASection() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
         >
-          <a
+          <Link
             href="/#pricing"
             className="btn-primary text-lg !py-4 !px-10 flex items-center gap-3 group"
           >
@@ -71,7 +72,7 @@ export function FinalCTASection() {
               size={20}
               className="group-hover:translate-x-1 transition-transform"
             />
-          </a>
+          </Link>
         </motion.div>
 
         {/* Urgency */}
@@ -83,8 +84,8 @@ export function FinalCTASection() {
         >
           <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
           <span className="text-sm text-slate-400">
-            <span className="text-orange-300 font-semibold">Only 23 spots</span>{" "}
-            remaining for this month&apos;s cohort
+            <span className="text-orange-300 font-semibold">Limited Slots</span>{" "}
+            Available
           </span>
         </motion.div>
       </div>
