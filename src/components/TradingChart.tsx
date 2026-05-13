@@ -48,11 +48,19 @@ const volBarH = (v: number) => v * (PADDING_BOTTOM - 4);
 
 // ── component ──────────────────────────────────────────────────────────────
 export function TradingChart({ className = "" }: { className?: string }) {
-  const [candles, setCandles] = useState<Candle[]>(() => seed(VISIBLE));
-  // live price: fraction (0–1) through the current forming candle
-  const [livePrice, setLivePrice] = useState(candles[candles.length - 1].close);
+  const [candles, setCandles] = useState<Candle[]>([]);
+  const [livePrice, setLivePrice] = useState(50);
+  const [mounted, setMounted] = useState(false);
+  
   const tickRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const priceTickRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+    const initialCandles = seed(VISIBLE);
+    setCandles(initialCandles);
+    setLivePrice(initialCandles[initialCandles.length - 1].close);
+  }, []);
 
   // Every ~2s: push a new finished candle and start fresh live candle
   const pushCandle = useCallback(() => {
@@ -111,6 +119,8 @@ export function TradingChart({ className = "" }: { className?: string }) {
       if (priceTickRef.current) clearTimeout(priceTickRef.current);
     };
   }, [pushCandle, tickPrice, isVisible]);
+
+  if (!mounted || candles.length === 0) return null;
 
   // ── derived layout ───────────────────────────────────────────────────────
   const prices = candles.flatMap((c) => [c.high, c.low]);

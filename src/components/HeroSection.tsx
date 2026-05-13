@@ -1,10 +1,18 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { AnimatedCounter } from "./AnimatedCounter";
-import { TradingChart } from "./TradingChart";
 import { Play, ArrowRight } from "lucide-react";
+import Link from "next/link";
+
+const TradingChart = dynamic(
+  () => import("./TradingChart").then((mod) => mod.TradingChart),
+  {
+    ssr: false,
+  },
+);
 
 const trustStats = [
   { value: 2847, suffix: "+", label: "Active Students" },
@@ -27,7 +35,10 @@ export function HeroSection() {
 
       {/* Radial glows */}
       <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-[120px] animate-pulse-glow" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-purple-500/5 blur-[100px] animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
+      <div
+        className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-purple-500/5 blur-[100px] animate-pulse-glow"
+        style={{ animationDelay: "1.5s" }}
+      />
 
       {/* Trading chart background */}
       <div className="absolute inset-0 flex items-end opacity-35 pointer-events-none">
@@ -37,7 +48,10 @@ export function HeroSection() {
       {/* Floating orbs */}
       <div className="absolute top-20 right-[15%] w-3 h-3 rounded-full bg-blue-400/40 animate-float" />
       <div className="absolute top-40 left-[20%] w-2 h-2 rounded-full bg-purple-400/30 animate-float-delayed" />
-      <div className="absolute bottom-32 right-[30%] w-2.5 h-2.5 rounded-full bg-cyan-400/30 animate-float" style={{ animationDelay: "2s" }} />
+      <div
+        className="absolute bottom-32 right-[30%] w-2.5 h-2.5 rounded-full bg-cyan-400/30 animate-float"
+        style={{ animationDelay: "2s" }}
+      />
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-20 text-center">
@@ -73,8 +87,8 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-400 leading-relaxed mb-12 text-balance"
         >
-          Join the premier crypto academy and signal service. Learn to navigate 
-          the markets with precision and trade alongside a community of 
+          Join the premier crypto academy and signal service. Learn to navigate
+          the markets with precision and trade alongside a community of
           consistently profitable professionals.
         </motion.p>
 
@@ -85,7 +99,7 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
         >
-          <a
+          <Link
             href="/#pricing"
             className="btn-primary text-base flex items-center gap-2 group"
           >
@@ -94,8 +108,8 @@ export function HeroSection() {
               size={18}
               className="group-hover:translate-x-1 transition-transform"
             />
-          </a>
-          <a
+          </Link>
+          <Link
             href="/#testimonials"
             className="btn-secondary text-base flex items-center gap-2 group"
           >
@@ -104,7 +118,7 @@ export function HeroSection() {
               className="text-blue-400 group-hover:scale-110 transition-transform"
             />
             Watch Success Stories
-          </a>
+          </Link>
         </motion.div>
 
         {/* Trust Stats */}

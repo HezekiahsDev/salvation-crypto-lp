@@ -17,14 +17,36 @@ const navLinks = [
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // Set mounted asynchronously to avoid lint warning and cascading renders
+    const raf = requestAnimationFrame(() => setMounted(true));
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(raf);
+    };
   }, []);
+
+  if (!mounted)
+    return (
+      <nav className="fixed top-0 left-0 right-0 z-[100] py-5 bg-transparent">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-white/5 animate-pulse" />
+            <span className="text-lg font-semibold text-white/50">
+              Salvation Crypto
+            </span>
+          </div>
+        </div>
+      </nav>
+    );
 
   return (
     <>
@@ -34,7 +56,7 @@ export function Navigation() {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
           isScrolled
-            ? "py-3 glass-strong shadow-lg shadow-black/20"
+            ? "py-3 bg-black/60 backdrop-blur-[60px] shadow-lg shadow-black/40 border-b border-white/10"
             : "py-5 bg-transparent"
         }`}
       >
@@ -42,8 +64,8 @@ export function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-blue-500/20">
-              <Image 
-                src="/img/logo/icon.png" 
+              <Image
+                src="/img/logo/icon.png"
                 alt="Salvation Crypto"
                 width={36}
                 height={36}
@@ -71,7 +93,7 @@ export function Navigation() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <a
+            <Link
               href="/#pricing"
               className="btn-primary text-sm !py-2.5 !px-6 inline-flex items-center gap-2"
             >
@@ -89,7 +111,7 @@ export function Navigation() {
                   d="M13 7l5 5m0 0l-5 5m5-5H6"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Toggle */}
@@ -106,35 +128,46 @@ export function Navigation() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-x-0 top-[60px] z-[99] p-4 md:hidden"
-          >
-            <div className="glass-strong rounded-2xl p-6 space-y-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setIsMobileOpen(false)}
-                  className="block px-4 py-3 text-base font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-all"
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <div className="pt-4 border-t border-white/5">
-                <a
-                  href="/#pricing"
-                  onClick={() => setIsMobileOpen(false)}
-                  className="btn-primary block text-center !py-3"
-                >
-                  Join Academy
-                </a>
+          <>
+            {/* Backdrop Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileOpen(false)}
+              className="fixed inset-0 z-[98] bg-black/40 backdrop-blur-[20px] md:hidden"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed inset-x-0 top-[70px] z-[99] p-4 md:hidden"
+            >
+              <div className="bg-white/5 backdrop-blur-[60px] rounded-2xl p-6 space-y-1 shadow-2xl shadow-black/80 border border-white/10">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setIsMobileOpen(false)}
+                    className="block px-4 py-3 text-base font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <div className="pt-4 border-t border-white/5">
+                  <Link
+                    href="/#pricing"
+                    onClick={() => setIsMobileOpen(false)}
+                    className="btn-primary block text-center !py-3 shadow-lg shadow-blue-500/20"
+                  >
+                    Join Academy
+                  </Link>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
