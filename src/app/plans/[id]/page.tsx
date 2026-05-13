@@ -48,52 +48,41 @@ export default async function PlanDetailsPage({ params }: PageProps) {
     <>
       <Navigation />
 
-      <main className="relative pt-32 pb-20 px-6">
+      <main className="relative pt-32 pb-12 px-6">
         <div className="max-w-6xl mx-auto">
-          {/* Back Button */}
-          <Link
-            href="/#pricing"
-            className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-8 group"
-          >
-            <ArrowLeft
-              size={18}
-              className="group-hover:-translate-x-1 transition-transform"
-            />
-            Back to Pricing
-          </Link>
 
-          {/* Plan Header - High Impact */}
-          <div className="mb-12 p-8 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-xl">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-              <div className="flex items-center gap-4">
-                <div className="p-4 rounded-2xl bg-blue-500/10 text-blue-400">
-                  {plan.icon ? <plan.icon size={40} /> : <Zap size={40} />}
+          {/* Plan Header - Ultra Compact */}
+          <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-md">
+            <div className="flex flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="hidden xs:block p-2 rounded-lg bg-blue-500/10 text-blue-400">
+                  {plan.icon ? <plan.icon size={20} /> : <Zap size={20} />}
                 </div>
                 <div>
-                  <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight">
                     {plan.name}
                   </h1>
-                  <p className="text-blue-400 font-bold uppercase tracking-widest text-sm">
+                  <p className="text-blue-400/80 font-bold uppercase tracking-widest text-[9px] sm:text-[10px]">
                     {plan.duration} Access
                   </p>
                 </div>
               </div>
-              <div className="flex items-baseline gap-2 p-6 rounded-2xl bg-white/5 border border-white/5">
+              <div className="flex items-baseline gap-1 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-white/5 border border-white/5 w-fit shrink-0">
                 {plan.price ? (
                   <>
-                    <span className="text-5xl font-bold text-white">
+                    <span className="text-xl sm:text-2xl font-bold text-white">
                       ${plan.price}
                     </span>
-                    <span className="text-slate-500">{plan.period}</span>
+                    <span className="text-slate-500 text-[10px] sm:text-xs">
+                      {plan.period}
+                    </span>
                   </>
                 ) : (
-                  <span className="text-2xl font-bold text-white">
-                    Custom Pricing
-                  </span>
+                  <span className="text-base font-bold text-white">Custom</span>
                 )}
               </div>
             </div>
-            <p className="text-xl text-slate-400 mt-8 leading-relaxed max-w-3xl">
+            <p className="text-sm sm:text-base text-slate-400 mt-4 leading-relaxed max-w-4xl border-t border-white/5 pt-4">
               {plan.description}
             </p>
           </div>

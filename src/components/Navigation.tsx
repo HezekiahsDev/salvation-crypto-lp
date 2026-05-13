@@ -56,7 +56,7 @@ export function Navigation() {
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
           isScrolled
-            ? "py-3 bg-black/60 backdrop-blur-[60px] shadow-lg shadow-black/40 border-b border-white/10"
+            ? "py-3 bg-black/90 backdrop-blur-[60px] shadow-lg shadow-black/40 border-b border-white/10"
             : "py-5 bg-transparent"
         }`}
       >
@@ -145,13 +145,13 @@ export function Navigation() {
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="fixed inset-x-0 top-[70px] z-[99] p-4 md:hidden"
             >
-              <div className="bg-white/5 backdrop-blur-[60px] rounded-2xl p-6 space-y-1 shadow-2xl shadow-black/80 border border-white/10">
+              <div className="bg-[#05001a]/95 backdrop-blur-[60px] rounded-2xl p-6 space-y-1 shadow-2xl shadow-black/80 border border-white/10">
                 {navLinks.map((link) => (
                   <Link
                     key={link.label}
                     href={link.href}
                     onClick={() => setIsMobileOpen(false)}
-                    className="block px-4 py-3 text-base font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                    className="block px-4 py-3 text-base font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-all text-center"
                   >
                     {link.label}
                   </Link>
