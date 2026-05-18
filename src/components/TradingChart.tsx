@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // ── types ──────────────────────────────────────────────────────────────────
 interface Candle {
@@ -23,7 +23,9 @@ function nextCandle(prev: Candle): Candle {
 }
 
 function seed(count: number): Candle[] {
-  const list: Candle[] = [{ open: 50, close: 52, high: 54, low: 48, volume: 0.6 }];
+  const list: Candle[] = [
+    { open: 50, close: 52, high: 54, low: 48, volume: 0.6 },
+  ];
   for (let i = 1; i < count; i++) list.push(nextCandle(list[i - 1]));
   return list;
 }
@@ -48,77 +50,26 @@ const volBarH = (v: number) => v * (PADDING_BOTTOM - 4);
 
 // ── component ──────────────────────────────────────────────────────────────
 export function TradingChart({ className = "" }: { className?: string }) {
-  const [candles, setCandles] = useState<Candle[]>([]);
-  const [livePrice, setLivePrice] = useState(50);
+  // Static trading chart: pre-seed candles once and render without live updates
+  const [candles, setCandles] = useState<Candle[]>(() => seed(VISIBLE));
   const [mounted, setMounted] = useState(false);
-  
-  const tickRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const priceTickRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const livePrice = candles[candles.length - 1].close;
+
+  const containerRef = useRef<SVGSVGElement | null>(null);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     setMounted(true);
-    const initialCandles = seed(VISIBLE);
-    setCandles(initialCandles);
-    setLivePrice(initialCandles[initialCandles.length - 1].close);
   }, []);
-
-  // Every ~2s: push a new finished candle and start fresh live candle
-  const pushCandle = useCallback(() => {
-    setCandles((prev) => {
-      const next = [...prev.slice(-(VISIBLE - 1)), nextCandle(prev[prev.length - 1])];
-      setLivePrice(next[next.length - 1].close);
-      return next;
-    });
-  }, []);
-
-  // Every ~120ms: wiggle the live price inside the forming candle's range
-  const tickPrice = useCallback(() => {
-    setCandles((prev) => {
-      const last = prev[prev.length - 1];
-      const noise = (Math.random() - 0.48) * 1.2;
-      const newClose = Math.min(Math.max(last.close + noise, last.low - 0.5), last.high + 0.5);
-      const newHigh = Math.max(last.high, newClose);
-      const newLow = Math.min(last.low, newClose);
-      const updated = { ...last, close: newClose, high: newHigh, low: newLow };
-      setLivePrice(newClose);
-      return [...prev.slice(0, -1), updated];
-    });
-  }, []);
-
-  const [isVisible, setIsVisible] = useState(true);
-  const containerRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
     if (containerRef.current) observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, []);
-
-  useEffect(() => {
-    if (!isVisible) return;
-
-    const schedulePush = () => {
-      tickRef.current = setTimeout(() => {
-        pushCandle();
-        schedulePush();
-      }, 1800 + Math.random() * 800);
-    };
-    const scheduleTick = () => {
-      priceTickRef.current = setTimeout(() => {
-        tickPrice();
-        scheduleTick();
-      }, 100 + Math.random() * 80);
-    };
-    schedulePush();
-    scheduleTick();
-    return () => {
-      if (tickRef.current) clearTimeout(tickRef.current);
-      if (priceTickRef.current) clearTimeout(priceTickRef.current);
-    };
-  }, [pushCandle, tickPrice, isVisible]);
 
   if (!mounted || candles.length === 0) return null;
 
@@ -134,7 +85,8 @@ export function TradingChart({ className = "" }: { className?: string }) {
   // moving average (5-period)
   const maPoints = candles.map((c, i) => {
     const slice = candles.slice(Math.max(0, i - 4), i + 1);
-    const avg = slice.reduce((s, cc) => s + (cc.open + cc.close) / 2, 0) / slice.length;
+    const avg =
+      slice.reduce((s, cc) => s + (cc.open + cc.close) / 2, 0) / slice.length;
     const x = i * CANDLE_STEP + CANDLE_W / 2;
     const y = priceToY(avg, lo, hi);
     return `${x},${y}`;
@@ -177,9 +129,21 @@ export function TradingChart({ className = "" }: { className?: string }) {
         </linearGradient>
         {/* Live price line gradient */}
         <linearGradient id="tcLive" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor={lastIsGreen ? "#10b981" : "#ef4444"} stopOpacity="0" />
-          <stop offset="80%" stopColor={lastIsGreen ? "#10b981" : "#ef4444"} stopOpacity="0.7" />
-          <stop offset="100%" stopColor={lastIsGreen ? "#10b981" : "#ef4444"} stopOpacity="1" />
+          <stop
+            offset="0%"
+            stopColor={lastIsGreen ? "#10b981" : "#ef4444"}
+            stopOpacity="0"
+          />
+          <stop
+            offset="80%"
+            stopColor={lastIsGreen ? "#10b981" : "#ef4444"}
+            stopOpacity="0.7"
+          />
+          <stop
+            offset="100%"
+            stopColor={lastIsGreen ? "#10b981" : "#ef4444"}
+            stopOpacity="1"
+          />
         </linearGradient>
         {/* Glow filter for candle bodies */}
         <filter id="tcGlow" x="-50%" y="-50%" width="200%" height="200%">
@@ -190,7 +154,13 @@ export function TradingChart({ className = "" }: { className?: string }) {
           </feMerge>
         </filter>
         {/* Stronger glow for live candle */}
-        <filter id="tcGlowStrong" x="-100%" y="-100%" width="300%" height="300%">
+        <filter
+          id="tcGlowStrong"
+          x="-100%"
+          y="-100%"
+          width="300%"
+          height="300%"
+        >
           <feGaussianBlur stdDeviation="3" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
@@ -213,7 +183,10 @@ export function TradingChart({ className = "" }: { className?: string }) {
         return (
           <line
             key={t}
-            x1={0} y1={y} x2={W} y2={y}
+            x1={0}
+            y1={y}
+            x2={W}
+            y2={y}
             stroke="rgba(99,102,241,0.07)"
             strokeWidth="1"
             strokeDasharray="4 6"
@@ -251,11 +224,16 @@ export function TradingChart({ className = "" }: { className?: string }) {
         const color = isGreen ? "#34d399" : "#f87171";
 
         return (
-          <g key={`c-${i}`} filter={isLast ? "url(#tcGlowStrong)" : "url(#tcGlow)"}>
+          <g
+            key={`c-${i}`}
+            filter={isLast ? "url(#tcGlowStrong)" : "url(#tcGlow)"}
+          >
             {/* Wick */}
             <line
-              x1={cx} y1={wickTop}
-              x2={cx} y2={wickBot}
+              x1={cx}
+              y1={wickTop}
+              x2={cx}
+              y2={wickBot}
               stroke={color}
               strokeWidth={isLast ? 1.5 : 1}
               opacity={isLast ? 1 : 0.65}
@@ -271,15 +249,7 @@ export function TradingChart({ className = "" }: { className?: string }) {
               opacity={isLast ? 1 : 0.8}
             >
               {/* Entry fade-in for new candles */}
-              {isLast && (
-                <animate
-                  attributeName="opacity"
-                  from="0"
-                  to="1"
-                  dur="0.3s"
-                  fill="freeze"
-                />
-              )}
+              {/* static chart: no per-candle SVG animations */}
             </rect>
             {/* Highlight sheen on body */}
             <rect
@@ -317,17 +287,14 @@ export function TradingChart({ className = "" }: { className?: string }) {
         opacity={0.6}
       />
 
-      {/* ── Glowing live price dot on last candle ── */}
+      {/* ── Glowing live price dot on last candle (static) ── */}
       <circle
         cx={(candles.length - 1) * CANDLE_STEP + CANDLE_W / 2}
         cy={livePriceY}
         r={3}
         fill={lastIsGreen ? "#34d399" : "#f87171"}
         filter="url(#tcGlowStrong)"
-      >
-        <animate attributeName="r" values="2.5;4;2.5" dur="1s" repeatCount="indefinite" />
-        <animate attributeName="opacity" values="1;0.5;1" dur="1s" repeatCount="indefinite" />
-      </circle>
+      />
 
       {/* ── Price label ── */}
       <g filter="url(#tcLabelGlow)">

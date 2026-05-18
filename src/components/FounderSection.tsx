@@ -9,11 +9,7 @@ export function FounderSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section
-      id="founder"
-      ref={ref}
-      className="relative py-32 overflow-hidden"
-    >
+    <section id="founder" ref={ref} className="relative py-32 overflow-hidden">
       {/* Spotlight effect */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-[150px]" />
 
@@ -25,7 +21,6 @@ export function FounderSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="relative"
-            data-aos="fade-right"
           >
             <div className="relative aspect-[4/5] max-w-md mx-auto">
               {/* Photo placeholder - gradient silhouette */}
@@ -39,7 +34,9 @@ export function FounderSection() {
                     <div className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 blur-2xl" />
                     <div className="absolute inset-4 rounded-full bg-gradient-to-br from-blue-400/10 to-purple-400/10 border border-white/5" />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-6xl font-bold gradient-text">SC</span>
+                      <span className="text-6xl font-bold gradient-text">
+                        SC
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -79,7 +76,6 @@ export function FounderSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            data-aos="fade-left"
           >
             <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4">
               Meet the Founder
@@ -91,15 +87,15 @@ export function FounderSection() {
 
             <div className="space-y-5 text-slate-400 leading-relaxed mb-10">
               <p>
-                I started trading in 2017 with $200 and zero knowledge. I blew my
-                first 3 accounts, lost money I couldn&apos;t afford to lose, and
-                almost gave up entirely.
+                I started trading in 2017 with $200 and zero knowledge. I blew
+                my first 3 accounts, lost money I couldn&apos;t afford to lose,
+                and almost gave up entirely.
               </p>
               <p>
-                But I didn&apos;t quit. I studied obsessively, found real mentors,
-                and developed a systematic approach to the markets. By 2019, I
-                was consistently profitable. By 2020, I was trading at a 
-                professional level, managing significant capital with absolute 
+                But I didn&apos;t quit. I studied obsessively, found real
+                mentors, and developed a systematic approach to the markets. By
+                2019, I was consistently profitable. By 2020, I was trading at a
+                professional level, managing significant capital with absolute
                 discipline.
               </p>
               <p className="text-slate-300 font-medium">

@@ -7,12 +7,12 @@ export const metadata: Metadata = {
   description:
     "Join the premier crypto learning and trading community. Master the markets through quality education, daily signals, and professional mentorship.",
   keywords: [
-    "forex trading",
     "trading academy",
     "financial markets",
     "crypto trading",
     "crypto trading",
     "trading academy",
+    "crypto education",
     "bitcoin signals",
     "master trader",
     "trading mentorship",

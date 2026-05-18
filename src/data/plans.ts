@@ -170,10 +170,11 @@ export const plans: Plan[] = [
     price: "50",
     period: "one-time",
     description:
-      "Master the crypto market through quality education and community.",
+      "Master crypto markets with a full curriculum that includes DEFI.",
     features: [
       "Complete learning curriculum",
       "Beginner to Advanced modules",
+      "DEFI fundamentals and protocols",
       "Trading community access",
       "Recorded masterclasses",
       "Practical workshops",

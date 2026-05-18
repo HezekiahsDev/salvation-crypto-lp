@@ -50,18 +50,17 @@ export function HowItWorksSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
-          data-aos="fade-down"
         >
-          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4" data-aos="fade-right" data-aos-delay="200">
+          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4">
             Simple Process
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance" data-aos="zoom-in" data-aos-delay="400">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance">
             Three Steps to{" "}
             <span className="gradient-text">Your New Career</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed" data-aos="fade-up" data-aos-delay="600">
-            Getting started is straightforward. We&apos;ve removed every barrier so
-            you can focus on what matters — becoming profitable.
+          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed">
+            Getting started is straightforward. We&apos;ve removed every barrier
+            so you can focus on what matters — becoming profitable.
           </p>
         </motion.div>
 
@@ -88,16 +87,11 @@ export function HowItWorksSection() {
                   delay: 0.3 + i * 0.2,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                data-aos="fade-up"
-                data-aos-delay={i * 200}
                 className="relative text-center group"
               >
                 {/* Step number circle */}
                 <div className="relative inline-flex items-center justify-center w-[72px] h-[72px] rounded-2xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-white/5 mb-8 mx-auto group-hover:border-blue-500/20 group-hover:scale-110 transition-all duration-500">
-                  <step.icon
-                    size={28}
-                    className="text-blue-400"
-                  />
+                  <step.icon size={28} className="text-blue-400" />
                   <div className="absolute -top-2 -right-2 w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
                     <span className="text-[11px] font-bold text-white">
                       {step.step}

@@ -2,12 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import {
-  TrendingDown,
-  Brain,
-  UserX,
-  AlertTriangle,
-} from "lucide-react";
+import { TrendingDown, Brain, UserX, AlertTriangle } from "lucide-react";
 
 const painPoints = [
   {
@@ -61,11 +56,7 @@ export function PainSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section
-      id="pain"
-      ref={ref}
-      className="relative py-32 overflow-hidden"
-    >
+    <section id="pain" ref={ref} className="relative py-32 overflow-hidden">
       {/* Subtle red ambient */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-red-500/3 blur-[150px]" />
 
@@ -76,16 +67,15 @@ export function PainSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
-          data-aos="fade-down"
         >
-          <span className="inline-block text-sm font-semibold text-red-400/80 tracking-widest uppercase mb-4" data-aos="fade-right" data-aos-delay="200">
+          <span className="inline-block text-sm font-semibold text-red-400/80 tracking-widest uppercase mb-4">
             The Reality
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance" data-aos="zoom-in" data-aos-delay="400">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance">
             Why Most Traders{" "}
             <span className="text-red-400/90">Never Make It</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed" data-aos="fade-up" data-aos-delay="600">
+          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed">
             Before you can win, you need to understand why you&apos;re losing.
             These are the silent killers of trading careers.
           </p>
@@ -103,8 +93,6 @@ export function PainSection() {
                 delay: 0.2 + i * 0.15,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              data-aos={i % 2 === 0 ? "fade-right" : "fade-left"}
-              data-aos-delay={i * 100}
               className={`group relative p-8 rounded-2xl border border-white/5 bg-gradient-to-b ${pain.color} backdrop-blur-sm transition-all duration-500 ${pain.borderColor} hover:bg-white/[0.02] cursor-default`}
             >
               {/* Icon */}
@@ -126,9 +114,7 @@ export function PainSection() {
                 <span className="text-2xl font-bold text-white">
                   {pain.stat}
                 </span>
-                <span className="text-sm text-slate-500">
-                  {pain.statLabel}
-                </span>
+                <span className="text-sm text-slate-500">{pain.statLabel}</span>
               </div>
 
               {/* Hover glow */}
@@ -146,9 +132,7 @@ export function PainSection() {
         >
           <p className="text-xl sm:text-2xl text-slate-300 font-medium text-balance">
             But what if there was a{" "}
-            <span className="gradient-text font-semibold">
-              proven system
-            </span>{" "}
+            <span className="gradient-text font-semibold">proven system</span>{" "}
             that could change everything?
           </p>
         </motion.div>

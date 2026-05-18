@@ -34,9 +34,9 @@ export function HeroSection() {
       <div className="absolute inset-0 grid-bg opacity-40" />
 
       {/* Radial glows */}
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-[120px] animate-pulse-glow" />
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-[120px]" />
       <div
-        className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-purple-500/5 blur-[100px] animate-pulse-glow"
+        className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-purple-500/5 blur-[100px]"
         style={{ animationDelay: "1.5s" }}
       />
 
@@ -46,10 +46,10 @@ export function HeroSection() {
       </div>
 
       {/* Floating orbs */}
-      <div className="absolute top-20 right-[15%] w-3 h-3 rounded-full bg-blue-400/40 animate-float" />
-      <div className="absolute top-40 left-[20%] w-2 h-2 rounded-full bg-purple-400/30 animate-float-delayed" />
+      <div className="absolute top-20 right-[15%] w-3 h-3 rounded-full bg-blue-400/40" />
+      <div className="absolute top-40 left-[20%] w-2 h-2 rounded-full bg-purple-400/30" />
       <div
-        className="absolute bottom-32 right-[30%] w-2.5 h-2.5 rounded-full bg-cyan-400/30 animate-float"
+        className="absolute bottom-32 right-[30%] w-2.5 h-2.5 rounded-full bg-cyan-400/30"
         style={{ animationDelay: "2s" }}
       />
 

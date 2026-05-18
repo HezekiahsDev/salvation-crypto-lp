@@ -77,11 +77,7 @@ export function FeaturesSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section
-      id="features"
-      ref={ref}
-      className="relative py-32 overflow-hidden"
-    >
+    <section id="features" ref={ref} className="relative py-32 overflow-hidden">
       {/* Ambient */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-blue-500/3 blur-[150px]" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-purple-500/3 blur-[120px]" />
@@ -93,18 +89,17 @@ export function FeaturesSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
-          data-aos="fade-down"
         >
-          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4" data-aos="fade-left">
+          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4">
             What You Get
           </span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance" data-aos="zoom-in">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance">
             Everything You Need to{" "}
             <span className="gradient-text">Become Profitable</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed" data-aos="fade-up">
-            A complete ecosystem designed to take you from wherever you are today
-            to consistently profitable trader.
+          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed">
+            A complete ecosystem designed to take you from wherever you are
+            today to consistently profitable trader.
           </p>
         </motion.div>
 
@@ -120,8 +115,6 @@ export function FeaturesSection() {
                 delay: 0.2 + i * 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              data-aos="fade-up"
-              data-aos-delay={i * 50}
               className="group relative p-6 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500 hover:border-blue-500/20 cursor-default"
             >
               {/* Highlight badge */}

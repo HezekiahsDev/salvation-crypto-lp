@@ -31,24 +31,14 @@ export function PricingSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
-          data-aos="fade-down"
         >
-          <span
-            className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4"
-            data-aos="fade-right"
-          >
+          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4">
             Membership Plans
           </span>
-          <h2
-            className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance"
-            data-aos="zoom-in"
-          >
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6 text-balance">
             Choose Your <span className="gradient-text">Success Path</span>
           </h2>
-          <p
-            className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed"
-            data-aos="fade-up"
-          >
+          <p className="max-w-2xl mx-auto text-lg text-slate-400 leading-relaxed">
             Whether you want professional signals or complete market mastery, we
             have a dedicated track for your growth.
           </p>
@@ -68,15 +58,16 @@ export function PricingSection() {
               }}
               onMouseEnter={() => setHoveredPlan(i)}
               onMouseLeave={() => setHoveredPlan(null)}
-              data-aos="fade-up"
-              data-aos-delay={i * 100}
               className={`relative rounded-2xl p-6 transition-all duration-500 flex flex-col h-full group/card cursor-pointer ${
                 plan.popular
                   ? "bg-white/[0.04] border-2 border-transparent pricing-highlight scale-105 z-10"
                   : "bg-white/[0.02] border border-white/5 hover:border-white/10"
               } ${hoveredPlan === i && !plan.popular ? "transform scale-[1.02]" : ""}`}
             >
-              <Link href={`/plans/${plan.id}`} className="absolute inset-0 z-20" />
+              <Link
+                href={`/plans/${plan.id}`}
+                className="absolute inset-0 z-20"
+              />
               {/* Badge */}
               {plan.badge && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap">

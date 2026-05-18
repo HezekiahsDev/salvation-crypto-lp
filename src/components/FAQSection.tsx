@@ -18,7 +18,7 @@ const faqs = [
   {
     question: "What markets do you cover?",
     answer:
-      "We primarily focus on Forex (major and minor pairs), Crypto (BTC, ETH, and major altcoins), Gold (XAUUSD), and Indices (US30, NAS100, SPX500). Our strategies are based on price action and market structure, which means the principles apply across any liquid market.",
+      "We focus on crypto markets, including BTC, ETH, and major altcoins. Our strategies are based on price action and market structure, so the principles apply across any liquid crypto market.",
   },
   {
     question: "How is this different from free YouTube content?",
@@ -127,12 +127,11 @@ export function FAQSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
-          data-aos="fade-down"
         >
-          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4" data-aos="fade-left">
+          <span className="inline-block text-sm font-semibold text-blue-400/80 tracking-widest uppercase mb-4">
             Common Questions
           </span>
-          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-6" data-aos="zoom-in">
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-6">
             Objections <span className="gradient-text">Resolved</span>
           </h2>
           <p className="max-w-xl mx-auto text-lg text-slate-400 leading-relaxed">

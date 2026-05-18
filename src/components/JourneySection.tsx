@@ -86,10 +86,7 @@ function StageCard({
       style={{ opacity, scale, y }}
       className="absolute inset-0 flex items-center justify-center p-6"
     >
-      <div
-        className="max-w-2xl w-full glass-strong p-6 md:p-12 rounded-2xl md:rounded-[2rem] border-white/10 relative overflow-hidden group cursor-pointer hover:border-white/20 transition-colors mx-4"
-        data-aos="zoom-in"
-      >
+      <div className="max-w-2xl w-full glass-strong p-6 md:p-12 rounded-2xl md:rounded-[2rem] border-white/10 relative overflow-hidden group cursor-pointer hover:border-white/20 transition-colors mx-4">
         {/* Background Glow */}
         <div
           className="absolute -top-24 -right-24 w-64 h-64 rounded-full blur-[100px] opacity-20 transition-opacity group-hover:opacity-40"
@@ -169,16 +166,10 @@ export function JourneySection() {
           whileInView={{ opacity: 1, y: 0 }}
           className="absolute top-16 md:top-24 text-center z-20 py-4 px-6"
         >
-          <span
-            className="text-[10px] md:text-sm font-bold text-blue-400 tracking-[0.3em] uppercase mb-2 md:mb-4 block"
-            data-aos="fade-down"
-          >
+          <span className="text-[10px] md:text-sm font-bold text-blue-400 tracking-[0.3em] uppercase mb-2 md:mb-4 block">
             The Journey
           </span>
-          <h2
-            className="text-3xl md:text-6xl font-bold text-white mb-2 md:mb-4"
-            data-aos="fade-up"
-          >
+          <h2 className="text-3xl md:text-6xl font-bold text-white mb-2 md:mb-4">
             Your Transformation <span className="gradient-text">Story</span>
           </h2>
           <p className="text-slate-500 max-w-xl mx-auto text-sm md:text-base">

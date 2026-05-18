@@ -6,53 +6,51 @@ import { SectionLoading } from "@/components/Skeleton";
 // Dynamically import heavy sections below the fold
 const PainSection = dynamic(
   () => import("@/components/PainSection").then((mod) => mod.PainSection),
-  { loading: () => <SectionLoading /> }
+  { loading: () => <SectionLoading /> },
 );
 const JourneySection = dynamic(
   () => import("@/components/JourneySection").then((mod) => mod.JourneySection),
-  { loading: () => <SectionLoading /> }
+  { loading: () => <SectionLoading /> },
 );
 const FeaturesSection = dynamic(
   () =>
     import("@/components/FeaturesSection").then((mod) => mod.FeaturesSection),
-  { loading: () => <SectionLoading /> }
+  { loading: () => <SectionLoading /> },
 );
 const TestimonialsSection = dynamic(
   () =>
     import("@/components/TestimonialsSection").then(
       (mod) => mod.TestimonialsSection,
     ),
-  { loading: () => <SectionLoading /> }
-);
-const ProofMarquee = dynamic(
-  () => import("@/components/ProofMarquee").then((mod) => mod.ProofMarquee),
-  { loading: () => <SectionLoading /> }
+  { loading: () => <SectionLoading /> },
 );
 const FounderSection = dynamic(
   () => import("@/components/FounderSection").then((mod) => mod.FounderSection),
-  { loading: () => <SectionLoading /> }
+  { loading: () => <SectionLoading /> },
 );
 const HowItWorksSection = dynamic(
   () =>
-    import("@/components/HowItWorksSection").then((mod) => mod.HowItWorksSection),
-  { loading: () => <SectionLoading /> }
+    import("@/components/HowItWorksSection").then(
+      (mod) => mod.HowItWorksSection,
+    ),
+  { loading: () => <SectionLoading /> },
 );
 const PricingSection = dynamic(
   () => import("@/components/PricingSection").then((mod) => mod.PricingSection),
-  { loading: () => <SectionLoading /> }
+  { loading: () => <SectionLoading /> },
 );
 const FAQSection = dynamic(
   () => import("@/components/FAQSection").then((mod) => mod.FAQSection),
-  { loading: () => <SectionLoading /> }
+  { loading: () => <SectionLoading /> },
 );
 const FinalCTASection = dynamic(
   () =>
     import("@/components/FinalCTASection").then((mod) => mod.FinalCTASection),
-  { loading: () => <SectionLoading /> }
+  { loading: () => <SectionLoading /> },
 );
 const Footer = dynamic(
   () => import("@/components/Footer").then((mod) => mod.Footer),
-  { loading: () => <SectionLoading /> }
+  { loading: () => <SectionLoading /> },
 );
 
 export default function Home() {
@@ -66,7 +64,6 @@ export default function Home() {
         <HowItWorksSection />
         <PricingSection />
         <FeaturesSection />
-        <ProofMarquee />
         <TestimonialsSection />
         <FounderSection />
         <FAQSection />

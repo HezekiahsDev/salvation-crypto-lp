@@ -2,14 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import Lenis from "lenis";
-import AOS from "aos";
-import "aos/dist/aos.css";
+// AOS removed to reduce page load and rely on framer-motion for in-view animations
 
-export function AnimationProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function AnimationProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
@@ -30,19 +25,7 @@ export function AnimationProvider({
 
     requestAnimationFrame(raf);
 
-    // Initialize AOS
-    AOS.init({
-      duration: 1000,
-      once: false, // Allow animations to repeat when scrolling back up for better storytelling
-      mirror: true,
-      easing: "ease-out-cubic",
-      offset: 100,
-    });
-
-    // Refresh AOS on scroll to ensure compatibility with Lenis
-    lenis.on("scroll", () => {
-      AOS.refresh();
-    });
+    // No AOS initialization. Framer Motion handles reveal animations.
 
     return () => {
       lenis.destroy();

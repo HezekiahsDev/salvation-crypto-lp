@@ -38,11 +38,11 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-16">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1" data-aos="fade-right">
+          <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-3 mb-5">
               <div className="w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-blue-500/20">
-                <img 
-                  src="/img/logo/icon.png" 
+                <img
+                  src="/img/logo/icon.png"
                   alt="Salvation Crypto"
                   className="w-full h-full object-cover"
                 />
@@ -58,7 +58,7 @@ export function Footer() {
           </div>
 
           {Object.entries(footerLinks).map(([category, links], i) => (
-            <div key={category} data-aos="fade-up" data-aos-delay={i * 100}>
+            <div key={category}>
               <h4 className="text-sm font-semibold text-white mb-4 tracking-wide">
                 {category}
               </h4>
@@ -102,20 +102,21 @@ export function Footer() {
         </div>
 
         {/* Risk disclaimer */}
-        <div className="mt-10 p-5 rounded-xl bg-white/[0.02] border border-white/5" data-aos="fade-up">
+        <div className="mt-10 p-5 rounded-xl bg-white/[0.02] border border-white/5">
           <p className="text-[11px] text-slate-600 leading-relaxed text-center">
             <span className="text-slate-500 font-semibold">
               Risk Disclaimer:
             </span>{" "}
-            Trading foreign exchange and cryptocurrencies on margin carries a high
+            Trading cryptocurrencies and digital assets on margin carries a high
             level of risk and may not be suitable for all investors. Past
             performance is not indicative of future results. The high degree of
             leverage can work against you as well as for you. Before deciding to
-            trade, you should carefully consider your investment objectives, level
-            of experience, and risk appetite. The possibility exists that you could
-            sustain a loss of some or all of your initial investment. You should be
-            aware of all the risks associated with trading and seek advice from an
-            independent financial advisor if you have any doubts.
+            trade, you should carefully consider your investment objectives,
+            level of experience, and risk appetite. The possibility exists that
+            you could sustain a loss of some or all of your initial investment.
+            You should be aware of all the risks associated with trading and
+            seek advice from an independent financial advisor if you have any
+            doubts.
           </p>
         </div>
       </div>
