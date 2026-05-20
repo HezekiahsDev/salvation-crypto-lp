@@ -17,9 +17,16 @@ import { CopyButton } from "@/components/CopyButton";
 import Link from "next/link";
 import { Metadata } from "next";
 
+import { FiatCheckoutForm } from "@/components/payment/FiatCheckoutForm";
+import { PaymentVerification } from "@/components/payment/PaymentVerification";
+
 interface PageProps {
   params: Promise<{
     id: string;
+  }>;
+  searchParams: Promise<{
+    reference?: string;
+    trxref?: string;
   }>;
 }
 
@@ -27,7 +34,17 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { id } = await params;
-  const plan = plans.find((p) => p.id === id);
+  const slugify = (s: string) =>
+    s
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+
+  const decodedId = decodeURIComponent(String(id));
+  const plan =
+    plans.find((p) => p.id === decodedId) ||
+    plans.find((p) => slugify(p.name) === decodedId) ||
+    plans.find((p) => p.id === String(id));
   if (!plan) return { title: "Plan Not Found" };
 
   return {
@@ -36,9 +53,27 @@ export async function generateMetadata({
   };
 }
 
-export default async function PlanDetailsPage({ params }: PageProps) {
+export default async function PlanDetailsPage({
+  params,
+  searchParams,
+}: PageProps) {
   const { id } = await params;
-  const plan = plans.find((p) => p.id === id);
+  // `searchParams` may contain string or string[] depending on how Next provides repeated query params.
+  const sp = await searchParams;
+  const refParam = (sp as any)?.reference ?? (sp as any)?.trxref;
+  const reference = Array.isArray(refParam) ? String(refParam[0]) : refParam;
+
+  const slugify = (s: string) =>
+    s
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+
+  const decodedId = decodeURIComponent(String(id));
+  const plan =
+    plans.find((p) => p.id === decodedId) ||
+    plans.find((p) => slugify(p.name) === decodedId) ||
+    plans.find((p) => p.id === String(id));
 
   if (!plan) {
     notFound();
@@ -48,9 +83,17 @@ export default async function PlanDetailsPage({ params }: PageProps) {
     <>
       <Navigation />
 
+      {reference && (
+        <PaymentVerification
+          reference={reference}
+          planName={plan.name}
+          planId={plan.id}
+          supportLink={plan.supportLink}
+        />
+      )}
+
       <main className="relative pt-32 pb-12 px-6">
         <div className="max-w-6xl mx-auto">
-
           {/* Plan Header - Ultra Compact */}
           <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-md">
             <div className="flex flex-row items-center justify-between gap-4">
@@ -208,6 +251,16 @@ export default async function PlanDetailsPage({ params }: PageProps) {
                       >
                         I've Made Payment
                       </a>
+
+                      {!plan.isExclusive &&
+                        plan.price &&
+                        plan.price !== "Custom" && (
+                          <FiatCheckoutForm
+                            planId={plan.id}
+                            price={plan.price}
+                            planName={plan.name}
+                          />
+                        )}
                     </>
                   )}
                 </div>

@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Payment {
+  id                    String   @id @default(cuid())
+  transaction_reference String   @unique
+  paystack_reference    String?  @unique
+  user_id               String?
+  full_name             String
+  email                 String
+  phone_number          String
+  plan_id               String
+  plan_name             String?
+  amount                Float
+  currency              String
+  payment_status        String   @default("pending") // pending, successful, failed, abandoned, refunded
+  confirmed             Boolean  @default(false)
+  payment_method        String?  // card, bank_transfer, etc.
+  paystack_response     String?  // Store JSON stringified response if needed
+  webhook_payload       String?  // Store final JSON webhook payload
+  created_at            DateTime @default(now())
+  updated_at            DateTime @updatedAt
+}
+
+model Admin {
+  id          String   @id @default(cuid())
+  username    String   @unique
+  password    String // Will store bcrypt hash
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
