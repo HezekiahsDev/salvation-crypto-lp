@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CheckCircle2, XCircle, Loader2 } from "lucide-react";
+import { CheckCircle2, XCircle, Loader2, X } from "lucide-react";
 import Link from "next/link";
 
 export function PaymentVerification({
@@ -21,6 +21,7 @@ export function PaymentVerification({
 
   // Normalize reference if an array was passed (avoid comma-joined values)
   const singleReference = Array.isArray(reference) ? reference[0] : reference;
+  const [visible, setVisible] = useState(true);
   useEffect(() => {
     async function verify() {
       try {
@@ -44,6 +45,8 @@ export function PaymentVerification({
     verify();
   }, [singleReference]);
 
+  if (!visible) return null;
+
   if (status === "loading") {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 text-center">
@@ -64,6 +67,13 @@ export function PaymentVerification({
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 text-center">
         <div className="bg-[#0f172a] border border-emerald-500/20 p-8 rounded-2xl max-w-md w-full shadow-2xl shadow-emerald-500/10 flex flex-col items-center">
+          <button
+            onClick={() => setVisible(false)}
+            aria-label="Close"
+            className="absolute top-4 right-4 p-2 rounded-md hover:bg-white/5"
+          >
+            <X className="text-slate-300" />
+          </button>
           <CheckCircle2 className="text-emerald-500 mb-4" size={64} />
           <h3 className="text-2xl font-bold text-white mb-2">
             Payment Successful!
@@ -94,6 +104,13 @@ export function PaymentVerification({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 text-center">
       <div className="bg-[#0f172a] border border-red-500/20 p-8 rounded-2xl max-w-md w-full shadow-2xl shadow-red-500/10 flex flex-col items-center">
+        <button
+          onClick={() => setVisible(false)}
+          aria-label="Close"
+          className="absolute top-4 right-4 p-2 rounded-md hover:bg-white/5"
+        >
+          <X className="text-slate-300" />
+        </button>
         <XCircle className="text-red-500 mb-4" size={64} />
         <h3 className="text-2xl font-bold text-white mb-2">
           Payment Verification Failed

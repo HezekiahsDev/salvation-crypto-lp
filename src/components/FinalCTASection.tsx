@@ -85,6 +85,29 @@ export function FinalCTASection() {
             Available
           </span>
         </motion.div>
+
+        {/* Contact: WhatsApp */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 1 }}
+          className="mt-8 text-center"
+        >
+          <h3 className="text-lg font-semibold text-white mb-1">
+            For calls and inquiries
+          </h3>
+          <p className="text-slate-400 mb-3">
+            WhatsApp call or message our Customer Service (WhatsApp only)
+          </p>
+          <a
+            href="https://wa.me/2348020769766"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 text-lg font-semibold text-green-400 bg-green-900/5 px-4 py-2 rounded-md border border-green-800/20"
+          >
+            +234 802 076 9766
+          </a>
+        </motion.div>
       </div>
     </section>
   );

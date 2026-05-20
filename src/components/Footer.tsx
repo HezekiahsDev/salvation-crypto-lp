@@ -19,7 +19,7 @@ const footerLinks = {
   ],
   Company: [
     { label: "About Us", href: "/#founder" },
-    { label: "Contact", href: "https://wa.me/2347026821951" },
+    { label: "Contact", href: "https://wa.me/2348020769766" },
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
   ],
@@ -98,6 +98,14 @@ export function Footer() {
                 <ArrowUpRight size={10} />
               </motion.a>
             ))}
+            <a
+              href="https://wa.me/2348020769766"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-4 inline-flex items-center gap-2 text-sm text-green-400 hover:text-green-300"
+            >
+              WhatsApp: +234 802 076 9766
+            </a>
           </div>
         </div>
 

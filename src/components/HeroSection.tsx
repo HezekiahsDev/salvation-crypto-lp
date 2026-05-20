@@ -121,6 +121,28 @@ export function HeroSection() {
           </Link>
         </motion.div>
 
+        {/* Contact: WhatsApp (prominent) */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.95 }}
+          className="mb-8 flex items-center justify-center gap-4"
+        >
+          <div className="text-center">
+            <p className="text-sm text-slate-400 mb-1">
+              For calls and inquiries (WhatsApp only)
+            </p>
+            <a
+              href="https://wa.me/2348020769766"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-lg font-semibold text-green-400 bg-green-900/5 px-4 py-2 rounded-md border border-green-800/20"
+            >
+              +234 802 076 9766
+            </a>
+          </div>
+        </motion.div>
+
         {/* Trust Stats */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
