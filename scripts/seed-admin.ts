@@ -4,8 +4,8 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 async function main() {
-  const username = "admin";
-  const plainPassword = "password123";
+  const username = "salvation.admin@salvationacademy.net";
+  const plainPassword = "P@ssw0rd123!";
   const hashedPassword = await bcrypt.hash(plainPassword, 10);
 
   await prisma.admin.upsert({
@@ -18,7 +18,7 @@ async function main() {
   });
 
   console.log(
-    "Admin user created/verified successfully. u: admin p: password123",
+    "Admin user created/verified successfully. u: salvation.admin@salvationacademy.net p: P@ssw0rd123!",
   );
 }
 
