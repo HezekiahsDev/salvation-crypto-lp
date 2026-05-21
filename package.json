@@ -12,8 +12,6 @@
     "@gsap/react": "^2.1.2",
     "@prisma/client": "^6.19.3",
     "@studio-freight/lenis": "^1.0.42",
-    "@types/aos": "^3.0.7",
-    "aos": "^2.3.4",
     "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",

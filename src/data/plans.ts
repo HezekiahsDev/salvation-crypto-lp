@@ -56,11 +56,6 @@ const DEFAULT_PAYMENT_INSTRUCTIONS: Plan["paymentInstructions"] = {
       address:
         "0xc965330e7faad6d2c02e753c338b8c4a7519f6fba4567dba136307d174034fcb",
     },
-    {
-      symbol: "USDT",
-      network: "Solana",
-      address: "9YxqjmWhnB8kpXGBtJK28ac3YjmUDySokpHn4FU7DBkd",
-    },
   ],
 };
 

@@ -6,7 +6,6 @@ import { Footer } from "@/components/Footer";
 import { TestimonialCarousel } from "@/components/TestimonialCarousel";
 import {
   Check,
-  ArrowLeft,
   Wallet,
   ShieldCheck,
   Zap,
@@ -14,7 +13,7 @@ import {
   CreditCard,
 } from "lucide-react";
 import { CopyButton } from "@/components/CopyButton";
-import Link from "next/link";
+
 import { Metadata } from "next";
 
 import { FiatCheckoutForm } from "@/components/payment/FiatCheckoutForm";
@@ -95,7 +94,7 @@ export default async function PlanDetailsPage({
       <main className="relative pt-32 pb-12 px-6">
         <div className="max-w-6xl mx-auto">
           {/* Plan Header - Ultra Compact */}
-          <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-md">
+          <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-white/2 border border-white/5 backdrop-blur-md">
             <div className="flex flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <div className="hidden xs:block p-2 rounded-lg bg-blue-500/10 text-blue-400">
@@ -133,7 +132,7 @@ export default async function PlanDetailsPage({
           <div className="grid lg:grid-cols-2 gap-8 items-start">
             {/* Left Column: Social Proof (Now Primary) */}
             <div className="space-y-8 h-full">
-              <div className="p-1 rounded-3xl bg-gradient-to-br from-blue-500/20 to-purple-500/20">
+              <div className="p-1 rounded-3xl bg-linear-to-br from-blue-500/20 to-purple-500/20">
                 <div className="rounded-[calc(1.5rem-1px)] bg-[#030014] overflow-hidden">
                   <TestimonialCarousel proofImages={plan.proofImages} />
                 </div>
@@ -156,10 +155,10 @@ export default async function PlanDetailsPage({
 
             {/* Right Column: Enrollment Instructions */}
             <div className="space-y-8">
-              <div className="p-8 rounded-3xl bg-gradient-to-br from-blue-600/10 to-purple-600/10 border border-white/10 backdrop-blur-xl h-full">
+              <div className="p-8 rounded-3xl bg-linear-to-br from-blue-600/10 to-purple-600/10 border border-white/10 backdrop-blur-xl h-full">
                 <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
                   <CreditCard className="text-blue-400" />
-                  {plan.isExclusive ? "How to Apply" : "Secure Enrollment"}
+                  {plan.isExclusive ? "How to Apply" : "Pay with Crypto"}
                 </h2>
 
                 <div className="space-y-6">
@@ -222,7 +221,7 @@ export default async function PlanDetailsPage({
                               </div>
                             </div>
                             <div className="flex items-center gap-2 bg-white/5 p-3 rounded-lg group">
-                              <code className="text-xs text-blue-300 break-all flex-grow font-mono">
+                              <code className="text-xs text-blue-300 break-all grow font-mono">
                                 {crypto.address}
                               </code>
                               <CopyButton text={crypto.address} />
@@ -231,25 +230,13 @@ export default async function PlanDetailsPage({
                         ))}
                       </div>
 
-                      <div className="p-6 rounded-2xl bg-yellow-500/5 border border-yellow-500/20">
-                        <div className="flex items-center gap-2 text-yellow-500 mb-2">
-                          <Clock size={18} />
-                          <h4 className="font-bold text-sm">Quick Setup</h4>
-                        </div>
-                        <ol className="text-xs text-slate-400 space-y-2 list-decimal ml-4">
-                          <li>Send payment & take a screenshot.</li>
-                          <li>Message support with your receipt.</li>
-                          <li>Get access within minutes.</li>
-                        </ol>
-                      </div>
-
                       <a
                         href={`${plan.supportContact}?text=${encodeURIComponent(`Hello, I've just made payment for the ${plan.name} (${plan.duration}) plan. Here is my proof of payment:`)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold transition-all shadow-lg shadow-blue-600/20 text-center block"
                       >
-                        I've Made Payment
+                        I&apos;ve Made Payment
                       </a>
 
                       {!plan.isExclusive &&
@@ -264,12 +251,23 @@ export default async function PlanDetailsPage({
                     </>
                   )}
                 </div>
+                <div className="p-6 mt-4 rounded-2xl bg-yellow-500/5 border border-yellow-500/20">
+                  <div className="flex items-center gap-2 text-yellow-500 mb-2">
+                    <Clock size={18} />
+                    <h4 className="font-bold text-sm">Quick Setup</h4>
+                  </div>
+                  <ol className="text-xs text-slate-400 space-y-2 list-decimal ml-4">
+                    <li>Send payment & take a screenshot.</li>
+                    <li>Message support with your receipt.</li>
+                    <li>Get access within minutes.</li>
+                  </ol>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Features Detail - Moved Below Grid */}
-          <div className="mt-12 p-8 rounded-3xl bg-white/[0.02] border border-white/5">
+          <div className="mt-12 p-8 rounded-3xl bg-white/2 border border-white/5">
             <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
               <Check size={24} className="text-green-500" />
               Everything you get with {plan.name}
