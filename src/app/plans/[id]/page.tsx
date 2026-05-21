@@ -152,6 +152,15 @@ export default async function PlanDetailsPage({
                   </p>
                 </div>
               </div>
+              <div className="mt-4 p-4 rounded-2xl bg-white/3 border border-white/5">
+                <p className="text-sm text-slate-400 mb-2">
+                  For inquiries, Call or Message support (WhatsApp only)
+                </p>
+                <WhatsAppButton
+                  className="w-full flex justify-center"
+                  message={`Hello, I would like to inquire about the ${plan.name} plan.`}
+                />
+              </div>
             </div>
 
             {/* Right Column: Enrollment Instructions */}
@@ -252,15 +261,7 @@ export default async function PlanDetailsPage({
                     </>
                   )}
                 </div>
-                <div className="mt-4">
-                  <p className="text-sm text-slate-400 mb-2">
-                    Prefer WhatsApp? Message support directly (WhatsApp only)
-                  </p>
-                  <WhatsAppButton
-                    className="w-full flex justify-center"
-                    message={`Hello, I would like to inquire about the ${plan.name} plan.`}
-                  />
-                </div>
+
                 <div className="p-6 mt-4 rounded-2xl bg-yellow-500/5 border border-yellow-500/20">
                   <div className="flex items-center gap-2 text-yellow-500 mb-2">
                     <Clock size={18} />
