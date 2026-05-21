@@ -156,12 +156,12 @@ export default async function PlanDetailsPage({
             {/* Right Column: Enrollment Instructions */}
             <div className="space-y-8">
               <div className="p-8 rounded-3xl bg-linear-to-br from-blue-600/10 to-purple-600/10 border border-white/10 backdrop-blur-xl h-full">
-                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
                   <CreditCard className="text-blue-400" />
                   {plan.isExclusive ? "How to Apply" : "Pay with Crypto"}
                 </h2>
 
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {plan.isExclusive ? (
                     <>
                       <p className="text-slate-400 text-sm leading-relaxed">
@@ -206,7 +206,7 @@ export default async function PlanDetailsPage({
                         to any address below:
                       </p>
 
-                      <div className="space-y-4">
+                      <div className="space-y-2">
                         {plan.paymentInstructions.crypto.map((crypto, i) => (
                           <div
                             key={i}
@@ -286,7 +286,6 @@ export default async function PlanDetailsPage({
           </div>
         </div>
       </main>
-
       <Footer />
     </>
   );
