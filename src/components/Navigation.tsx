@@ -36,7 +36,7 @@ export function Navigation() {
 
   if (!mounted)
     return (
-      <nav className="fixed top-0 left-0 right-0 z-[100] py-5 bg-transparent">
+      <nav className="fixed top-0 left-0 right-0 z-100 py-5 bg-transparent">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-white/5 animate-pulse" />
@@ -54,7 +54,7 @@ export function Navigation() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-100 transition-all duration-500 ${
           isScrolled
             ? "py-3 bg-black/90 backdrop-blur-[60px] shadow-lg shadow-black/40 border-b border-white/10"
             : "py-5 bg-transparent"
@@ -95,7 +95,7 @@ export function Navigation() {
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/#pricing"
-              className="btn-primary text-sm !py-2.5 !px-6 inline-flex items-center gap-2"
+              className="btn-primary text-sm py-2.5! px-6! inline-flex items-center gap-2"
             >
               Join Academy
               <svg
@@ -135,7 +135,7 @@ export function Navigation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileOpen(false)}
-              className="fixed inset-0 z-[98] bg-black/40 backdrop-blur-[20px] md:hidden"
+              className="fixed inset-0 z-98 bg-black/40 backdrop-blur-[20px] md:hidden"
             />
 
             <motion.div
@@ -143,7 +143,7 @@ export function Navigation() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-x-0 top-[70px] z-[99] p-4 md:hidden"
+              className="fixed inset-x-0 top-17.5 z-99 p-4 md:hidden"
             >
               <div className="bg-[#05001a]/95 backdrop-blur-[60px] rounded-2xl p-6 space-y-1 shadow-2xl shadow-black/80 border border-white/10">
                 {navLinks.map((link) => (
@@ -160,7 +160,7 @@ export function Navigation() {
                   <Link
                     href="/#pricing"
                     onClick={() => setIsMobileOpen(false)}
-                    className="btn-primary block text-center !py-3 shadow-lg shadow-blue-500/20"
+                    className="btn-primary block text-center py-3! shadow-lg shadow-blue-500/20"
                   >
                     Join Academy
                   </Link>

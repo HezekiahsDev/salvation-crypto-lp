@@ -18,14 +18,15 @@ import { Metadata } from "next";
 
 import { FiatCheckoutForm } from "@/components/payment/FiatCheckoutForm";
 import { PaymentVerification } from "@/components/payment/PaymentVerification";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 interface PageProps {
   params: Promise<{
     id: string;
   }>;
   searchParams: Promise<{
-    reference?: string;
-    trxref?: string;
+    reference?: string | string[];
+    trxref?: string | string[];
   }>;
 }
 
@@ -59,7 +60,7 @@ export default async function PlanDetailsPage({
   const { id } = await params;
   // `searchParams` may contain string or string[] depending on how Next provides repeated query params.
   const sp = await searchParams;
-  const refParam = (sp as any)?.reference ?? (sp as any)?.trxref;
+  const refParam = sp?.reference ?? sp?.trxref;
   const reference = Array.isArray(refParam) ? String(refParam[0]) : refParam;
 
   const slugify = (s: string) =>
@@ -250,6 +251,15 @@ export default async function PlanDetailsPage({
                         )}
                     </>
                   )}
+                </div>
+                <div className="mt-4">
+                  <p className="text-sm text-slate-400 mb-2">
+                    Prefer WhatsApp? Message support directly (WhatsApp only)
+                  </p>
+                  <WhatsAppButton
+                    className="w-full flex justify-center"
+                    message={`Hello, I would like to inquire about the ${plan.name} plan.`}
+                  />
                 </div>
                 <div className="p-6 mt-4 rounded-2xl bg-yellow-500/5 border border-yellow-500/20">
                   <div className="flex items-center gap-2 text-yellow-500 mb-2">

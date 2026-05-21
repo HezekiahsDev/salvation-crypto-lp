@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import { Navigation } from "@/components/Navigation";
 import { HeroSection } from "@/components/HeroSection";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { SectionLoading } from "@/components/Skeleton";
 
 // Dynamically import heavy sections below the fold
@@ -59,6 +60,21 @@ export default function Home() {
       <Navigation />
       <main>
         <HeroSection />
+        <section className="bg-slate-50 py-8">
+          <div className="max-w-5xl mx-auto text-center px-4">
+            <p className="text-sm text-slate-600">For inquiries</p>
+            <h3 className="mt-2 text-2xl font-semibold text-slate-900">
+              Call or Message Our Customer Service on WhatsApp
+            </h3>
+            <div className="mt-4">
+              <WhatsAppButton
+                className=""
+                message={"Hello, I would like to inquire about your services."}
+              />
+            </div>
+            <p className="mt-2 text-sm text-slate-500">WhatsApp only</p>
+          </div>
+        </section>
         <PainSection />
         <JourneySection />
         <HowItWorksSection />

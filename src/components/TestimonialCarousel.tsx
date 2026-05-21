@@ -16,7 +16,8 @@ const FALLBACK_IMAGES = [
 ];
 
 export function TestimonialCarousel({ proofImages }: TestimonialCarouselProps) {
-  const images = proofImages && proofImages.length > 0 ? proofImages : FALLBACK_IMAGES;
+  const images =
+    proofImages && proofImages.length > 0 ? proofImages : FALLBACK_IMAGES;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
@@ -39,10 +40,12 @@ export function TestimonialCarousel({ proofImages }: TestimonialCarouselProps) {
     <div className="relative w-full max-w-4xl mx-auto px-4 py-12">
       <div className="text-center mb-10">
         <h3 className="text-2xl font-bold text-white mb-2">Member Results</h3>
-        <p className="text-slate-400">Real profits from real members in our community</p>
+        <p className="text-slate-400">
+          Real profits from real members in our community
+        </p>
       </div>
 
-      <div className="relative h-[350px] sm:h-[500px] overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl">
+      <div className="relative h-87.5 sm:h-125 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentIndex}
