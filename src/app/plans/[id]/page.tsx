@@ -112,23 +112,38 @@ export default async function PlanDetailsPage({
                   </p>
                 </div>
               </div>
-              <div className="relative flex items-baseline gap-1 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-white/5 border border-white/5 w-fit shrink-0">
+              <div className="relative flex flex-col items-start gap-0.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-white/5 border border-white/5 w-fit shrink-0">
                 {paymentPrice !== null &&
                   plan.id !== "inner-caucus" &&
                   plan.id !== "one-on-one" &&
                   Number(plan.price) > paymentPrice && (
-                    <span className="absolute -top-3 -left-3 inline-flex items-center rounded-full bg-amber-400 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-black shadow-md shadow-amber-500/20 ring-1 ring-amber-200">
+                    <span className="absolute -top-2 right-2 inline-flex items-center rounded-full bg-amber-400 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-black shadow-md shadow-amber-500/20 ring-1 ring-amber-200">
                       20% off
                     </span>
                   )}
                 {paymentPrice !== null ? (
                   <>
-                    <span className="text-xl sm:text-2xl font-bold text-white">
-                      ${formatPlanPrice(paymentPrice)}
-                    </span>
-                    <span className="text-slate-500 text-[10px] sm:text-xs">
-                      {plan.period}
-                    </span>
+                    {plan.id !== "inner-caucus" &&
+                      plan.id !== "one-on-one" &&
+                      Number(plan.price) > paymentPrice && (
+                        <span className="relative inline-flex items-center text-base font-semibold text-red-400/90">
+                          <span className="relative z-10">
+                            ${formatPlanPrice(Number(plan.price))}
+                          </span>
+                          <span
+                            aria-hidden="true"
+                            className="absolute left-0 right-0 top-1/2 h-[3px] -translate-y-1/2 rounded-full bg-red-300/95"
+                          />
+                        </span>
+                      )}
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-xl sm:text-2xl font-bold text-white">
+                        ${formatPlanPrice(paymentPrice)}
+                      </span>
+                      <span className="text-slate-500 text-[10px] sm:text-xs">
+                        {plan.period}
+                      </span>
+                    </div>
                   </>
                 ) : (
                   <span className="text-base font-bold text-white">Custom</span>
