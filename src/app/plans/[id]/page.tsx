@@ -112,7 +112,15 @@ export default async function PlanDetailsPage({
                   </p>
                 </div>
               </div>
-              <div className="flex items-baseline gap-1 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-white/5 border border-white/5 w-fit shrink-0">
+              <div className="relative flex items-baseline gap-1 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-white/5 border border-white/5 w-fit shrink-0">
+                {paymentPrice !== null &&
+                  plan.id !== "inner-caucus" &&
+                  plan.id !== "one-on-one" &&
+                  Number(plan.price) > paymentPrice && (
+                    <span className="absolute -top-3 -left-3 inline-flex items-center rounded-full bg-amber-400 px-2.5 py-1 text-[10px] font-black uppercase tracking-wider text-black shadow-md shadow-amber-500/20 ring-1 ring-amber-200">
+                      20% off
+                    </span>
+                  )}
                 {paymentPrice !== null ? (
                   <>
                     <span className="text-xl sm:text-2xl font-bold text-white">

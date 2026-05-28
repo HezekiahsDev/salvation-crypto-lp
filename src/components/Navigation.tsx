@@ -97,7 +97,7 @@ export function Navigation() {
               href="/#pricing"
               className="btn-primary text-sm py-2.5! px-6! inline-flex items-center gap-2"
             >
-              Join Academy
+              Choose plan
               <svg
                 className="w-4 h-4"
                 fill="none"

@@ -77,8 +77,8 @@ export function PricingSection() {
                   plan.id !== "inner-caucus" &&
                   plan.id !== "one-on-one" &&
                   Number(plan.price) > paymentPrice && (
-                    <div className="absolute -top-3 left-3 z-30">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full bg-amber-400 text-black text-xs font-bold uppercase tracking-wider shadow-md">
+                    <div className="absolute -top-3 left-3 z-30 -rotate-3">
+                      <span className="inline-flex items-center px-3 py-1 rounded-lg bg-linear-to-br from-yellow-400 to-amber-600 text-[11px] font-black uppercase tracking-widest text-black shadow-lg shadow-yellow-500/20 ring-1 ring-yellow-300">
                         {Math.round(DISCOUNT_RATE * 100)}% off
                       </span>
                     </div>
@@ -108,14 +108,21 @@ export function PricingSection() {
                   <p className="text-xs text-slate-500 mt-3 mb-4 h-8 line-clamp-2">
                     {plan.description}
                   </p>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-xs text-slate-500">$</span>
-                    <span className="text-3xl font-bold text-white tracking-tight">
-                      {formatPlanPrice(paymentPrice)}
-                    </span>
-                    <span className="text-slate-500 text-[10px]">
-                      {plan.period}
-                    </span>
+                  <div className="flex flex-col gap-0.5">
+                    {paymentPrice !== null && plan.id !== "inner-caucus" && plan.id !== "one-on-one" && Number(plan.price) > paymentPrice && (
+                      <span className="text-sm font-medium text-slate-500/70 line-through -mb-1">
+                        ${plan.price}
+                      </span>
+                    )}
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-xs text-slate-500">$</span>
+                      <span className="text-3xl font-bold text-white tracking-tight">
+                        {formatPlanPrice(paymentPrice)}
+                      </span>
+                      <span className="text-slate-500 text-[10px]">
+                        {plan.period}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
