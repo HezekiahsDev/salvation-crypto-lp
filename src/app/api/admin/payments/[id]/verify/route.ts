@@ -46,12 +46,12 @@ export async function POST(
 
     const data = paystackData.data;
     const EXCHANGE_RATE = 1500;
+    const expectedAmountInKobo = Math.round(
+      payment.amount * EXCHANGE_RATE * 100,
+    );
 
     let updatedPayment;
-    if (
-      data.status === "success" &&
-      data.amount >= payment.amount * EXCHANGE_RATE * 100
-    ) {
+    if (data.status === "success" && data.amount >= expectedAmountInKobo) {
       updatedPayment = await prisma.payment.update({
         where: { id },
         data: {

@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { AnimatedCounter } from "./AnimatedCounter";
-import { Play, ArrowRight } from "lucide-react";
+import { Play, ArrowRight, Tag } from "lucide-react";
 import Link from "next/link";
 
 const TradingChart = dynamic(
@@ -34,9 +34,9 @@ export function HeroSection() {
       <div className="absolute inset-0 grid-bg opacity-40" />
 
       {/* Radial glows */}
-      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-[120px]" />
+      <div className="absolute top-1/4 left-1/4 w-150 h-150 rounded-full bg-blue-500/5 blur-[120px]" />
       <div
-        className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-purple-500/5 blur-[100px]"
+        className="absolute bottom-1/4 right-1/4 w-125 h-125 rounded-full bg-purple-500/5 blur-[100px]"
         style={{ animationDelay: "1.5s" }}
       />
 
@@ -103,7 +103,11 @@ export function HeroSection() {
             href="/#pricing"
             className="btn-primary text-base flex items-center gap-2 group"
           >
-            Join the Academy
+            <Tag
+              size={16}
+              className="text-yellow-300 group-hover:scale-110 transition-transform"
+            />
+            <span>Choose your desired plan</span>
             <ArrowRight
               size={18}
               className="group-hover:translate-x-1 transition-transform"
@@ -175,7 +179,7 @@ export function HeroSection() {
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#030014] to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-linear-to-t from-[#030014] to-transparent" />
     </section>
   );
 }

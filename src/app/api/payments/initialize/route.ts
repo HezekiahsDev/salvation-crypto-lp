@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
-import { plans } from "@/data/plans";
+import { getPlanPaymentPrice, plans } from "@/data/plans";
 import crypto from "crypto";
 
 const prisma = new PrismaClient();
@@ -26,8 +26,8 @@ export async function POST(req: Request) {
       );
     }
 
-    const price = parseFloat(plan.price);
-    if (isNaN(price) || price <= 0) {
+    const price = getPlanPaymentPrice(plan);
+    if (price === null) {
       return NextResponse.json(
         { error: "Invalid plan price" },
         { status: 400 },
@@ -95,6 +95,8 @@ export async function POST(req: Request) {
           metadata: {
             planId: data.planId,
             planName: plan.name,
+            originalAmount: plan.price,
+            discountedAmount: price,
             phone: data.phoneNumber,
             fullName: data.fullName,
           },

@@ -37,6 +37,31 @@ export interface Plan {
 }
 
 const DEFAULT_SUPPORT_CONTACT = "https://wa.me/2347026821951";
+export const DISCOUNT_RATE = 0.2;
+
+export function getPlanPaymentPrice(
+  plan: Pick<Plan, "id" | "price">,
+): number | null {
+  const basePrice = Number(plan.price);
+
+  if (!Number.isFinite(basePrice) || basePrice <= 0) {
+    return null;
+  }
+
+  if (plan.id === "inner-caucus") {
+    return basePrice;
+  }
+
+  return Number((basePrice * (1 - DISCOUNT_RATE)).toFixed(2));
+}
+
+export function formatPlanPrice(price: number | null): string {
+  if (price === null) {
+    return "Custom";
+  }
+
+  return Number.isInteger(price) ? String(price) : price.toFixed(2);
+}
 
 const DEFAULT_PAYMENT_INSTRUCTIONS: Plan["paymentInstructions"] = {
   crypto: [
@@ -61,8 +86,40 @@ const DEFAULT_PAYMENT_INSTRUCTIONS: Plan["paymentInstructions"] = {
 
 export const plans: Plan[] = [
   {
+    id: "crypto-academy",
+    name: "Salvation Crypto Academy",
+    duration: "",
+    price: "50",
+    period: "one-time",
+    description:
+      "Master crypto markets with a full curriculum that includes DEFI.",
+    features: [
+      "Complete learning curriculum",
+      "Beginner to Advanced modules",
+      "DEFI fundamentals and protocols",
+      "Trading community access",
+      "Recorded masterclasses",
+      "Practical workshops",
+    ],
+    cta: "Enroll in Academy",
+    popular: false,
+    icon: GraduationCap,
+    badge: "Learn to Trade",
+    supportLink: "https://wa.me/2347026821951",
+    supportContact: DEFAULT_SUPPORT_CONTACT,
+    proofImages: [
+      "/img/proofs/academy.jpg",
+      "/img/proofs/academy1.jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-56(2).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-57(1).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-45-59(2).jpg",
+      "/img/proofs/PHOTO-2026-05-08-01-22-13(5).jpg",
+    ],
+    paymentInstructions: DEFAULT_PAYMENT_INSTRUCTIONS,
+  },
+  {
     id: "genesis-signals",
-    name: "Genesis Signals",
+    name: "One month trading Signals",
     duration: "1 Month",
     price: "10",
     period: "/month",
@@ -158,38 +215,7 @@ export const plans: Plan[] = [
     ],
     paymentInstructions: DEFAULT_PAYMENT_INSTRUCTIONS,
   },
-  {
-    id: "crypto-academy",
-    name: "Crypto Academy",
-    duration: "",
-    price: "50",
-    period: "one-time",
-    description:
-      "Master crypto markets with a full curriculum that includes DEFI.",
-    features: [
-      "Complete learning curriculum",
-      "Beginner to Advanced modules",
-      "DEFI fundamentals and protocols",
-      "Trading community access",
-      "Recorded masterclasses",
-      "Practical workshops",
-    ],
-    cta: "Enroll in Academy",
-    popular: false,
-    icon: GraduationCap,
-    badge: "Learn to Trade",
-    supportLink: "https://wa.me/2347026821951",
-    supportContact: DEFAULT_SUPPORT_CONTACT,
-    proofImages: [
-      "/img/proofs/academy.jpg",
-      "/img/proofs/academy1.jpg",
-      "/img/proofs/PHOTO-2026-05-08-01-45-56(2).jpg",
-      "/img/proofs/PHOTO-2026-05-08-01-45-57(1).jpg",
-      "/img/proofs/PHOTO-2026-05-08-01-45-59(2).jpg",
-      "/img/proofs/PHOTO-2026-05-08-01-22-13(5).jpg",
-    ],
-    paymentInstructions: DEFAULT_PAYMENT_INSTRUCTIONS,
-  },
+
   {
     id: "inner-caucus",
     name: "Inner Caucus",

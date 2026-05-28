@@ -1,4 +1,4 @@
-import { plans } from "@/data/plans";
+import { formatPlanPrice, getPlanPaymentPrice, plans } from "@/data/plans";
 import { notFound } from "next/navigation";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -79,6 +79,8 @@ export default async function PlanDetailsPage({
     notFound();
   }
 
+  const paymentPrice = getPlanPaymentPrice(plan);
+
   return (
     <>
       <Navigation />
@@ -111,10 +113,10 @@ export default async function PlanDetailsPage({
                 </div>
               </div>
               <div className="flex items-baseline gap-1 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-white/5 border border-white/5 w-fit shrink-0">
-                {plan.price ? (
+                {paymentPrice !== null ? (
                   <>
                     <span className="text-xl sm:text-2xl font-bold text-white">
-                      ${plan.price}
+                      ${formatPlanPrice(paymentPrice)}
                     </span>
                     <span className="text-slate-500 text-[10px] sm:text-xs">
                       {plan.period}
@@ -211,7 +213,7 @@ export default async function PlanDetailsPage({
                       <p className="text-slate-400 text-sm">
                         Please send the exact amount of{" "}
                         <span className="text-white font-bold">
-                          ${plan.price}
+                          ${formatPlanPrice(paymentPrice)}
                         </span>{" "}
                         to any address below:
                       </p>
@@ -249,15 +251,13 @@ export default async function PlanDetailsPage({
                         I&apos;ve Made Payment
                       </a>
 
-                      {!plan.isExclusive &&
-                        plan.price &&
-                        plan.price !== "Custom" && (
-                          <FiatCheckoutForm
-                            planId={plan.id}
-                            price={plan.price}
-                            planName={plan.name}
-                          />
-                        )}
+                      {!plan.isExclusive && paymentPrice !== null && (
+                        <FiatCheckoutForm
+                          planId={plan.id}
+                          price={formatPlanPrice(paymentPrice)}
+                          planName={plan.name}
+                        />
+                      )}
                     </>
                   )}
                 </div>
