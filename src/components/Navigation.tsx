@@ -162,7 +162,7 @@ export function Navigation() {
                     onClick={() => setIsMobileOpen(false)}
                     className="btn-primary block text-center py-3! shadow-lg shadow-blue-500/20"
                   >
-                    Join Academy
+                    Join 
                   </Link>
                 </div>
               </div>

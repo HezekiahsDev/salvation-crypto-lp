@@ -96,7 +96,7 @@ export async function POST(req: Request) {
             planId: data.planId,
             planName: plan.name,
             originalAmount: plan.price,
-            discountedAmount: price,
+            // discountedAmount: price, // commented out while discounts are disabled
             phone: data.phoneNumber,
             fullName: data.fullName,
           },

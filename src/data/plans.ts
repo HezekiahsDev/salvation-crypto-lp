@@ -37,7 +37,10 @@ export interface Plan {
 }
 
 const DEFAULT_SUPPORT_CONTACT = "https://wa.me/2347026821951";
-export const DISCOUNT_RATE = 0.2;
+// Previously DISCOUNT_RATE was 0.2 — kept here for reference
+// export const DISCOUNT_RATE = 0.2;
+// Temporarily disable discounts by setting rate to 0
+export const DISCOUNT_RATE = 0;
 
 export function getPlanPaymentPrice(
   plan: Pick<Plan, "id" | "price">,
