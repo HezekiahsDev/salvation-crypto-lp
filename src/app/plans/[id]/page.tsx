@@ -1,4 +1,4 @@
-import { formatPlanPrice, getPlanPaymentPrice, plans } from "@/data/plans";
+import { formatPlanPrice, getPlanPaymentPrice, plans, DISCOUNT_RATE } from "@/data/plans";
 import { notFound } from "next/navigation";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -118,7 +118,7 @@ export default async function PlanDetailsPage({
                   plan.id !== "one-on-one" &&
                   Number(plan.price) > paymentPrice && (
                     <span className="absolute -top-2 right-2 inline-flex items-center rounded-full bg-amber-400 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-black shadow-md shadow-amber-500/20 ring-1 ring-amber-200">
-                      20% off
+                      {Math.round(DISCOUNT_RATE * 100)}% off
                     </span>
                   )}
                 {paymentPrice !== null ? (
