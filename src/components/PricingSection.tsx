@@ -72,11 +72,8 @@ export function PricingSection() {
                     : "bg-white/2 border border-white/5 hover:border-white/10"
                 } ${hoveredPlan === i && !plan.popular ? "transform scale-[1.02]" : ""}`}
               >
-                {/* Discount tag for eligible plans */}
-                {paymentPrice !== null &&
-                  plan.id !== "inner-caucus" &&
-                  plan.id !== "one-on-one" &&
-                  Number(plan.price) > paymentPrice && (
+                {/* Discount tag shown across all plans */}
+                {DISCOUNT_RATE > 0 && (
                     <div className="absolute -top-3 left-3 z-30">
                       <span className="inline-flex items-center px-3 py-1 rounded-full bg-amber-400 text-black text-xs font-bold uppercase tracking-wider shadow-md">
                         {Math.round(DISCOUNT_RATE * 100)}% off

@@ -113,14 +113,12 @@ export default async function PlanDetailsPage({
                 </div>
               </div>
               <div className="relative flex flex-col items-start gap-0.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-white/5 border border-white/5 w-fit shrink-0">
-                {paymentPrice !== null &&
-                  plan.id !== "inner-caucus" &&
-                  plan.id !== "one-on-one" &&
-                  Number(plan.price) > paymentPrice && (
-                    <span className="absolute -top-2 right-2 inline-flex items-center rounded-full bg-amber-400 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-black shadow-md shadow-amber-500/20 ring-1 ring-amber-200">
-                      {Math.round(DISCOUNT_RATE * 100)}% off
-                    </span>
-                  )}
+                {/* Discount tag shown across all plans */}
+                {DISCOUNT_RATE > 0 && (
+                  <span className="absolute -top-2 right-2 inline-flex items-center rounded-full bg-amber-400 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-black shadow-md shadow-amber-500/20 ring-1 ring-amber-200">
+                    {Math.round(DISCOUNT_RATE * 100)}% off
+                  </span>
+                )}
                 {paymentPrice !== null ? (
                   <>
                     {plan.id !== "inner-caucus" &&
