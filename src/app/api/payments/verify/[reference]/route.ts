@@ -78,7 +78,7 @@ export async function GET(
       amount_ok: isAmountSufficient,
       note: "Do NOT trust this endpoint to change payment status. Webhook only.",
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Verification Error:", error);
     return NextResponse.json(
       { error: "An unexpected error occurred" },

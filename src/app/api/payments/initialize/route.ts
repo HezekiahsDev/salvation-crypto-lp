@@ -50,7 +50,7 @@ export async function POST(req: Request) {
     const txRef = `${planToken}-${nameToken}-${timestamp}-${randomString}`;
 
     // Record pending transaction in DB
-    const payment = await prisma.payment.create({
+    await prisma.payment.create({
       data: {
         transaction_reference: txRef,
         full_name: data.fullName,
@@ -121,7 +121,7 @@ export async function POST(req: Request) {
       authorizationUrl: paystackData.data.authorization_url,
       reference: txRef,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
         { error: "Invalid input data", details: error.issues },

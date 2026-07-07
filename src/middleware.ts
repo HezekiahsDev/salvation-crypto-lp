@@ -27,7 +27,7 @@ export async function middleware(request: NextRequest) {
     try {
       await jwtVerify(token, JWT_SECRET);
       return NextResponse.next();
-    } catch (err) {
+    } catch {
       if (isAdminApiRoute) {
         return NextResponse.json({ error: "Invalid token" }, { status: 401 });
       }

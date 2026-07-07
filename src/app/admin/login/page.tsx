@@ -31,7 +31,7 @@ export default function AdminLogin() {
         setError(data.error || "Login failed");
         setLoading(false);
       }
-    } catch (err) {
+    } catch {
       setError("An unexpected error occurred");
       setLoading(false);
     }

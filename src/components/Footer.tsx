@@ -57,7 +57,7 @@ export function Footer() {
             </p>
           </div>
 
-          {Object.entries(footerLinks).map(([category, links], i) => (
+          {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
               <h4 className="text-sm font-semibold text-white mb-4 tracking-wide">
                 {category}

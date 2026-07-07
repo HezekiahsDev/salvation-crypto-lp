@@ -38,7 +38,7 @@ export function PaymentVerification({
         } else {
           setStatus("failed");
         }
-      } catch (err) {
+      } catch {
         setStatus("failed");
       }
     }

@@ -78,7 +78,7 @@ export async function POST(req: Request) {
 
     // Acknowledge receipt
     return NextResponse.json({ received: true }, { status: 200 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Webhook Error:", error);
     return NextResponse.json(
       { error: "An unexpected error occurred" },

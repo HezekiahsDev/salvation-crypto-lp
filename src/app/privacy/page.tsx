@@ -43,7 +43,7 @@ export default function PrivacyPolicy() {
                     Introduction
                   </h2>
                   <p className="leading-relaxed text-lg">
-                    Welcome to Salvation Crypto Academy ("we," "our," or "us"). We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website and use our services.
+                    Welcome to Salvation Crypto Academy (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website and use our services.
                   </p>
                 </section>
 

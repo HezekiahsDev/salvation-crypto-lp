@@ -12,7 +12,6 @@ interface FiatCheckoutFormProps {
 export function FiatCheckoutForm({
   planId,
   price,
-  planName,
 }: FiatCheckoutFormProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -57,8 +56,8 @@ export function FiatCheckoutForm({
       } else {
         throw new Error("Invalid response from server");
       }
-    } catch (err: any) {
-      setError(err.message || "An unexpected error occurred");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "An unexpected error occurred");
       setLoading(false);
     }
   };

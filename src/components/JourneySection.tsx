@@ -1,12 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, MotionValue } from "framer-motion";
 import {
   AlertCircle,
   BookOpen,
   BarChart2,
-  TrendingUp,
   CheckCircle2,
 } from "lucide-react";
 
@@ -60,7 +59,7 @@ function StageCard({
 }: {
   stage: (typeof storyStages)[0];
   index: number;
-  progress: any;
+  progress: MotionValue<number>;
 }) {
   // Animating based on scroll progress
   const opacity = useTransform(

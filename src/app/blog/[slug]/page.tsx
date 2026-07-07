@@ -7,11 +7,11 @@ import { Footer } from "@/components/Footer";
 import { CinematicBackground } from "@/components/CinematicBackground";
 import { MouseFollowGlow } from "@/components/MouseFollowGlow";
 import { motion } from "framer-motion";
-import { Calendar, Clock, ArrowLeft, Share2, Link as LinkIcon } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, Link as LinkIcon } from "lucide-react";
 import Link from "next/link";
 
 // Custom brand icons
-const Twitter = ({ size = 24, ...props }: { size?: number; [key: string]: any }) => (
+const Twitter = ({ size = 24, ...props }: { size?: number } & React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -28,7 +28,7 @@ const Twitter = ({ size = 24, ...props }: { size?: number; [key: string]: any })
   </svg>
 );
 
-const Facebook = ({ size = 24, ...props }: { size?: number; [key: string]: any }) => (
+const Facebook = ({ size = 24, ...props }: { size?: number } & React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}

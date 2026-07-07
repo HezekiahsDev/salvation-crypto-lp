@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Salvation Crypto LP
 
-## Getting Started
+## Local-build deploy pipeline
 
-First, run the development server:
+The server already has the repo, Nginx, and PM2 app. Deployment keeps that flow:
+
+1. Run the deploy script locally.
+2. Your machine installs dependencies, generates Prisma client, runs lint/tests when available, runs `pnpm build`, and packages only `.next`.
+3. The script prompts for a commit message, commits source changes, and pushes to `origin/main`.
+4. The `.next` artifact, and `.env` when present, are uploaded over SSH.
+5. The server runs `git pull origin main`, unpacks the uploaded `.next`, runs `pnpm install`, runs Prisma generate, and restarts PM2.
+
+The server does not run `pnpm build`.
+
+### Deploy
+
+Edit the local-only `.env.deploy` file:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+DEPLOY_HOST=hezekiah@your-server-host
+DEPLOY_PATH=/home/hezekiah/projects/salvation-crypto-lp
+APP_NAME=salvation-academy-lp
+APP_PORT=9004
+ENV_SOURCE=.env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+If the server repo path is different, update `DEPLOY_PATH`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Then deploy:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm run deploy
+```
 
-## Learn More
+You can also use:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm ship
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Skip lint:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+RUN_LINT=0 pnpm run deploy
+```
 
-## Deploy on Vercel
+Skip env upload:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+SYNC_ENV=0 pnpm run deploy
+```

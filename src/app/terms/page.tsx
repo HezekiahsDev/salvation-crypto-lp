@@ -107,7 +107,7 @@ export default function TermsAndConditions() {
                     Changes to Terms
                   </h2>
                   <p className="leading-relaxed text-slate-300">
-                    We reserve the right to modify these terms at any time. We will notify users of any significant changes by posting the new terms on this page and updating the "Last Updated" date.
+                    We reserve the right to modify these terms at any time. We will notify users of any significant changes by posting the new terms on this page and updating the &quot;Last Updated&quot; date.
                   </p>
                 </section>
 

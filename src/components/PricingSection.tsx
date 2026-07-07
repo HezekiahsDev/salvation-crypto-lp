@@ -5,11 +5,6 @@ import { motion, useInView } from "framer-motion";
 import {
   Check,
   ArrowRight,
-  Sparkles,
-  Zap,
-  Shield,
-  Crown,
-  GraduationCap,
 } from "lucide-react";
 
 import {

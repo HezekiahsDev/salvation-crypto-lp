@@ -1,5 +1,4 @@
 import { Skeleton, SkeletonText } from "@/components/Skeleton";
-import { ArrowLeft } from "lucide-react";
 
 export default function Loading() {
   return (

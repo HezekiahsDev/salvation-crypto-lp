@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Calendar, Clock, ChevronRight, ArrowUpRight } from "lucide-react";
+import { Calendar, Clock, ArrowUpRight } from "lucide-react";
 
 interface BlogCardProps {
   post: {

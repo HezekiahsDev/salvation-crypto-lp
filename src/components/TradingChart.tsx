@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 // ── types ──────────────────────────────────────────────────────────────────
 interface Candle {
@@ -51,27 +51,12 @@ const volBarH = (v: number) => v * (PADDING_BOTTOM - 4);
 // ── component ──────────────────────────────────────────────────────────────
 export function TradingChart({ className = "" }: { className?: string }) {
   // Static trading chart: pre-seed candles once and render without live updates
-  const [candles, setCandles] = useState<Candle[]>(() => seed(VISIBLE));
-  const [mounted, setMounted] = useState(false);
+  const [candles] = useState<Candle[]>(() => seed(VISIBLE));
   const livePrice = candles[candles.length - 1].close;
 
   const containerRef = useRef<SVGSVGElement | null>(null);
-  const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.1 },
-    );
-    if (containerRef.current) observer.observe(containerRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  if (!mounted || candles.length === 0) return null;
+  if (candles.length === 0) return null;
 
   // ── derived layout ───────────────────────────────────────────────────────
   const prices = candles.flatMap((c) => [c.high, c.low]);

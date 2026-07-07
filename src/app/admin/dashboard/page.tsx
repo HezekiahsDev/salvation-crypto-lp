@@ -5,37 +5,59 @@ import { useRouter } from "next/navigation";
 import {
   LogOut,
   RefreshCw,
-  Eye,
   Search,
   CheckCircle2,
   XCircle,
   Clock,
 } from "lucide-react";
 
+interface Payment {
+  id: string;
+  created_at: string;
+  full_name: string;
+  email: string;
+  phone_number: string;
+  plan_id: string;
+  amount: number;
+  payment_status: string;
+  transaction_reference: string;
+  confirmed: boolean;
+}
+
 export default function AdminDashboard() {
-  const [payments, setPayments] = useState<any[]>([]);
+  const [payments, setPayments] = useState<Payment[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const router = useRouter();
 
-  const fetchPayments = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/admin/payments");
-      const data = await res.json();
-      if (data.payments) {
-        setPayments(data.payments);
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchPayments();
+    let cancelled = false;
+    fetch("/api/admin/payments")
+      .then((res) => res.json())
+      .then((data) => {
+        if (!cancelled && data.payments) {
+          setPayments(data.payments);
+        }
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
+
+  const handleRefresh = () => {
+    setLoading(true);
+    fetch("/api/admin/payments")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.payments) setPayments(data.payments);
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  };
 
   const handleLogout = async () => {
     await fetch("/api/admin/logout", { method: "POST" });
@@ -48,12 +70,12 @@ export default function AdminDashboard() {
         method: "POST",
       });
       if (res.ok) {
-        fetchPayments();
+        handleRefresh();
       } else {
         const data = await res.json();
         alert(data.error || "Confirm failed");
       }
-    } catch (err) {
+    } catch {
       alert("Error confirming payment");
     }
   };
@@ -99,7 +121,7 @@ export default function AdminDashboard() {
             />
           </div>
           <button
-            onClick={fetchPayments}
+            onClick={handleRefresh}
             className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition-all text-sm"
           >
             <RefreshCw size={16} className={loading ? "animate-spin" : ""} />
