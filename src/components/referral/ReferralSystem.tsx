@@ -3,19 +3,23 @@
 import { useEffect, useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import {
+  BadgePercent,
   Check,
   Copy,
   Gift,
   Loader2,
-  Users,
+  Share2,
   Wallet,
   X,
 } from "lucide-react";
 import {
   isValidReferralUsername,
   normalizeReferralUsername,
+  REFERRAL_COMMISSION_PERCENT,
+  REFERRAL_COMMISSION_RATE,
   REFERRAL_STORAGE_KEY,
 } from "@/lib/referrals";
+import { plans, getPlanPaymentPrice } from "@/data/plans";
 
 interface Bank {
   name: string;
@@ -31,6 +35,24 @@ interface ReferralResponse {
   usdtNetworks?: string[];
   error?: string;
 }
+
+/** Worked examples so the payout is concrete before anyone registers. */
+const earningExamples = plans
+  .map((plan) => {
+    const price = getPlanPaymentPrice(plan);
+    if (price === null || price <= 0) return null;
+    return {
+      id: plan.id,
+      name: plan.name,
+      price,
+      payout: Number((price * REFERRAL_COMMISSION_RATE).toFixed(2)),
+    };
+  })
+  .filter((example): example is NonNullable<typeof example> => example !== null)
+  .sort((a, b) => a.price - b.price);
+
+const formatUsd = (value: number) =>
+  Number.isInteger(value) ? `$${value}` : `$${value.toFixed(2)}`;
 
 const inputClass =
   "w-full bg-black/50 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500/60 focus:ring-1 focus:ring-blue-500/50 transition-all";
@@ -208,11 +230,11 @@ export function ReferralSystem() {
         type="button"
         onClick={() => setOpen(true)}
         className="fixed bottom-5 right-4 z-[120] inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/30 ring-1 ring-white/15 transition hover:bg-blue-500 sm:bottom-6 sm:right-6"
-        aria-label="Open referral form"
-        title="Refer"
+        aria-label="Open the Refer to Earn form"
+        title={`Refer to Earn — ${REFERRAL_COMMISSION_PERCENT}% commission`}
       >
         <Gift size={18} />
-        <span>Refer</span>
+        <span>Refer to Earn</span>
       </button>
 
       {open && (
@@ -228,14 +250,76 @@ export function ReferralSystem() {
             </button>
 
             <div className="mb-5 flex items-center gap-3 pr-10">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/15 text-blue-300">
-                <Users size={20} />
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-300">
+                <BadgePercent size={20} />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-white">Become a Referrer</h2>
+                <h2 className="text-xl font-bold text-white">Refer to Earn</h2>
                 <p className="text-xs text-slate-500">
-                  Create your unique link and receive payouts through NGN or USDT.
+                  Earn {REFERRAL_COMMISSION_PERCENT}% on every package your
+                  referrals buy. Paid in NGN or USDT.
                 </p>
+              </div>
+            </div>
+
+            {/* Value proposition — shown before any details are collected */}
+            <div className="mb-5 rounded-2xl border border-emerald-400/25 bg-emerald-400/[0.06] p-4 sm:p-5">
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="text-3xl font-black leading-none text-emerald-300">
+                  {REFERRAL_COMMISSION_PERCENT}%
+                </span>
+                <span className="text-sm font-bold text-white">
+                  commission on every package your referral buys
+                </span>
+              </div>
+              <p className="mt-2 text-xs leading-relaxed text-slate-400">
+                Share your link. When someone signs up through it and pays for
+                any package — signals or Academy — you keep{" "}
+                {REFERRAL_COMMISSION_PERCENT}% of what they pay. Every time they
+                buy, not just the first time.
+              </p>
+
+              {earningExamples.length > 0 && (
+                <div className="mt-4">
+                  <p className="mb-2 text-[10px] font-bold uppercase tracking-widest text-emerald-200/70">
+                    What you earn
+                  </p>
+                  <ul className="grid gap-1.5 sm:grid-cols-2">
+                    {earningExamples.map((example) => (
+                      <li
+                        key={example.id}
+                        className="flex items-center justify-between gap-2 rounded-lg bg-black/30 px-3 py-2"
+                      >
+                        <span className="truncate text-[11px] text-slate-400">
+                          {example.name}
+                        </span>
+                        <span className="shrink-0 text-[11px] font-bold text-emerald-300">
+                          +{formatUsd(example.payout)}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <div className="mt-4 grid gap-2 sm:grid-cols-3">
+                {[
+                  "Register below to get your link",
+                  "Share it anywhere",
+                  `Get paid ${REFERRAL_COMMISSION_PERCENT}% per purchase`,
+                ].map((step, index) => (
+                  <div
+                    key={step}
+                    className="flex items-start gap-2 rounded-lg border border-white/5 bg-black/20 px-3 py-2"
+                  >
+                    <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-400/20 text-[9px] font-black text-emerald-200">
+                      {index + 1}
+                    </span>
+                    <span className="text-[11px] leading-tight text-slate-400">
+                      {step}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -257,6 +341,11 @@ export function ReferralSystem() {
                   <label className="mb-1 block text-xs font-medium text-slate-300">
                     Your Referral Link
                   </label>
+                  <p className="mb-2 flex items-center gap-1.5 text-[11px] text-emerald-300">
+                    <Share2 size={12} />
+                    Share this link — you earn {REFERRAL_COMMISSION_PERCENT}% of
+                    every package bought through it.
+                  </p>
                   <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-black/40 p-2">
                     <code className="grow break-all px-2 text-xs text-blue-200">
                       {referralLink}
@@ -466,7 +555,7 @@ export function ReferralSystem() {
                   className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {loading && <Loader2 className="animate-spin" size={18} />}
-                  Generate Referral Link
+                  Generate My Referral Link
                 </button>
               </form>
             )}

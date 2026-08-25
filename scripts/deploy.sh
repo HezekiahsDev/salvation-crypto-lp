@@ -28,7 +28,7 @@ Usage: pnpm run deploy
 Runs checks locally, builds this Next.js app locally, commits and pushes source
 changes, uploads the .next build output to the existing repo on the server,
 optionally syncs .env, then runs deploy.sh on the server. The server still runs
-git pull, pnpm install, Prisma generate/migrations, and PM2 restart.
+git pull, pnpm install, and PM2 restart.
 
 Required:
   DEPLOY_HOST       SSH target, for example hezekiah@203.0.113.10.
@@ -62,20 +62,30 @@ for cmd in git pnpm ssh scp tar; do
   fi
 done
 
+stop_local_next_dev() {
+  local project_path
+  project_path="$(pwd)"
+  local pids
+  pids="$(ps -eo pid=,cmd= | awk -v path="$project_path" '$0 ~ path && $0 ~ /next dev/ { print $1 }' || true)"
+
+  if [[ -z "$pids" ]]; then
+    return
+  fi
+
+  echo "Stopping local Next dev server before production build..."
+  # shellcheck disable=SC2086
+  kill $pids >/dev/null 2>&1 || true
+  sleep 2
+
+  pids="$(ps -eo pid=,cmd= | awk -v path="$project_path" '$0 ~ path && $0 ~ /next dev/ { print $1 }' || true)"
+  if [[ -n "$pids" ]]; then
+    # shellcheck disable=SC2086
+    kill -9 $pids >/dev/null 2>&1 || true
+  fi
+}
+
 echo "Installing dependencies locally..."
 pnpm install --frozen-lockfile
-
-if [[ -d prisma ]]; then
-  echo "Generating Prisma client locally..."
-  pnpm exec prisma generate
-
-  echo "Checking local Prisma migrations..."
-  if ! pnpm exec prisma migrate deploy; then
-    echo "Prisma migrate deploy failed locally; applying SQLite migrations with fallback script..."
-    node scripts/apply-sqlite-migrations.js
-    pnpm exec prisma generate
-  fi
-fi
 
 if [[ "$RUN_LINT" == "1" ]]; then
   echo "Running lint..."
@@ -86,6 +96,8 @@ if [[ "$RUN_TESTS" == "1" ]] && node -e "const p=require('./package.json'); proc
   echo "Running tests..."
   pnpm test
 fi
+
+stop_local_next_dev
 
 echo "Building locally..."
 pnpm build

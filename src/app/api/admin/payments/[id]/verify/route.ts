@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { paymentsCollection } from "@/lib/db";
 
 export async function POST(
   req: Request,
@@ -9,9 +7,8 @@ export async function POST(
 ) {
   try {
     const { id } = await params;
-    const payment = await prisma.payment.findUnique({
-      where: { id },
-    });
+    const payments = await paymentsCollection();
+    const payment = await payments.findOne({ id });
 
     if (!payment) {
       return NextResponse.json({ error: "Payment not found" }, { status: 404 });
@@ -52,24 +49,32 @@ export async function POST(
 
     let updatedPayment;
     if (data.status === "success" && data.amount >= expectedAmountInKobo) {
-      updatedPayment = await prisma.payment.update({
-        where: { id },
-        data: {
+      updatedPayment = await payments.findOneAndUpdate(
+        { id },
+        {
+          $set: {
           payment_status: "successful",
           paystack_reference: data.reference,
           payment_method: data.channel,
           paystack_response: JSON.stringify(data),
+          updated_at: new Date(),
         },
-      });
+        },
+        { returnDocument: "after" },
+      );
     } else {
-      updatedPayment = await prisma.payment.update({
-        where: { id },
-        data: {
+      updatedPayment = await payments.findOneAndUpdate(
+        { id },
+        {
+          $set: {
           payment_status: data.status,
           paystack_reference: data.reference,
           paystack_response: JSON.stringify(data),
+          updated_at: new Date(),
         },
-      });
+        },
+        { returnDocument: "after" },
+      );
     }
 
     return NextResponse.json({ payment: updatedPayment });

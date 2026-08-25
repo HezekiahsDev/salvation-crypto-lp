@@ -1,9 +1,8 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { SignJWT } from "jose";
+import { adminsCollection } from "@/lib/db";
 
-const prisma = new PrismaClient();
 const JWT_SECRET = new TextEncoder().encode(
   process.env.JWT_SECRET || "default_super_secret_key_change_in_production",
 );
@@ -19,9 +18,8 @@ export async function POST(req: Request) {
       );
     }
 
-    const admin = await prisma.admin.findUnique({
-      where: { username },
-    });
+    const admins = await adminsCollection();
+    const admin = await admins.findOne({ username });
 
     if (!admin) {
       return NextResponse.json(

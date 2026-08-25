@@ -97,9 +97,9 @@ export function Navigation() {
             <button
               type="button"
               onClick={openReferralModal}
-              className="px-4 py-2 text-sm font-medium text-slate-400 hover:text-white transition-colors duration-300 rounded-lg hover:bg-white/5"
+              className="px-4 py-2 text-sm font-semibold text-emerald-300 hover:text-emerald-200 transition-colors duration-300 rounded-lg hover:bg-emerald-400/10"
             >
-              Refer
+              Refer to Earn
             </button>
           </div>
 
@@ -174,7 +174,7 @@ export function Navigation() {
                   className="flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-base font-medium text-slate-300 transition-all hover:bg-white/5 hover:text-white"
                 >
                   <Gift size={18} />
-                  Refer
+                  Refer to Earn
                 </button>
                 <div className="pt-4 border-t border-white/5">
                   <Link

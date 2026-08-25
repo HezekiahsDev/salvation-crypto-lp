@@ -1,7 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { paymentsCollection } from "@/lib/db";
 
 export async function POST(
   req: NextRequest,
@@ -10,10 +8,16 @@ export async function POST(
   try {
     const params = await context.params;
     const { id } = params;
-    const payment = await prisma.payment.update({
-      where: { id },
-      data: { confirmed: true },
-    });
+    const payments = await paymentsCollection();
+    const payment = await payments.findOneAndUpdate(
+      { id },
+      { $set: { confirmed: true, updated_at: new Date() } },
+      { returnDocument: "after" },
+    );
+
+    if (!payment) {
+      return NextResponse.json({ error: "Payment not found" }, { status: 404 });
+    }
 
     return NextResponse.json({ ok: true, payment });
   } catch (error) {

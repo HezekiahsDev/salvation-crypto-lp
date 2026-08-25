@@ -1,14 +1,16 @@
 import {
-  Sparkles,
   Crown,
   Shield,
   GraduationCap,
   LucideIcon,
 } from "lucide-react";
 
+export type PlanCategory = "academy" | "subscription";
+
 export interface Plan {
   id: string;
   name: string;
+  category: PlanCategory;
   duration: string;
   price: string;
   period: string;
@@ -88,6 +90,7 @@ export const plans: Plan[] = [
   {
     id: "crypto-academy",
     name: "Salvation Crypto Academy",
+    category: "academy",
     duration: "",
     price: "50",
     period: "one-time",
@@ -120,6 +123,7 @@ export const plans: Plan[] = [
   {
     id: "genesis-signals",
     name: "One month trading Signals",
+    category: "subscription",
     duration: "1 Month",
     price: "10",
     period: "/month",
@@ -146,40 +150,9 @@ export const plans: Plan[] = [
     paymentInstructions: DEFAULT_PAYMENT_INSTRUCTIONS,
   },
   {
-    id: "alpha-signals",
-    name: "Alpha Signals",
-    duration: "6 Months",
-    price: "50",
-    period: "/6 months",
-    description:
-      "Built for traders ready to level up and for serious traders looking for consistency.",
-    features: [
-      "Access to daily trading signals",
-      "Basic entry, SL & TP levels",
-      "Daily market insights",
-      "Massive follow-up from the team",
-      "Priority support",
-    ],
-    cta: "Join Alpha Circle",
-    popular: false,
-    icon: Sparkles,
-    badge: "Maximum Edge",
-    supportLink: "https://wa.me/2347026821951",
-    supportContact: DEFAULT_SUPPORT_CONTACT,
-    proofImages: [
-      "/img/proofs/alpha.jpg",
-      "/img/proofs/alpha1.jpg",
-      "/img/proofs/trading-3.jpg",
-      "/img/proofs/trading-4.jpg",
-      "/img/proofs/PHOTO-2026-05-08-01-45-54.jpg",
-      "/img/proofs/PHOTO-2026-05-08-01-45-58(1).jpg",
-      "/img/proofs/PHOTO-2026-05-08-01-46-00(1).jpg",
-    ],
-    paymentInstructions: DEFAULT_PAYMENT_INSTRUCTIONS,
-  },
-  {
     id: "elite-alpha",
     name: "Elite Alpha Circle",
+    category: "subscription",
     duration: "1 Year",
     price: "100",
     period: "/year",
@@ -219,6 +192,7 @@ export const plans: Plan[] = [
   {
     id: "inner-caucus",
     name: "Inner Caucus",
+    category: "subscription",
     duration: "Exclusive",
     price: "2000",
     period: "",
@@ -256,6 +230,7 @@ export const plans: Plan[] = [
   {
     id: "one-on-one",
     name: "One on One",
+    category: "academy",
     duration: "Custom",
     price: "",
     period: "",
@@ -288,3 +263,9 @@ export const plans: Plan[] = [
     },
   },
 ];
+
+export const academyPlans = plans.filter((plan) => plan.category === "academy");
+
+export const subscriptionPlans = plans.filter(
+  (plan) => plan.category === "subscription",
+);

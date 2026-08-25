@@ -5,17 +5,15 @@
 The server already has the repo, Nginx, and PM2 app. Deployment keeps that flow:
 
 1. Run the deploy script locally.
-2. Your machine installs dependencies, generates Prisma client, runs lint/tests when available, runs `pnpm build`, and packages only `.next`.
+2. Your machine installs dependencies, runs lint/tests when available, runs `pnpm build`, and packages only `.next`.
 3. The script prompts for a commit message, commits source changes, and pushes to `origin/main`.
 4. The `.next` artifact, and `.env` when present, are uploaded over SSH.
-5. The server runs `git pull origin main`, unpacks the uploaded `.next`, runs `pnpm install`, runs Prisma generate, applies Prisma migrations, and restarts PM2.
+5. The server runs `git pull origin main`, unpacks the uploaded `.next`, runs `pnpm install`, and restarts PM2.
 
 The server does not run `pnpm build`.
 
-For SQLite deployments, the server first tries `prisma migrate deploy`. If the
-Prisma schema engine fails, the deploy script automatically runs
-`scripts/apply-sqlite-migrations.js` as a fallback so new tables and columns are
-still applied before PM2 restarts.
+The app uses MongoDB. Make sure the server `.env` has `MONGODB_URI` before
+deploying.
 
 ### Deploy
 
@@ -65,4 +63,14 @@ Use a custom commit message:
 
 ```bash
 COMMIT_MESSAGE="add referral system" pnpm deploy
+```
+
+### Required Runtime Env
+
+```bash
+MONGODB_URI=mongodb+srv://...
+MONGODB_DB=salvation_crypto_lp
+PAYSTACK_SECRET_KEY=...
+NEXT_PUBLIC_APP_URL=https://your-domain.com
+JWT_SECRET=...
 ```

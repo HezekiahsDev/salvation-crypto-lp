@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { paymentsCollection, stripMongoId } from "@/lib/db";
 
 export async function GET() {
   try {
-    const payments = await prisma.payment.findMany({
-      orderBy: { created_at: "desc" },
-    });
-    return NextResponse.json({ payments });
+    const payments = await (await paymentsCollection())
+      .find({})
+      .sort({ created_at: -1 })
+      .toArray();
+    return NextResponse.json({ payments: payments.map(stripMongoId) });
   } catch (error) {
     console.error("Fetch Payments Error:", error);
     return NextResponse.json(

@@ -113,10 +113,10 @@ export function Footer() {
             <button
               type="button"
               onClick={openReferralModal}
-              className="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 hover:text-emerald-300"
             >
               <Gift size={14} />
-              Refer
+              Refer to Earn
             </button>
           </div>
         </div>

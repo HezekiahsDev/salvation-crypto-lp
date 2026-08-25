@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import crypto from "crypto";
+import { paymentsCollection } from "@/lib/db";
 
-const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
   try {
@@ -41,8 +40,9 @@ export async function POST(req: Request) {
       const data = event.data;
       const reference = data.reference;
 
-      const payment = await prisma.payment.findUnique({
-        where: { transaction_reference: reference },
+      const payments = await paymentsCollection();
+      const payment = await payments.findOne({
+        transaction_reference: reference,
       });
 
       if (!payment) {
@@ -63,16 +63,19 @@ export async function POST(req: Request) {
       else if (data.status === "failed") newStatus = "failed";
 
       if (newStatus !== payment.payment_status) {
-        await prisma.payment.update({
-          where: { transaction_reference: reference },
-          data: {
+        await payments.updateOne(
+          { transaction_reference: reference },
+          {
+            $set: {
             payment_status: newStatus,
             paystack_reference: data.reference,
             payment_method: data.channel,
             webhook_payload: payload,
             paystack_response: JSON.stringify(data),
+            updated_at: new Date(),
           },
-        });
+          },
+        );
       }
     }
 

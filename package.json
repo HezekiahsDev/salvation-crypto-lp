@@ -8,11 +8,11 @@
     "start": "next start -p 9004",
     "deploy": "bash scripts/deploy.sh",
     "ship": "bash scripts/deploy.sh",
+    "seed-admin": "tsx scripts/seed-admin.ts",
     "lint": "eslint"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
-    "@prisma/client": "^6.19.3",
     "@studio-freight/lenis": "^1.0.42",
     "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
@@ -22,6 +22,7 @@
     "jose": "^6.2.3",
     "lenis": "^1.3.23",
     "lucide-react": "^1.14.0",
+    "mongodb": "^7.6.0",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
@@ -35,8 +36,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
-    "prisma": "^6.19.3",
     "tailwindcss": "^4",
+    "tsx": "^4.23.12",
     "typescript": "^5"
   }
 }

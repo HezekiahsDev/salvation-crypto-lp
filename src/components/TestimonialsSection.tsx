@@ -31,7 +31,7 @@ const testimonials = [
   },
   {
     name: "Michael Chen",
-    role: "Alpha Signals Member",
+    role: "Salvation Crypto Academy Member",
     avatar: "MC",
     content:
       "The live trading sessions and daily signals changed everything for me. Watching the team execute in real-time showed me what was missing from my strategy. My portfolio has grown 300% in 4 months.",

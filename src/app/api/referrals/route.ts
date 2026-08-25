@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import crypto from "crypto";
 import { z } from "zod";
 import {
   getAllowedUsdtNetworks,
   normalizeReferralUsername,
   REFERRAL_USERNAME_REGEX,
 } from "@/lib/referrals";
-
-const prisma = new PrismaClient();
+import { referralsCollection, stripMongoId } from "@/lib/db";
 
 const baseSchema = z.object({
   username: z
@@ -98,26 +97,23 @@ export async function POST(req: Request) {
     const data = referralSchema.parse(body);
     const phoneNumber = data.phoneNumber || null;
 
-    const identityMatch = await prisma.referral.findFirst({
-      where: {
-        OR: [
-          { email: data.email },
-          ...(phoneNumber ? [{ phone_number: phoneNumber }] : []),
-        ],
-      },
+    const referrals = await referralsCollection();
+    const identityMatch = await referrals.findOne({
+      $or: [
+        { email: data.email },
+        ...(phoneNumber ? [{ phone_number: phoneNumber }] : []),
+      ],
     });
 
     if (identityMatch) {
       return NextResponse.json({
-        referral: identityMatch,
+        referral: stripMongoId(identityMatch),
         referralLink: getReferralLink(req, identityMatch.username),
         existing: true,
       });
     }
 
-    const usernameMatch = await prisma.referral.findUnique({
-      where: { username: data.username },
-    });
+    const usernameMatch = await referrals.findOne({ username: data.username });
 
     if (usernameMatch) {
       return NextResponse.json(
@@ -126,8 +122,9 @@ export async function POST(req: Request) {
       );
     }
 
-    const referral = await prisma.referral.create({
-      data: {
+    const now = new Date();
+    const referral = {
+      id: crypto.randomUUID(),
         username: data.username,
         full_name: data.fullName,
         email: data.email,
@@ -140,8 +137,11 @@ export async function POST(req: Request) {
         usdt_wallet_address:
           data.payoutMethod === "USDT" ? data.usdtWalletAddress : null,
         usdt_network: data.payoutMethod === "USDT" ? data.usdtNetwork : null,
-      },
-    });
+        created_at: now,
+        updated_at: now,
+    };
+
+    await referrals.insertOne(referral);
 
     return NextResponse.json(
       {

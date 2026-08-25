@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
 import { getPlanPaymentPrice, plans } from "@/data/plans";
 import crypto from "crypto";
@@ -7,8 +6,7 @@ import {
   normalizeReferralUsername,
   REFERRAL_USERNAME_REGEX,
 } from "@/lib/referrals";
-
-const prisma = new PrismaClient();
+import { paymentsCollection, referralsCollection } from "@/lib/db";
 
 const initializeSchema = z.object({
   fullName: z.string().min(2),
@@ -50,8 +48,8 @@ export async function POST(req: Request) {
     let referrerUsername: string | undefined;
 
     if (data.referrerUsername) {
-      const referral = await prisma.referral.findUnique({
-        where: { username: data.referrerUsername },
+      const referral = await (await referralsCollection()).findOne({
+        username: data.referrerUsername,
       });
       if (referral) {
         referrerUsername = referral.username;
@@ -72,9 +70,12 @@ export async function POST(req: Request) {
       : baseTxRef;
 
     // Record pending transaction in DB
-    await prisma.payment.create({
-      data: {
+    const now = new Date();
+    await (await paymentsCollection()).insertOne({
+      id: crypto.randomUUID(),
         transaction_reference: txRef,
+        paystack_reference: null,
+        user_id: null,
         full_name: data.fullName,
         email: data.email,
         phone_number: data.phoneNumber,
@@ -84,7 +85,12 @@ export async function POST(req: Request) {
         currency: "NGN",
         referrer_username: referrerUsername,
         payment_status: "pending",
-      },
+        confirmed: false,
+        payment_method: null,
+        paystack_response: null,
+        webhook_payload: null,
+        created_at: now,
+        updated_at: now,
     });
 
     const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
