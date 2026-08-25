@@ -59,7 +59,7 @@ export function Navigation() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-100 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-[120] transition-all duration-500 ${
           isScrolled
             ? "py-3 bg-black/90 backdrop-blur-[60px] shadow-lg shadow-black/40 border-b border-white/10"
             : "py-5 bg-transparent"
@@ -94,18 +94,17 @@ export function Navigation() {
                 {link.label}
               </Link>
             ))}
+            <button
+              type="button"
+              onClick={openReferralModal}
+              className="px-4 py-2 text-sm font-medium text-slate-400 hover:text-white transition-colors duration-300 rounded-lg hover:bg-white/5"
+            >
+              Refer
+            </button>
           </div>
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <button
-              type="button"
-              onClick={openReferralModal}
-              className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-slate-300 transition-colors duration-300 hover:bg-white/5 hover:text-white"
-            >
-              <Gift size={16} />
-              Refer
-            </button>
             <Link
               href="/#pricing"
               className="btn-primary text-sm py-2.5! px-6! inline-flex items-center gap-2"
@@ -148,7 +147,7 @@ export function Navigation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileOpen(false)}
-              className="fixed inset-0 z-98 bg-black/40 backdrop-blur-[20px] md:hidden"
+              className="fixed inset-0 z-[118] bg-black/40 backdrop-blur-[20px] md:hidden"
             />
 
             <motion.div
@@ -156,7 +155,7 @@ export function Navigation() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="fixed inset-x-0 top-17.5 z-99 p-4 md:hidden"
+              className="fixed inset-x-0 top-17.5 z-[119] p-4 md:hidden"
             >
               <div className="bg-[#05001a]/95 backdrop-blur-[60px] rounded-2xl p-6 space-y-1 shadow-2xl shadow-black/80 border border-white/10">
                 {navLinks.map((link) => (
@@ -169,15 +168,15 @@ export function Navigation() {
                     {link.label}
                   </Link>
                 ))}
+                <button
+                  type="button"
+                  onClick={openReferralModal}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-base font-medium text-slate-300 transition-all hover:bg-white/5 hover:text-white"
+                >
+                  <Gift size={18} />
+                  Refer
+                </button>
                 <div className="pt-4 border-t border-white/5">
-                  <button
-                    type="button"
-                    onClick={openReferralModal}
-                    className="mb-2 flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-base font-medium text-slate-300 transition-all hover:bg-white/5 hover:text-white"
-                  >
-                    <Gift size={18} />
-                    Refer
-                  </button>
                   <Link
                     href="/#pricing"
                     onClick={() => setIsMobileOpen(false)}

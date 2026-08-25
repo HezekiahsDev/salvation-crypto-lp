@@ -207,16 +207,16 @@ export function ReferralSystem() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-90 inline-flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-white shadow-lg shadow-blue-600/30 transition hover:bg-blue-500 md:h-auto md:w-auto md:gap-2 md:rounded-xl md:px-4 md:py-3 md:text-sm md:font-bold"
+        className="fixed bottom-5 right-4 z-[120] inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-bold text-white shadow-lg shadow-blue-600/30 ring-1 ring-white/15 transition hover:bg-blue-500 sm:bottom-6 sm:right-6"
         aria-label="Open referral form"
         title="Refer"
       >
         <Gift size={18} />
-        <span className="hidden md:inline">Refer</span>
+        <span>Refer</span>
       </button>
 
       {open && (
-        <div className="fixed inset-0 z-110 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
+        <div className="fixed inset-0 z-[130] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
           <div className="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-white/10 bg-[#05001a] p-5 shadow-2xl shadow-black/70 sm:p-6">
             <button
               type="button"
