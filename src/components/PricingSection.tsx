@@ -111,7 +111,9 @@ function PlanCard({
               </span>
             )}
           <div className="flex items-baseline gap-1">
-            <span className="text-xs text-slate-500">$</span>
+            {paymentPrice !== null && (
+              <span className="text-xs text-slate-500">$</span>
+            )}
             <span className="text-3xl font-bold text-white tracking-tight">
               {formatPlanPrice(paymentPrice)}
             </span>
@@ -239,11 +241,9 @@ export function PricingSection() {
               <GraduationCap size={13} />
               Academy — not a signals plan
             </span>
-            <div className="flex items-center gap-3 mt-4 mb-2">
-              <h3 className="text-2xl font-bold text-white tracking-tight">
-                Salvation Crypto Academy
-              </h3>
-            </div>
+            <h3 className="text-2xl font-bold text-white tracking-tight mt-4 mb-2">
+              Academy &amp; Mentorship
+            </h3>
             <p className="text-sm text-slate-400 max-w-2xl">
               Education and mentorship, billed separately from the signal
               subscriptions above. You learn to find and manage your own trades
