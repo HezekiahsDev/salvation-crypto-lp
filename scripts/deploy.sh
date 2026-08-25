@@ -153,6 +153,9 @@ echo "Deploying on server..."
 ssh -p "$DEPLOY_SSH_PORT" "$DEPLOY_HOST" "\
   set -euo pipefail; \
   cd '$DEPLOY_PATH'; \
+  if git ls-files --others --exclude-standard -- pnpm-workspace.yaml | grep -q '^pnpm-workspace.yaml$'; then \
+    mv pnpm-workspace.yaml '/tmp/${APP_NAME}-pnpm-workspace-${release_id}.yaml'; \
+  fi; \
   git pull origin '$DEPLOY_BRANCH'; \
   chmod +x ./deploy.sh; \
   DEPLOY_PATH='$DEPLOY_PATH' \
