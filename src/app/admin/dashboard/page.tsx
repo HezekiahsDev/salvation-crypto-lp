@@ -21,6 +21,7 @@ interface Payment {
   amount: number;
   payment_status: string;
   transaction_reference: string;
+  referrer_username?: string | null;
   confirmed: boolean;
 }
 
@@ -171,6 +172,11 @@ export default function AdminDashboard() {
                         <div className="text-xs text-slate-500">
                           {payment.phone_number}
                         </div>
+                        {payment.referrer_username && (
+                          <div className="mt-1 text-xs text-blue-300">
+                            Referred by: {payment.referrer_username}
+                          </div>
+                        )}
                       </td>
                       <td className="p-4">
                         <span className="inline-block px-2 py-1 rounded bg-blue-500/10 text-blue-400 text-xs">

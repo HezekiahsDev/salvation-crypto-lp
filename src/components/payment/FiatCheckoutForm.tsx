@@ -2,6 +2,11 @@
 
 import { useState } from "react";
 import { CreditCard, Loader2 } from "lucide-react";
+import {
+  isValidReferralUsername,
+  normalizeReferralUsername,
+  REFERRAL_STORAGE_KEY,
+} from "@/lib/referrals";
 
 interface FiatCheckoutFormProps {
   planId: string;
@@ -36,12 +41,19 @@ export function FiatCheckoutForm({
     setError(null);
 
     try {
+      const storedReferrer = localStorage.getItem(REFERRAL_STORAGE_KEY);
+      const referrerUsername =
+        storedReferrer && isValidReferralUsername(storedReferrer)
+          ? normalizeReferralUsername(storedReferrer)
+          : undefined;
+
       const res = await fetch("/api/payments/initialize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
           planId,
+          referrerUsername,
         }),
       });
 
@@ -52,6 +64,9 @@ export function FiatCheckoutForm({
       }
 
       if (data.authorizationUrl) {
+        if (referrerUsername) {
+          localStorage.removeItem(REFERRAL_STORAGE_KEY);
+        }
         window.location.href = data.authorizationUrl;
       } else {
         throw new Error("Invalid response from server");

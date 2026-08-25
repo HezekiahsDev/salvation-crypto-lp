@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Gift, Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Academy", href: "/#features" },
@@ -33,6 +33,11 @@ export function Navigation() {
       cancelAnimationFrame(raf);
     };
   }, []);
+
+  const openReferralModal = () => {
+    window.dispatchEvent(new Event("open-referral-modal"));
+    setIsMobileOpen(false);
+  };
 
   if (!mounted)
     return (
@@ -93,6 +98,14 @@ export function Navigation() {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-3">
+            <button
+              type="button"
+              onClick={openReferralModal}
+              className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-slate-300 transition-colors duration-300 hover:bg-white/5 hover:text-white"
+            >
+              <Gift size={16} />
+              Refer
+            </button>
             <Link
               href="/#pricing"
               className="btn-primary text-sm py-2.5! px-6! inline-flex items-center gap-2"
@@ -157,6 +170,14 @@ export function Navigation() {
                   </Link>
                 ))}
                 <div className="pt-4 border-t border-white/5">
+                  <button
+                    type="button"
+                    onClick={openReferralModal}
+                    className="mb-2 flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 text-base font-medium text-slate-300 transition-all hover:bg-white/5 hover:text-white"
+                  >
+                    <Gift size={18} />
+                    Refer
+                  </button>
                   <Link
                     href="/#pricing"
                     onClick={() => setIsMobileOpen(false)}

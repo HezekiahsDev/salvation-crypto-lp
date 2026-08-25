@@ -18,6 +18,7 @@ import { Metadata } from "next";
 
 import { FiatCheckoutForm } from "@/components/payment/FiatCheckoutForm";
 import { PaymentVerification } from "@/components/payment/PaymentVerification";
+import { CryptoSupportButton } from "@/components/payment/CryptoSupportButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 interface PageProps {
@@ -263,14 +264,14 @@ export default async function PlanDetailsPage({
                         ))}
                       </div>
 
-                      <a
-                        href={`${plan.supportContact}?text=${encodeURIComponent(`Hello, I've just made payment for the ${plan.name} (${plan.duration}) plan. Here is my proof of payment:`)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold transition-all shadow-lg shadow-blue-600/20 text-center block"
-                      >
-                        I&apos;ve Made Payment
-                      </a>
+                      <CryptoSupportButton
+                        supportContact={
+                          plan.supportContact ||
+                          "https://wa.me/2347026821951"
+                        }
+                        planName={plan.name}
+                        duration={plan.duration}
+                      />
 
                       {!plan.isExclusive && paymentPrice !== null && (
                         <FiatCheckoutForm

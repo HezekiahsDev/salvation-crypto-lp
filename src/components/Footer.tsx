@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Gift } from "lucide-react";
 
 const footerLinks = {
   Academy: [
@@ -33,6 +33,10 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const openReferralModal = () => {
+    window.dispatchEvent(new Event("open-referral-modal"));
+  };
+
   return (
     <footer className="relative border-t border-white/5 bg-[#020010]">
       <div className="max-w-6xl mx-auto px-6 py-16">
@@ -106,6 +110,14 @@ export function Footer() {
             >
               WhatsApp: +234 802 076 9766
             </a>
+            <button
+              type="button"
+              onClick={openReferralModal}
+              className="inline-flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300"
+            >
+              <Gift size={14} />
+              Refer
+            </button>
           </div>
         </div>
 

@@ -35,6 +35,7 @@ export const metadata: Metadata = {
 
 import { CinematicBackground } from "@/components/CinematicBackground";
 import { MouseFollowGlow } from "@/components/MouseFollowGlow";
+import { ReferralSystem } from "@/components/referral/ReferralSystem";
 
 export default function RootLayout({
   children,
@@ -47,6 +48,7 @@ export default function RootLayout({
         <CinematicBackground />
         <MouseFollowGlow />
         <AnimationProvider>{children}</AnimationProvider>
+        <ReferralSystem />
       </body>
     </html>
   );

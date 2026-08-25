@@ -28,7 +28,7 @@ Usage: pnpm run deploy
 Runs checks locally, builds this Next.js app locally, commits and pushes source
 changes, uploads the .next build output to the existing repo on the server,
 optionally syncs .env, then runs deploy.sh on the server. The server still runs
-git pull, pnpm install, Prisma generate, and PM2 restart.
+git pull, pnpm install, Prisma generate/migrations, and PM2 restart.
 
 Required:
   DEPLOY_HOST       SSH target, for example hezekiah@203.0.113.10.
@@ -45,6 +45,7 @@ Optional:
   SYNC_ENV=0        Do not upload .env
   ENV_SOURCE=.env   Env file to upload. Default: .env
   SKIP_GIT_PUSH=1   Do not commit and push before deploy
+  COMMIT_MESSAGE    Commit message body. Default: deploy updates
 EOF
   exit 0
 fi
@@ -67,6 +68,13 @@ pnpm install --frozen-lockfile
 if [[ -d prisma ]]; then
   echo "Generating Prisma client locally..."
   pnpm exec prisma generate
+
+  echo "Checking local Prisma migrations..."
+  if ! pnpm exec prisma migrate deploy; then
+    echo "Prisma migrate deploy failed locally; applying SQLite migrations with fallback script..."
+    node scripts/apply-sqlite-migrations.js
+    pnpm exec prisma generate
+  fi
 fi
 
 if [[ "$RUN_LINT" == "1" ]]; then
@@ -101,14 +109,7 @@ if [[ "$SKIP_GIT_PUSH" != "1" ]]; then
     echo "Changes to commit:"
     git status --short
 
-    if [[ -z "${COMMIT_MESSAGE:-}" ]]; then
-      read -r -p "Enter commit message: " COMMIT_MESSAGE
-    fi
-
-    if [[ -z "$COMMIT_MESSAGE" ]]; then
-      echo "Commit message is required."
-      exit 1
-    fi
+    COMMIT_MESSAGE="${COMMIT_MESSAGE:-deploy updates}"
 
     user="$(whoami)"
     timestamp="$(date '+%Y-%m-%d %H:%M:%S')"

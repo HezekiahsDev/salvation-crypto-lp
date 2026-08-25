@@ -3,6 +3,10 @@ import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
 import { getPlanPaymentPrice, plans } from "@/data/plans";
 import crypto from "crypto";
+import {
+  normalizeReferralUsername,
+  REFERRAL_USERNAME_REGEX,
+} from "@/lib/referrals";
 
 const prisma = new PrismaClient();
 
@@ -11,6 +15,11 @@ const initializeSchema = z.object({
   email: z.string().email(),
   phoneNumber: z.string().min(6),
   planId: z.string(),
+  referrerUsername: z
+    .string()
+    .transform(normalizeReferralUsername)
+    .pipe(z.string().regex(REFERRAL_USERNAME_REGEX))
+    .optional(),
 });
 
 export async function POST(req: Request) {
@@ -38,6 +47,16 @@ export async function POST(req: Request) {
     // PLAN-FULL-NAME-Timestamp-Random
     const timestamp = Math.floor(Date.now() / 1000);
     const randomString = crypto.randomBytes(3).toString("hex").toUpperCase();
+    let referrerUsername: string | undefined;
+
+    if (data.referrerUsername) {
+      const referral = await prisma.referral.findUnique({
+        where: { username: data.referrerUsername },
+      });
+      if (referral) {
+        referrerUsername = referral.username;
+      }
+    }
 
     const sanitizeToToken = (s: string) =>
       s
@@ -47,7 +66,10 @@ export async function POST(req: Request) {
 
     const planToken = sanitizeToToken(plan.name || "PLAN");
     const nameToken = sanitizeToToken(data.fullName || "CUSTOMER");
-    const txRef = `${planToken}-${nameToken}-${timestamp}-${randomString}`;
+    const baseTxRef = `${planToken}-${nameToken}-${timestamp}-${randomString}`;
+    const txRef = referrerUsername
+      ? `${baseTxRef}-by_${referrerUsername}`
+      : baseTxRef;
 
     // Record pending transaction in DB
     await prisma.payment.create({
@@ -60,6 +82,7 @@ export async function POST(req: Request) {
         plan_id: data.planId,
         amount: price,
         currency: "NGN",
+        referrer_username: referrerUsername,
         payment_status: "pending",
       },
     });
@@ -99,6 +122,7 @@ export async function POST(req: Request) {
             discountedAmount: price,
             phone: data.phoneNumber,
             fullName: data.fullName,
+            referrerUsername,
           },
         }),
       },

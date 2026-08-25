@@ -13,8 +13,8 @@ if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
 Usage: ./deploy.sh
 
 Server-side deploy script. The server keeps using the git repo, pnpm install,
-Prisma generation, and PM2 restart flow. The only thing skipped here is pnpm
-build; .next must be uploaded from your local machine first.
+Prisma generation/migrations, and PM2 restart flow. The only thing skipped here
+is pnpm build; .next must be uploaded from your local machine first.
 
 Environment:
   APP_NAME        PM2 app name. Default: salvation-academy-lp
@@ -104,6 +104,13 @@ echo "Installing dependencies..."
 if [[ -d prisma ]]; then
   echo "Generating Prisma client..."
   "$PNPM_BIN" exec prisma generate
+
+  echo "Applying Prisma migrations..."
+  if ! "$PNPM_BIN" exec prisma migrate deploy; then
+    echo "Prisma migrate deploy failed; applying SQLite migrations with fallback script..."
+    node scripts/apply-sqlite-migrations.js
+    "$PNPM_BIN" exec prisma generate
+  fi
 fi
 
 echo "Restarting $APP_NAME with PM2..."

@@ -24,11 +24,29 @@ model Payment {
   plan_name             String?
   amount                Float
   currency              String
+  referrer_username     String?
   payment_status        String   @default("pending") // pending, successful, failed, abandoned, refunded
   confirmed             Boolean  @default(false)
   payment_method        String?  // card, bank_transfer, etc.
   paystack_response     String?  // Store JSON stringified response if needed
   webhook_payload       String?  // Store final JSON webhook payload
+  created_at            DateTime @default(now())
+  updated_at            DateTime @updatedAt
+}
+
+model Referral {
+  id                    String   @id @default(cuid())
+  username              String   @unique
+  full_name             String
+  email                 String   @unique
+  phone_number          String?  @unique
+  payout_method         String
+  bank_name             String?
+  bank_code             String?
+  account_number        String?
+  account_name          String?
+  usdt_wallet_address   String?
+  usdt_network          String?
   created_at            DateTime @default(now())
   updated_at            DateTime @updatedAt
 }
