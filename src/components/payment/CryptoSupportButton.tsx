@@ -22,9 +22,16 @@ export function CryptoSupportButton({
 
   useEffect(() => {
     const raf = requestAnimationFrame(() => {
-      const storedReferrer = localStorage.getItem(REFERRAL_STORAGE_KEY);
+      const params = new URLSearchParams(window.location.search);
+      const urlReferrer =
+        params.get("ref") || params.get("refer") || params.get("referrer");
+      const storedReferrer =
+        urlReferrer || localStorage.getItem(REFERRAL_STORAGE_KEY);
+
       if (storedReferrer && isValidReferralUsername(storedReferrer)) {
-        setReferrerUsername(normalizeReferralUsername(storedReferrer));
+        const username = normalizeReferralUsername(storedReferrer);
+        localStorage.setItem(REFERRAL_STORAGE_KEY, username);
+        setReferrerUsername(username);
       }
     });
 
@@ -32,8 +39,9 @@ export function CryptoSupportButton({
   }, []);
 
   const href = useMemo(() => {
+    const planLabel = duration ? `${planName} (${duration})` : planName;
     const message = [
-      `Hello, I've just made payment for the ${planName} (${duration}) plan.`,
+      `Hello, I've just made payment for the ${planLabel} plan.`,
       referrerUsername ? `Referrer: ${referrerUsername}` : null,
       "Here is my proof of payment:",
     ]
