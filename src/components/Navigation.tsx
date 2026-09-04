@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Gift, Menu, X } from "lucide-react";
+import { handleHashClick } from "@/lib/scrollToSection";
 
 const navLinks = [
   { label: "Academy", href: "/#features" },
@@ -89,6 +90,11 @@ export function Navigation() {
               <Link
                 key={link.label}
                 href={link.href}
+                onClick={
+                  link.href.startsWith("/#")
+                    ? (e) => handleHashClick(e, link.href.slice(2))
+                    : undefined
+                }
                 className="px-4 py-2 text-sm font-medium text-slate-400 hover:text-white transition-colors duration-300 rounded-lg hover:bg-white/5"
               >
                 {link.label}
@@ -107,6 +113,7 @@ export function Navigation() {
           <div className="hidden md:flex items-center gap-3">
             <Link
               href="/#pricing"
+              onClick={(e) => handleHashClick(e, "pricing")}
               className="btn-primary text-sm py-2.5! px-6! inline-flex items-center gap-2"
             >
               Choose plan
@@ -162,7 +169,12 @@ export function Navigation() {
                   <Link
                     key={link.label}
                     href={link.href}
-                    onClick={() => setIsMobileOpen(false)}
+                    onClick={(e) => {
+                      setIsMobileOpen(false);
+                      if (link.href.startsWith("/#")) {
+                        handleHashClick(e, link.href.slice(2));
+                      }
+                    }}
                     className="block px-4 py-3 text-base font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-xl transition-all text-center"
                   >
                     {link.label}
@@ -179,7 +191,10 @@ export function Navigation() {
                 <div className="pt-4 border-t border-white/5">
                   <Link
                     href="/#pricing"
-                    onClick={() => setIsMobileOpen(false)}
+                    onClick={(e) => {
+                      setIsMobileOpen(false);
+                      handleHashClick(e, "pricing");
+                    }}
                     className="btn-primary block text-center py-3! shadow-lg shadow-blue-500/20"
                   >
                     Join 

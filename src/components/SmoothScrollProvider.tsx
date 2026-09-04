@@ -19,6 +19,7 @@ export function SmoothScrollProvider({
     });
 
     lenisRef.current = lenis;
+    (window as Window & { __lenis?: Lenis }).__lenis = lenis;
 
     function raf(time: number) {
       lenis.raf(time);
@@ -28,6 +29,9 @@ export function SmoothScrollProvider({
     requestAnimationFrame(raf);
 
     return () => {
+      if ((window as Window & { __lenis?: Lenis }).__lenis === lenis) {
+        delete (window as Window & { __lenis?: Lenis }).__lenis;
+      }
       lenis.destroy();
     };
   }, []);

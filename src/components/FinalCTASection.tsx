@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
+import { handleHashClick } from "@/lib/scrollToSection";
 
 export function FinalCTASection() {
   const ref = useRef(null);
@@ -62,6 +63,7 @@ export function FinalCTASection() {
         >
           <Link
             href="/#pricing"
+            onClick={(e) => handleHashClick(e, "pricing")}
             className="btn-primary text-lg !py-4 !px-10 flex items-center gap-3 group"
           >
             Start Your Transformation

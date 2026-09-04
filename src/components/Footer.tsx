@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight, Gift } from "lucide-react";
+import { handleHashClick } from "@/lib/scrollToSection";
 
 const footerLinks = {
   Academy: [
@@ -71,6 +72,11 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
+                      onClick={
+                        link.href.startsWith("/#")
+                          ? (e) => handleHashClick(e, link.href.slice(2))
+                          : undefined
+                      }
                       className="text-sm text-slate-500 hover:text-slate-300 transition-colors duration-200"
                     >
                       {link.label}

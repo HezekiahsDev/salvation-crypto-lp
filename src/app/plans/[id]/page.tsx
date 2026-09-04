@@ -11,6 +11,7 @@ import {
   Zap,
   Clock,
   CreditCard,
+  Lock,
 } from "lucide-react";
 import { CopyButton } from "@/components/CopyButton";
 
@@ -81,6 +82,7 @@ export default async function PlanDetailsPage({
   }
 
   const paymentPrice = getPlanPaymentPrice(plan);
+  const isOpen = plan.applicationsOpen !== false;
 
   return (
     <>
@@ -97,6 +99,26 @@ export default async function PlanDetailsPage({
 
       <main className="relative pt-32 pb-12 px-6">
         <div className="max-w-6xl mx-auto">
+          {/* Applications closed banner */}
+          {!isOpen && (
+            <div className="mb-8 p-6 rounded-2xl bg-red-500/10 border border-red-400/30 backdrop-blur-md">
+              <div className="flex items-center gap-4">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-500/15 text-red-400">
+                  <Lock size={24} />
+                </span>
+                <div>
+                  <h2 className="text-white font-bold text-base sm:text-lg">
+                    Applications Currently Closed
+                  </h2>
+                  <p className="text-sm text-slate-400 mt-1 leading-relaxed">
+                    We are not accepting new academy applications right now.
+                    We&apos;ll announce when our doors open again — stay tuned.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Plan Header - Ultra Compact */}
           <div className="mb-8 p-4 sm:p-5 rounded-2xl bg-white/2 border border-white/5 backdrop-blur-md">
             <div className="flex flex-row items-center justify-between gap-4">
@@ -192,11 +214,47 @@ export default async function PlanDetailsPage({
               <div className="p-8 rounded-3xl bg-linear-to-br from-blue-600/10 to-purple-600/10 border border-white/10 backdrop-blur-xl h-full">
                 <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
                   <CreditCard className="text-blue-400" />
-                  {plan.isExclusive ? "How to Apply" : "Pay with Crypto"}
+                  {!isOpen
+                    ? "Applications Closed"
+                    : plan.isExclusive
+                      ? "How to Apply"
+                      : "Pay with Crypto"}
                 </h2>
 
                 <div className="space-y-4">
-                  {plan.isExclusive ? (
+                  {!isOpen ? (
+                    <>
+                      <p className="text-slate-400 text-sm leading-relaxed">
+                        The{" "}
+                        <span className="text-white font-bold">
+                          {plan.name}
+                        </span>{" "}
+                        is currently{" "}
+                        <span className="text-red-400 font-bold">
+                          not accepting applications
+                        </span>{" "}
+                        or payments.
+                      </p>
+                      <div className="p-6 rounded-2xl bg-red-500/5 border border-red-500/20 space-y-3 text-center">
+                        <Clock size={32} className="mx-auto text-red-400" />
+                        <p className="text-sm text-slate-300 font-semibold">
+                          We&apos;ll announce when applications open again
+                        </p>
+                        <p className="text-xs text-slate-500">
+                          Contact us on WhatsApp to be notified when enrollment
+                          reopens.
+                        </p>
+                        <WhatsAppButton
+                          message={`Hello, please notify me when applications for the ${plan.name} reopen.`}
+                          className="w-full"
+                        >
+                          <span className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-4 text-white text-sm font-bold hover:bg-emerald-700">
+                            Notify Me When Open
+                          </span>
+                        </WhatsAppButton>
+                      </div>
+                    </>
+                  ) : plan.isExclusive ? (
                     <>
                       <p className="text-slate-400 text-sm leading-relaxed">
                         The{" "}
@@ -284,17 +342,19 @@ export default async function PlanDetailsPage({
                   )}
                 </div>
 
-                <div className="p-6 mt-4 rounded-2xl bg-yellow-500/5 border border-yellow-500/20">
-                  <div className="flex items-center gap-2 text-yellow-500 mb-2">
-                    <Clock size={18} />
-                    <h4 className="font-bold text-sm">Quick Setup</h4>
+                {isOpen && (
+                  <div className="p-6 mt-4 rounded-2xl bg-yellow-500/5 border border-yellow-500/20">
+                    <div className="flex items-center gap-2 text-yellow-500 mb-2">
+                      <Clock size={18} />
+                      <h4 className="font-bold text-sm">Quick Setup</h4>
+                    </div>
+                    <ol className="text-xs text-slate-400 space-y-2 list-decimal ml-4">
+                      <li>Send payment & take a screenshot.</li>
+                      <li>Message support with your receipt.</li>
+                      <li>Get access within minutes.</li>
+                    </ol>
                   </div>
-                  <ol className="text-xs text-slate-400 space-y-2 list-decimal ml-4">
-                    <li>Send payment & take a screenshot.</li>
-                    <li>Message support with your receipt.</li>
-                    <li>Get access within minutes.</li>
-                  </ol>
-                </div>
+                )}
               </div>
             </div>
           </div>

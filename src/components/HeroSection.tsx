@@ -6,6 +6,7 @@ import { motion, useInView } from "framer-motion";
 import { AnimatedCounter } from "./AnimatedCounter";
 import { Play, ArrowRight, Tag } from "lucide-react";
 import Link from "next/link";
+import { handleHashClick } from "@/lib/scrollToSection";
 
 const TradingChart = dynamic(
   () => import("./TradingChart").then((mod) => mod.TradingChart),
@@ -101,6 +102,7 @@ export function HeroSection() {
         >
           <Link
             href="/#pricing"
+            onClick={(e) => handleHashClick(e, "pricing")}
             className="btn-primary text-base flex items-center gap-2 group"
           >
             <Tag

@@ -2,7 +2,13 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Check, ArrowRight, GraduationCap, LineChart } from "lucide-react";
+import {
+  Check,
+  ArrowRight,
+  GraduationCap,
+  LineChart,
+  Clock,
+} from "lucide-react";
 
 import {
   academyPlans,
@@ -35,6 +41,7 @@ function PlanCard({
 }: PlanCardProps) {
   const paymentPrice = getPlanPaymentPrice(plan);
   const isAcademy = accent === "amber";
+  const isOpen = plan.applicationsOpen !== false;
 
   return (
     <motion.div
@@ -122,6 +129,16 @@ function PlanCard({
         </div>
       </div>
 
+      {/* Applications closed notice */}
+      {!isOpen && (
+        <div className="flex items-center justify-center gap-2 mb-6 px-3 py-2 rounded-lg bg-red-500/10 border border-red-400/30 relative z-10">
+          <Clock size={12} className="text-red-400 shrink-0" />
+          <span className="text-[11px] font-bold text-red-300 uppercase tracking-widest text-center">
+            Applications Closed — Opening Soon
+          </span>
+        </div>
+      )}
+
       {/* Features */}
       <ul className="space-y-2.5 mb-8 grow relative z-10">
         {plan.features.map((feature) => (
@@ -148,16 +165,30 @@ function PlanCard({
         className={`w-full py-3 rounded-xl font-bold text-xs transition-all duration-300 flex items-center justify-center gap-2 group mt-auto relative z-10 ${
           plan.popular
             ? "bg-linear-to-r from-blue-500 to-purple-600 text-white hover:shadow-lg hover:shadow-blue-500/25"
-            : isAcademy
-              ? "bg-amber-400/10 text-amber-100 border border-amber-300/25 group-hover/card:bg-amber-400/20"
-              : "bg-white/5 text-white border border-white/10 group-hover/card:bg-white/10"
+            : !isOpen
+              ? "bg-white/5 text-slate-500 border border-white/10 cursor-not-allowed"
+              : isAcademy
+                ? "bg-amber-400/10 text-amber-100 border border-amber-300/25 group-hover/card:bg-amber-400/20"
+                : "bg-white/5 text-white border border-white/10 group-hover/card:bg-white/10"
         }`}
       >
-        {plan.cta}
-        <ArrowRight
-          size={14}
-          className="group-hover:translate-x-1 transition-transform"
-        />
+        {!isOpen ? (
+          <>
+            <Clock
+              size={14}
+              className="group-hover:translate-x-1 transition-transform"
+            />
+            Openings Announced Soon
+          </>
+        ) : (
+          <>
+            {plan.cta}
+            <ArrowRight
+              size={14}
+              className="group-hover:translate-x-1 transition-transform"
+            />
+          </>
+        )}
       </div>
     </motion.div>
   );

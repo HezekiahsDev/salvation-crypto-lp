@@ -33,6 +33,13 @@ export async function POST(req: Request) {
       );
     }
 
+    if (plan.applicationsOpen === false) {
+      return NextResponse.json(
+        { error: "Applications for this plan are currently closed" },
+        { status: 400 },
+      );
+    }
+
     const price = getPlanPaymentPrice(plan);
     if (price === null) {
       return NextResponse.json(

@@ -21,6 +21,7 @@ export interface Plan {
   icon: LucideIcon | null;
   badge?: string;
   isExclusive?: boolean;
+  applicationsOpen?: boolean;
   supportLink?: string;
   supportContact?: string;
   proofImages: string[];
@@ -108,6 +109,7 @@ export const plans: Plan[] = [
     popular: false,
     icon: GraduationCap,
     badge: "Learn to Trade",
+    applicationsOpen: false,
     supportLink: "https://wa.me/2347026821951",
     supportContact: DEFAULT_SUPPORT_CONTACT,
     proofImages: [
