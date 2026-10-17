@@ -99,7 +99,7 @@ export default async function PlanDetailsPage({
 
       <main className="relative pt-32 pb-12 px-6">
         <div className="max-w-6xl mx-auto">
-          {/* Applications closed banner */}
+          {/* Availability banner */}
           {!isOpen && (
             <div className="mb-8 p-6 rounded-2xl bg-red-500/10 border border-red-400/30 backdrop-blur-md">
               <div className="flex items-center gap-4">
@@ -108,11 +108,11 @@ export default async function PlanDetailsPage({
                 </span>
                 <div>
                   <h2 className="text-white font-bold text-base sm:text-lg">
-                    Applications Currently Closed
+                    Academy Not on Session
                   </h2>
                   <p className="text-sm text-slate-400 mt-1 leading-relaxed">
-                    We are not accepting new academy applications right now.
-                    We&apos;ll announce when our doors open again — stay tuned.
+                    The Academy is not on session right now. Enrollment details
+                    will be announced soon, so check back for the next opening.
                   </p>
                 </div>
               </div>
@@ -215,7 +215,7 @@ export default async function PlanDetailsPage({
                 <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
                   <CreditCard className="text-blue-400" />
                   {!isOpen
-                    ? "Applications Closed"
+                    ? "Not on Session"
                     : plan.isExclusive
                       ? "How to Apply"
                       : "Pay with Crypto"}
@@ -231,21 +231,21 @@ export default async function PlanDetailsPage({
                         </span>{" "}
                         is currently{" "}
                         <span className="text-red-400 font-bold">
-                          not accepting applications
+                          not on session
                         </span>{" "}
-                        or payments.
+                        and enrollment is not available.
                       </p>
                       <div className="p-6 rounded-2xl bg-red-500/5 border border-red-500/20 space-y-3 text-center">
                         <Clock size={32} className="mx-auto text-red-400" />
                         <p className="text-sm text-slate-300 font-semibold">
-                          We&apos;ll announce when applications open again
+                          Enrollment will be announced soon
                         </p>
                         <p className="text-xs text-slate-500">
-                          Contact us on WhatsApp to be notified when enrollment
-                          reopens.
+                          Contact us on WhatsApp to be notified when the Academy
+                          is back in session.
                         </p>
                         <WhatsAppButton
-                          message={`Hello, please notify me when applications for the ${plan.name} reopen.`}
+                          message={`Hello, please notify me when enrollment for the ${plan.name} is announced.`}
                           className="w-full"
                         >
                           <span className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-4 text-white text-sm font-bold hover:bg-emerald-700">

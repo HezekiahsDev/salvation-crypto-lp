@@ -129,12 +129,12 @@ function PlanCard({
         </div>
       </div>
 
-      {/* Applications closed notice */}
+      {/* Availability notice */}
       {!isOpen && (
         <div className="flex items-center justify-center gap-2 mb-6 px-3 py-2 rounded-lg bg-red-500/10 border border-red-400/30 relative z-10">
           <Clock size={12} className="text-red-400 shrink-0" />
           <span className="text-[11px] font-bold text-red-300 uppercase tracking-widest text-center">
-            Applications Closed — Opening Soon
+            Not on session — Enrollment Soon
           </span>
         </div>
       )}
@@ -178,7 +178,7 @@ function PlanCard({
               size={14}
               className="group-hover:translate-x-1 transition-transform"
             />
-            Openings Announced Soon
+            Enrollment Announced Soon
           </>
         ) : (
           <>
