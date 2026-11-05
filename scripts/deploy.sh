@@ -12,7 +12,7 @@ fi
 
 APP_NAME="${APP_NAME:-salvation-academy-lp}"
 APP_PORT="${APP_PORT:-9004}"
-DEPLOY_PATH="${DEPLOY_PATH:-/home/hezekiah/projects/salvation-crypto-lp}"
+DEPLOY_PATH="${DEPLOY_PATH:-/home/alcance/projects/salvation-crypto-lp}"
 DEPLOY_SSH_PORT="${DEPLOY_SSH_PORT:-22}"
 DEPLOY_BRANCH="${DEPLOY_BRANCH:-main}"
 RUN_LINT="${RUN_LINT:-1}"
