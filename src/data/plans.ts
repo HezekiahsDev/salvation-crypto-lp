@@ -14,6 +14,10 @@ export interface Plan {
   duration: string;
   price: string;
   period: string;
+  /** Prominent billing term shown on cards so short and long plans are never confused. */
+  billingLabel?: string;
+  /** One-line clarification about what the payment actually covers. */
+  durationHint?: string;
   description: string;
   features: string[];
   cta: string;
@@ -129,6 +133,8 @@ export const plans: Plan[] = [
     duration: "1 Month",
     price: "10",
     period: "/month",
+    billingLabel: "1 MONTH",
+    durationHint: "One payment = 30 days of signals. This is not the yearly plan.",
     description: "Your gateway into the crypto market, perfect for beginners.",
     features: [
       "Access to daily trading signals",
@@ -158,6 +164,8 @@ export const plans: Plan[] = [
     duration: "1 Year",
     price: "100",
     period: "/year",
+    billingLabel: "FULL YEAR · 12 MONTHS",
+    durationHint: "One payment = 12 months of signals. This is the Elite yearly plan.",
     description:
       "The highest level of signal access for committed traders who want maximum edge.",
     features: [

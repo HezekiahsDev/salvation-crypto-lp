@@ -130,9 +130,17 @@ export default async function PlanDetailsPage({
                   <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-tight">
                     {plan.name}
                   </h1>
-                  <p className="text-blue-400/80 font-bold uppercase tracking-widest text-[9px] sm:text-[10px]">
-                    {plan.duration} Access
-                  </p>
+                  <div className="mt-1 flex flex-wrap items-center gap-2">
+                    {plan.billingLabel && (
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-400/40 bg-blue-500/15 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-blue-200">
+                        <Clock size={11} />
+                        {plan.billingLabel}
+                      </span>
+                    )}
+                    <p className="text-blue-400/80 font-bold uppercase tracking-widest text-[9px] sm:text-[10px]">
+                      {plan.duration} Access
+                    </p>
+                  </div>
                 </div>
               </div>
               <div className="relative flex flex-col items-start gap-0.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-white/5 border border-white/5 w-fit shrink-0">
@@ -174,6 +182,11 @@ export default async function PlanDetailsPage({
             <p className="text-sm sm:text-base text-slate-400 mt-4 leading-relaxed max-w-4xl border-t border-white/5 pt-4">
               {plan.description}
             </p>
+            {plan.durationHint && (
+              <p className="mt-2 text-xs font-semibold text-amber-200/90">
+                {plan.durationHint}
+              </p>
+            )}
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8 items-start">
@@ -295,7 +308,11 @@ export default async function PlanDetailsPage({
                         <span className="text-white font-bold">
                           ${formatPlanPrice(paymentPrice)}
                         </span>{" "}
-                        to any address below:
+                        for{" "}
+                        <span className="text-white font-bold">
+                          {plan.billingLabel || plan.duration}
+                        </span>{" "}
+                        access to any address below:
                       </p>
 
                       <div className="space-y-2">
@@ -328,7 +345,7 @@ export default async function PlanDetailsPage({
                           "https://wa.me/2347026821951"
                         }
                         planName={plan.name}
-                        duration={plan.duration}
+                        duration={plan.billingLabel || plan.duration}
                       />
 
                       {!plan.isExclusive && paymentPrice !== null && (

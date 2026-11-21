@@ -56,7 +56,7 @@ function PlanCard({
       onMouseLeave={onHoverEnd}
       className={`relative rounded-2xl p-6 transition-all duration-500 flex flex-col h-full group/card cursor-pointer ${
         plan.popular
-          ? "bg-white/4 border-2 border-transparent pricing-highlight scale-105 z-10"
+          ? "bg-white/4 border-2 border-transparent pricing-highlight z-10"
           : isAcademy
             ? "bg-amber-400/4 border border-amber-300/20 hover:border-amber-300/40"
             : "bg-white/2 border border-white/5 hover:border-white/10"
@@ -92,13 +92,20 @@ function PlanCard({
         <h3 className="text-base font-bold text-white mb-1 uppercase tracking-tight">
           {plan.name}
         </h3>
-        <span
-          className={`text-[10px] font-bold uppercase tracking-widest ${
-            isAcademy ? "text-amber-300" : "text-blue-400"
-          }`}
-        >
-          {plan.duration}
-        </span>
+        {(plan.billingLabel || plan.duration) && (
+          <div
+            className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-widest ${
+              plan.duration.toLowerCase().includes("year")
+                ? "border-purple-400/40 bg-purple-500/15 text-purple-200"
+                : isAcademy
+                  ? "border-amber-300/30 bg-amber-400/10 text-amber-200"
+                  : "border-blue-400/40 bg-blue-500/15 text-blue-200"
+            }`}
+          >
+            <Clock size={11} />
+            {plan.billingLabel || plan.duration}
+          </div>
+        )}
         <p className="text-xs text-slate-500 mt-3 mb-4 h-8 line-clamp-2">
           {plan.description}
         </p>
@@ -124,8 +131,15 @@ function PlanCard({
             <span className="text-3xl font-bold text-white tracking-tight">
               {formatPlanPrice(paymentPrice)}
             </span>
-            <span className="text-slate-500 text-[10px]">{plan.period}</span>
+            <span className="text-slate-400 text-xs font-semibold">
+              {plan.period}
+            </span>
           </div>
+          {plan.durationHint && (
+            <p className="mt-2 text-[11px] font-medium leading-snug text-slate-400 max-w-[20rem]">
+              {plan.durationHint}
+            </p>
+          )}
         </div>
       </div>
 
@@ -221,6 +235,10 @@ export function PricingSection() {
             Two separate tracks: subscribe to our trading signals, or learn to
             trade for yourself in the Academy. Pick one — or run both.
           </p>
+          <p className="mt-3 text-sm font-medium text-blue-300/80">
+            Signal plans are billed either monthly (1 month) or yearly (12
+            months) — they are different packages.
+          </p>
         </motion.div>
 
         {/* Track 1 — Signal subscriptions */}
@@ -239,13 +257,14 @@ export function PricingSection() {
             </h3>
           </div>
           <p className="text-sm text-slate-500 max-w-2xl">
-            Recurring access to our daily calls, entries, stop losses and
-            targets. We trade, you follow.
+            Access to our daily calls, entries, stop losses and targets. We
+            trade, you follow. Choose the 1-month plan or the 12-month Elite
+            plan — each is a separate purchase.
           </p>
           <div className="mt-5 h-px w-full bg-linear-to-r from-blue-500/40 via-white/5 to-transparent" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
           {subscriptionPlans.map((plan, i) => (
             <PlanCard
               key={plan.id}
@@ -307,7 +326,7 @@ export function PricingSection() {
           className="text-center mt-16"
         >
           <p className="text-xs text-slate-500">
-            🔒 Secure checkout · Instant access · No long-term commitments
+            🔒 Secure checkout · Instant access · Monthly or yearly signal plans
           </p>
         </motion.div>
       </div>
