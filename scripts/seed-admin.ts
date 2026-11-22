@@ -4,9 +4,16 @@ import crypto from "crypto";
 import { adminsCollection, closeDb } from "../src/lib/db";
 
 async function main() {
-  const username = "salvation.admin@salvationacademy.net";
-  const plainPassword = "P@ssw0rd123!";
-  const hashedPassword = await bcrypt.hash(plainPassword, 10);
+  const username = process.env.ADMIN_USERNAME;
+  const plainPassword = process.env.ADMIN_PASSWORD;
+
+  if (!username || !plainPassword) {
+    throw new Error(
+      "ADMIN_USERNAME and ADMIN_PASSWORD must be set in .env before seeding an admin user.",
+    );
+  }
+
+  const hashedPassword = await bcrypt.hash(plainPassword, 12);
   const now = new Date();
   const admins = await adminsCollection();
 
@@ -26,9 +33,7 @@ async function main() {
     { upsert: true },
   );
 
-  console.log(
-    "Admin user created/verified successfully. u: salvation.admin@salvationacademy.net p: P@ssw0rd123!",
-  );
+  console.log(`Admin user created/verified: ${username}`);
 }
 
 main()

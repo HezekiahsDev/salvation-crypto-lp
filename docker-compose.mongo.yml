@@ -1,0 +1,31 @@
+name: salvation-crypto-lp
+
+services:
+  mongo:
+    image: mongo:8.0
+    container_name: salvation-crypto-lp-mongo
+    restart: unless-stopped
+    ports:
+      # Only the host can reach the database; never expose it publicly.
+      - "127.0.0.1:27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER:-salvation_root}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:?MONGO_ROOT_PASSWORD is required}
+      MONGO_INITDB_DATABASE: ${MONGODB_DB:-salvation_crypto_lp}
+    volumes:
+      - mongo-data:/data/db
+      - mongo-config:/data/configdb
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mongosh --quiet --eval 'db.adminCommand({ ping: 1 }).ok' | grep -q 1",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+volumes:
+  mongo-data:
+  mongo-config:

@@ -113,6 +113,12 @@ export async function POST(req: Request) {
     const EXCHANGE_RATE = 1500;
     const amountInKobo = Math.round(price * EXCHANGE_RATE * 100);
 
+    // NEXT_PUBLIC_* values are inlined at build time, so fall back to the
+    // incoming request origin instead of a hardcoded localhost URL.
+    const appUrl =
+      process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") ||
+      new URL(req.url).origin;
+
     // Call Paystack API
     const paystackRes = await fetch(
       "https://api.paystack.co/transaction/initialize",
@@ -127,7 +133,7 @@ export async function POST(req: Request) {
           amount: amountInKobo,
           currency: "NGN",
           reference: txRef,
-          callback_url: `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:9004"}/plans/${data.planId}?reference=${txRef}`,
+          callback_url: `${appUrl}/plans/${data.planId}?reference=${txRef}`,
           metadata: {
             planId: data.planId,
             planName: plan.name,
