@@ -81,6 +81,7 @@
 }
 
 html {
+  --promo-bar-h: 0px; /* set by PromoBanner while a sale is live */
   scroll-behavior: auto; /* Lenis handles smooth scroll */
   background: var(--bg-primary);
   color-scheme: dark;
@@ -93,6 +94,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  padding-top: var(--promo-bar-h);
 }
 
 ::selection {

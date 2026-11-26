@@ -8,16 +8,18 @@ import {
   GraduationCap,
   LineChart,
   Clock,
+  Flame,
 } from "lucide-react";
 
 import {
   academyPlans,
   formatPlanPrice,
+  getPlanDiscountRate,
   getPlanPaymentPrice,
   subscriptionPlans,
-  DISCOUNT_RATE,
   type Plan,
 } from "@/data/plans";
+import { useActivePromotion } from "@/hooks/useActivePromotion";
 import Link from "next/link";
 
 interface PlanCardProps {
@@ -39,7 +41,13 @@ function PlanCard({
   onHoverEnd,
   accent,
 }: PlanCardProps) {
-  const paymentPrice = getPlanPaymentPrice(plan);
+  const promotion = useActivePromotion();
+  const discountRate = getPlanDiscountRate(plan, promotion);
+  const paymentPrice = getPlanPaymentPrice(plan, promotion);
+  const savings =
+    discountRate > 0 && paymentPrice !== null
+      ? Number(plan.price) - paymentPrice
+      : 0;
   const isAcademy = accent === "amber";
   const isOpen = plan.applicationsOpen !== false;
 
@@ -62,18 +70,10 @@ function PlanCard({
             : "bg-white/2 border border-white/5 hover:border-white/10"
       } ${isHovered && !plan.popular ? "transform scale-[1.02]" : ""}`}
     >
-      {/* Discount tag shown across all plans */}
-      {DISCOUNT_RATE > 0 && (
-        <div className="absolute -top-3 left-3 z-30">
-          <span className="inline-flex items-center px-3 py-1 rounded-full bg-amber-400 text-black text-xs font-bold uppercase tracking-wider shadow-md">
-            {Math.round(DISCOUNT_RATE * 100)}% off
-          </span>
-        </div>
-      )}
       <Link href={`/plans/${plan.id}`} className="absolute inset-0 z-20" />
       {/* Badge */}
       {plan.badge && (
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap z-30">
           <span
             className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-bold text-white shadow-lg uppercase tracking-tighter ${
               isAcademy
@@ -83,6 +83,19 @@ function PlanCard({
           >
             {plan.icon && <plan.icon size={10} />}
             {plan.badge}
+          </span>
+        </div>
+      )}
+
+      {/* Promotion strip */}
+      {promotion && discountRate > 0 && (
+        <div className="relative z-10 -mx-6 -mt-6 mb-5 flex items-center justify-between gap-2 rounded-t-2xl bg-linear-to-r from-amber-400 to-orange-500 px-4 py-2 text-black">
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-widest">
+            <Flame size={13} />
+            {promotion.name}
+          </span>
+          <span className="rounded-full bg-black px-2.5 py-0.5 text-[11px] font-black uppercase tracking-wider text-amber-300">
+            {Math.round(discountRate * 100)}% off
           </span>
         </div>
       )}
@@ -110,10 +123,7 @@ function PlanCard({
           {plan.description}
         </p>
         <div className="flex flex-col items-start gap-0.5">
-          {paymentPrice !== null &&
-            plan.id !== "inner-caucus" &&
-            plan.id !== "one-on-one" &&
-            Number(plan.price) > paymentPrice && (
+          {savings > 0 && (
               <span className="relative inline-flex items-center text-base font-semibold text-red-400/90">
                 <span className="relative z-10">
                   ${formatPlanPrice(Number(plan.price))}
@@ -135,6 +145,11 @@ function PlanCard({
               {plan.period}
             </span>
           </div>
+          {savings > 0 && (
+            <p className="mt-1 text-[11px] font-bold uppercase tracking-wider text-amber-300">
+              You save ${formatPlanPrice(savings)} · Today only
+            </p>
+          )}
           {plan.durationHint && (
             <p className="mt-2 text-[11px] font-medium leading-snug text-slate-400 max-w-[20rem]">
               {plan.durationHint}

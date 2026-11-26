@@ -1,4 +1,10 @@
-import { formatPlanPrice, getPlanPaymentPrice, plans, DISCOUNT_RATE } from "@/data/plans";
+import {
+  formatPlanPrice,
+  getActivePromotion,
+  getPlanDiscountRate,
+  getPlanPaymentPrice,
+  plans,
+} from "@/data/plans";
 import { notFound } from "next/navigation";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -21,6 +27,9 @@ import { FiatCheckoutForm } from "@/components/payment/FiatCheckoutForm";
 import { PaymentVerification } from "@/components/payment/PaymentVerification";
 import { CryptoSupportButton } from "@/components/payment/CryptoSupportButton";
 import WhatsAppButton from "@/components/WhatsAppButton";
+
+// Prices depend on the current time (promotions), so never cache this page.
+export const dynamic = "force-dynamic";
 
 interface PageProps {
   params: Promise<{
@@ -81,7 +90,9 @@ export default async function PlanDetailsPage({
     notFound();
   }
 
-  const paymentPrice = getPlanPaymentPrice(plan);
+  const promotion = getActivePromotion();
+  const discountRate = getPlanDiscountRate(plan, promotion);
+  const paymentPrice = getPlanPaymentPrice(plan, promotion);
   const isOpen = plan.applicationsOpen !== false;
 
   return (
@@ -144,17 +155,14 @@ export default async function PlanDetailsPage({
                 </div>
               </div>
               <div className="relative flex flex-col items-start gap-0.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-white/5 border border-white/5 w-fit shrink-0">
-                {/* Discount tag shown across all plans */}
-                {DISCOUNT_RATE > 0 && (
-                  <span className="absolute -top-2 right-2 inline-flex items-center rounded-full bg-amber-400 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-black shadow-md shadow-amber-500/20 ring-1 ring-amber-200">
-                    {Math.round(DISCOUNT_RATE * 100)}% off
+                {promotion && discountRate > 0 && (
+                  <span className="absolute -top-2 right-2 inline-flex items-center whitespace-nowrap rounded-full bg-amber-400 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider text-black shadow-md shadow-amber-500/20 ring-1 ring-amber-200">
+                    {promotion.name} −{Math.round(discountRate * 100)}%
                   </span>
                 )}
                 {paymentPrice !== null ? (
                   <>
-                    {plan.id !== "inner-caucus" &&
-                      plan.id !== "one-on-one" &&
-                      Number(plan.price) > paymentPrice && (
+                    {discountRate > 0 && (
                         <span className="relative inline-flex items-center text-base font-semibold text-red-400/90">
                           <span className="relative z-10">
                             ${formatPlanPrice(Number(plan.price))}

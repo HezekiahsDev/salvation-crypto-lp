@@ -36,6 +36,7 @@ export const metadata: Metadata = {
 import { CinematicBackground } from "@/components/CinematicBackground";
 import { MouseFollowGlow } from "@/components/MouseFollowGlow";
 import { ReferralSystem } from "@/components/referral/ReferralSystem";
+import { PromoBanner } from "@/components/PromoBanner";
 
 export default function RootLayout({
   children,
@@ -45,6 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="antialiased" suppressHydrationWarning>
       <body className="min-h-screen bg-[#030014] text-white overflow-x-hidden font-sans">
+        <PromoBanner />
         <CinematicBackground />
         <MouseFollowGlow />
         <AnimationProvider>{children}</AnimationProvider>

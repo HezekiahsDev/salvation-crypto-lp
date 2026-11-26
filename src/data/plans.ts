@@ -44,10 +44,71 @@ export interface Plan {
 }
 
 const DEFAULT_SUPPORT_CONTACT = "https://wa.me/2347026821951";
-export const DISCOUNT_RATE = 0;
+
+export interface Promotion {
+  name: string;
+  /** Fraction off, e.g. 0.3 = 30% off. */
+  rate: number;
+  /** From here until startsAt the banner counts down; prices stay full. */
+  announceAt: Date;
+  /** Inclusive start. */
+  startsAt: Date;
+  /** Exclusive end. */
+  endsAt: Date;
+}
+
+/**
+ * Black Friday 2026: 30% off every fixed-price plan for the whole of
+ * Friday 27 Nov 2026 in Nigeria time (WAT, UTC+1), 12:00am to 11:59pm.
+ * The server checks this window when it prices a checkout, so the
+ * discount turns itself on and off without a redeploy.
+ */
+export const BLACK_FRIDAY_PROMOTION: Promotion = {
+  name: "Black Friday",
+  rate: 0.3,
+  announceAt: new Date("2026-11-26T00:00:00+01:00"),
+  startsAt: new Date("2026-11-27T00:00:00+01:00"),
+  endsAt: new Date("2026-11-28T00:00:00+01:00"),
+};
+
+const PROMOTIONS: Promotion[] = [BLACK_FRIDAY_PROMOTION];
+
+/** Plans priced by application/quote, never discounted. */
+const NON_DISCOUNTABLE_PLAN_IDS = new Set(["inner-caucus", "one-on-one"]);
+
+export function getActivePromotion(now: Date = new Date()): Promotion | null {
+  const t = now.getTime();
+  return (
+    PROMOTIONS.find(
+      (promo) => t >= promo.startsAt.getTime() && t < promo.endsAt.getTime(),
+    ) ?? null
+  );
+}
+
+/** A promotion that has been announced but has not started yet. */
+export function getUpcomingPromotion(now: Date = new Date()): Promotion | null {
+  const t = now.getTime();
+  return (
+    PROMOTIONS.find(
+      (promo) =>
+        t >= promo.announceAt.getTime() && t < promo.startsAt.getTime(),
+    ) ?? null
+  );
+}
+
+export function getPlanDiscountRate(
+  plan: Pick<Plan, "id" | "price">,
+  promotion: Promotion | null = getActivePromotion(),
+): number {
+  if (!promotion || NON_DISCOUNTABLE_PLAN_IDS.has(plan.id)) return 0;
+  const basePrice = Number(plan.price);
+  if (!Number.isFinite(basePrice) || basePrice <= 0) return 0;
+  return promotion.rate;
+}
 
 export function getPlanPaymentPrice(
   plan: Pick<Plan, "id" | "price">,
+  promotion: Promotion | null = getActivePromotion(),
 ): number | null {
   const basePrice = Number(plan.price);
 
@@ -55,11 +116,8 @@ export function getPlanPaymentPrice(
     return null;
   }
 
-  if (plan.id === "inner-caucus" || plan.id === "one-on-one") {
-    return basePrice;
-  }
-
-  return Number((basePrice * (1 - DISCOUNT_RATE)).toFixed(2));
+  const rate = getPlanDiscountRate(plan, promotion);
+  return Number((basePrice * (1 - rate)).toFixed(2));
 }
 
 export function formatPlanPrice(price: number | null): string {
