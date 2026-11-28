@@ -58,8 +58,8 @@ export interface Promotion {
 }
 
 /**
- * Black Friday 2026: 30% off every fixed-price plan for the whole of
- * Friday 27 Nov 2026 in Nigeria time (WAT, UTC+1), 12:00am to 11:59pm.
+ * Black Friday 2026: 30% off every fixed-price plan for 3 days, from
+ * Friday 27 Nov 12:00am to Sunday 29 Nov 11:59pm, Nigeria time (WAT, UTC+1).
  * The server checks this window when it prices a checkout, so the
  * discount turns itself on and off without a redeploy.
  */
@@ -68,10 +68,18 @@ export const BLACK_FRIDAY_PROMOTION: Promotion = {
   rate: 0.3,
   announceAt: new Date("2026-11-26T00:00:00+01:00"),
   startsAt: new Date("2026-11-27T00:00:00+01:00"),
-  endsAt: new Date("2026-11-28T00:00:00+01:00"),
+  endsAt: new Date("2026-11-30T00:00:00+01:00"),
 };
 
 const PROMOTIONS: Promotion[] = [BLACK_FRIDAY_PROMOTION];
+
+/** Day the promotion ends, in Nigeria time, e.g. "Sunday". */
+export function getPromotionEndDay(promotion: Promotion): string {
+  return new Intl.DateTimeFormat("en-NG", {
+    weekday: "long",
+    timeZone: "Africa/Lagos",
+  }).format(new Date(promotion.endsAt.getTime() - 1));
+}
 
 /** Plans priced by application/quote, never discounted. */
 const NON_DISCOUNTABLE_PLAN_IDS = new Set(["inner-caucus", "one-on-one"]);

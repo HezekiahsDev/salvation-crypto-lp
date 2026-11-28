@@ -16,6 +16,7 @@ import {
   formatPlanPrice,
   getPlanDiscountRate,
   getPlanPaymentPrice,
+  getPromotionEndDay,
   subscriptionPlans,
   type Plan,
 } from "@/data/plans";
@@ -147,7 +148,8 @@ function PlanCard({
           </div>
           {savings > 0 && (
             <p className="mt-1 text-[11px] font-bold uppercase tracking-wider text-amber-300">
-              You save ${formatPlanPrice(savings)} · Today only
+              You save ${formatPlanPrice(savings)} · Ends{" "}
+              {promotion ? getPromotionEndDay(promotion) : ""}
             </p>
           )}
           {plan.durationHint && (
