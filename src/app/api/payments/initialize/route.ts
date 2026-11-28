@@ -81,7 +81,9 @@ export async function POST(req: Request) {
     await (await paymentsCollection()).insertOne({
       id: crypto.randomUUID(),
         transaction_reference: txRef,
-        paystack_reference: null,
+        // Left out until Paystack gives us a reference (webhook/verify set it). The index on
+        // paystack_reference is unique+sparse, and a sparse index still indexes an explicit null,
+        // so writing null here made every payment after the first pending one fail with E11000.
         user_id: null,
         full_name: data.fullName,
         email: data.email,
